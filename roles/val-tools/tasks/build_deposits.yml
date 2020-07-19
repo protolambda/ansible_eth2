@@ -6,4 +6,11 @@
     --amount="{{ deposit_amount_gwei }}"
     --fork-version="{{ eth2_fork_version }}"
     --withdrawals-mnemonic="{{ withdrawals_source_mnemonic }}"
-    --validators-mnemonic="{{ validators_source_mnemonic }}" > {{deposit_datas_path}}
+    --validators-mnemonic="{{ validators_source_mnemonic }}"
+  register: deposit_datas_out
+- name: deposit_datas fact
+  set_fact:
+    deposit_datas: "{{deposit_datas_out.stdout.splitlines()}}"
+- name: list deposit datas
+  debug:
+    var: deposit_datas

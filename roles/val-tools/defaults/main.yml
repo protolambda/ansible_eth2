@@ -24,3 +24,20 @@ deposit_datas_path: "/tmp/deposit_datas.txt"
 
 # Change me to run a separate VC or not
 has_validator_client: true
+
+# When ethereal does not recognize the deposit contract address, it needs to be forced.
+force_deposit: true
+
+# E.g. "0x16e82D77882A663454Ef92806b7DeCa1D394810f"
+deposit_contract_address: TODO change me
+
+eth1_network_name: goerli
+# Ethereal amount notation
+deposit_actual_value: "32Ether"
+
+# WARNING: not secure, only meant for quick testnet use
+eth1_from_addr: "{{lookup('env', 'ETH1_FROM_ADDR')}}"
+eth1_from_priv: "{{lookup('env', 'ETH1_FROM_PRIV')}}"
+
+# List of strings, each a json encoded deposit data, with some misc. data (name, version) for ethereal cli.
+deposit_datas: []

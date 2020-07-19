@@ -1,0 +1,16 @@
+- name: Execute deposits (unsafe, testnet use only)
+  # We loop over the dynamic fact variable set by `build_deposits.yml` task
+  loop: deposit_datas
+  shell: |
+    x="{{item}}"
+    account_name="$(echo "$x" | jq '.account')"
+    pubkey="$(echo "$x" | jq '.pubkey')"
+    echo "Sending deposit for validator $account_name $pubkey"
+    ethereal beacon deposit \
+    --allow-unknown-contract="{{force_deposit}}" \
+    --address="{{deposit_contract_address}}" \
+    --network="{{eth1_network_name}}" \
+    --data="$x" \
+    --value="{{deposit_actual_value}}" \
+    --from="{{eth1_from_addr}}" \
+    --privatekey="{{eth1_from_priv}}"

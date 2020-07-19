@@ -28,3 +28,10 @@ beacon_start_args: >
 beacon_env:
   JAVA_OPTS: "-Xmx2800m"
 
+keystores_container_dir: "{{beacon_container_dir}}/keys"
+secrets_container_dir: "{{beacon_container_dir}}/secrets"
+
+keystores_host_dir: "{{beacon_host_dir}}/keys"
+secrets_host_dir: "{{beacon_host_dir}}/secrets"
+
+validator_config_host_path: "{{ validator_host_dir }}/{{validators_config_file}}"

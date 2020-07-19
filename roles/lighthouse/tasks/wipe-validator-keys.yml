@@ -1,0 +1,8 @@
+- name: Lighthouse wipe validators
+  file:
+    path: "{{keystores_host_dir}}"
+    state: absent
+- name: Lighthouse wipe secrets
+  file:
+    path: "{{secrets_host_dir}}"
+    state: absent

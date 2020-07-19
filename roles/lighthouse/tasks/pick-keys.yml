@@ -1,0 +1,4 @@
+- name: Lighthouse data files
+  shell: |
+    mv {{ input_data_dir }}/keys {{ output_data_dir }}/selected/validators
+    mv {{ input_data_dir }}/secrets {{ output_data_dir }}/selected/secrets

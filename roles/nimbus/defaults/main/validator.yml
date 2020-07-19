@@ -1,3 +1,9 @@
+keystores_container_dir: "{{validator_container_dir}}/keys"
+secrets_container_dir: "{{validator_container_dir}}/secrets"
+
+keystores_host_dir: "{{validator_host_dir}}/keys"
+secrets_host_dir: "{{validator_host_dir}}/secrets"
+
 validator_image_name: protolambda/nim_beacon_node:latest
 validator_start_args: >
   validator_client
@@ -6,5 +12,5 @@ validator_start_args: >
   --non-interactive=true
   --rpc-port=4000
   --rpc-address=127.0.0.1
-  --validators-dir="{{validator_container_dir}}/keys"
-  --secrets-dir="{{validator_container_dir}}/secrets"
+  --validators-dir="{{keystores_container_dir}}"
+  --secrets-dir="{{secrets_container_dir}}"

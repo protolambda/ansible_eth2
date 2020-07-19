@@ -1,0 +1,4 @@
+- name: Nimbus data files
+  shell: |
+    mv {{ input_data_dir }}/nimbus-keys {{ output_data_dir }}/selected/keys
+    mv {{ input_data_dir }}/secrets {{ output_data_dir }}/selected/secrets

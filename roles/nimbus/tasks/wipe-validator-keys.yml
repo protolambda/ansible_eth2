@@ -1,0 +1,8 @@
+- name: Nimbus wipe validators
+  file:
+    path: "{{keystores_host_dir}}"
+    state: absent
+- name: Nimbus wipe secrets
+  file:
+    path: "{{secrets_host_dir}}"
+    state: absent

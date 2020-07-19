@@ -1,0 +1,12 @@
+- name: Teku wipe keys
+  file:
+    path: "{{ keystores_host_dir }}"
+    state: absent
+- name: Teku wipe secrets
+  file:
+    path: "{{ secrets_host_dir }}"
+    state: absent
+- name: Teku wipe validator config
+  file:
+    path: "{{ validator_config_host_path }}"
+    state: absent

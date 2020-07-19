@@ -1,8 +1,15 @@
+keystores_container_dir: "{{validator_container_dir}}/validators"
+secrets_container_dir: "{{validator_container_dir}}/secrets"
+
+keystores_host_dir: "{{validator_host_dir}}/validators"
+secrets_host_dir: "{{validator_host_dir}}/secrets"
+
+
 validator_image_name: sigp/lighthouse:latest
 validator_start_args: >
   lighthouse
   validator
-  --datadir="{{validator_container_dir}}/validators"
-  --secrets-dir="{{validator_container_dir}}/secrets"
+  --datadir="{{keystores_container_dir}}"
+  --secrets-dir="{{secrets_container_dir}}"
   --auto-register
   --server=http://localhost:4000/

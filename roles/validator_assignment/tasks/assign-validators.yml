@@ -1,0 +1,92 @@
+- name: Stop Eth2 validator client container
+  shell: "docker stop --time=10 {{validator_container_name}} || true"
+  when: has_validator_client
+# TODO: this silently stops the play when the container does not exist somehow
+- name: Check if validator client is stopped
+  docker_container_info:
+    name: "{{validator_container_name}}"
+  register: result
+  when: has_validator_client
+- name: End if validator is not stopped
+  meta: end_play
+  when: has_validator_client and ((not (result is defined)) or (not result.exists) or (result.exists and result.container.State.Running))
+
+- name: Stop Eth2 beacon node if no separate validator client
+  shell: "docker stop --time=10 {{beacon_container_name}} || true"
+  when: not has_validator_client
+- name: Check if validating beacon node is stopped
+  docker_container_info:
+    name: "{{beacon_container_name}}"
+  register: result
+  when: not has_validator_client
+- name: End if validating beacon node is not stopped
+  meta: end_play
+  when: (not has_validator_client) and ((not (result is defined)) or (not result.exists) or (result.exists and result.container.State.Running))
+
+- name: Wipe validator current keys
+  include_tasks: "../../{{client_name}}/wipe-validator-keys.yml"
+
+- name: Where assignment and wallet
+  debug:
+    msg: "assignments in '{{ assignments_file }}', remote output data in '{{remote_out_data_dir}}'"
+  delegate_to: localhost
+- name: Remove old local output data
+  file:
+    path: "{{remote_out_data_dir}}"
+    state: absent
+  delegate_to: localhost
+- name: Remove old output archive
+  file:
+    path: "{{remote_out_data_archive}}"
+    state: absent
+  delegate_to: localhost
+- name: Ensure local data dir exists
+  file:
+    path: "{{local_data_dir}}"
+    state: directory
+  delegate_to: localhost
+- name: Assign validator keys
+  delegate_to: localhost
+  shell: >
+    eth2-val-tools assign
+    --assignments="{{assignments_file}}"
+    --count={{validator_count_per_host}}
+    --hostname="{{validator_host}}"
+    --config-base-path="{{ beacon_container_dir | default('/data') }}"
+    --key-man-loc="{{validator_container_dir}}/wallets"
+    --out-loc="{{remote_out_data_dir}}"
+    --source-max="{{assign_validators_source_max}}"
+    --source-min="{{assign_validators_source_min}}"
+    --source-mnemonic="{{assign_validators_source_mnemonic}}"
+    --wallet-name="{{assign_validators_wallet_name}}"
+- name: Create remote out selected directory
+  file:
+    path: "{{ remote_out_data_dir }}/selected"
+    state: directory
+  delegate_to: localhost
+- name: Select files for client
+  delegate_to: localhost
+  vars:
+    input_data_dir: "{{remote_out_data_dir}}"
+    output_data_dir: "{{remote_out_data_dir}}/selected"
+  include_tasks: "../../{{client_name}}/pick-keys.yml"
+- name: Archive selected data before upload
+  archive:
+    path: "{{remote_out_data_dir}}/selected/*"
+    dest: "{{remote_out_data_archive}}"
+  delegate_to: localhost
+- name: Upload new validator accounts
+  unarchive:
+    src: "{{ remote_out_data_archive }}"
+    dest: "{{ validator_host_dir }}/"
+- block:
+    - name: Pull and restart validator client
+      vars:
+        validator_require_restart: true
+      include_tasks: "../../validator/tasks/start-validator.yml"
+      when: has_validator_client
+    - name: Or restart beacon node, if no separate beacon node
+      vars:
+        beacon_require_restart: true
+      include_tasks: "../../eth2client/tasks/start-beacon.yml"
+      when: not has_validator_client

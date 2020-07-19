@@ -1,1 +1,11 @@
 machine_swap_mb: 2048
+
+# For amazon linux: "ec2-user"
+# For Ubuntu images: "ubuntu"
+ansible_user: "ubuntu"
+home_dir: "/home/{{ ansible_user }}"
+
+# SSH keys are fetched from github and then added with authorized-keys.yml task
+github_user_pubkeys:
+  - protolambda
+  - djrtwo

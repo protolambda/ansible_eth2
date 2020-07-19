@@ -1,0 +1,7 @@
+- name: Stop eth2stats
+  include_tasks: "stop-eth2stats.yml"
+- name: Remove eth2stats data
+  become: true
+  file:
+    path: "{{eth2stats_host_dir}}"
+    state: absent

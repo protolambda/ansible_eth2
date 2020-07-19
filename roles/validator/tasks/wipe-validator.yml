@@ -1,0 +1,6 @@
+- name: Stop validator client
+  include_tasks: "stop-validator.yml"
+- name: Remove validator data (may be the same dir as beacon node)
+  file:
+    path: "{{validator_host_dir}}"
+    state: absent

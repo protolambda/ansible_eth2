@@ -1,6 +1,6 @@
 - name: Eth2stats
   docker_container:
-    name: eth2stats-client
+    name: "{{ eth2stats_container_name }}"
     state: started
     image: "{{ eth2stats_image_name }}"
     restart_policy: unless-stopped

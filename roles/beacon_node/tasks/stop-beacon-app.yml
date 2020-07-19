@@ -1,0 +1,4 @@
+- name: Stop Eth2 beacon node container
+  docker_container:
+    name: "{{ beacon_container_name }}"
+    state: stopped

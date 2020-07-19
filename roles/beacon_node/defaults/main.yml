@@ -1,0 +1,8 @@
+beacon_container_name: beacon
+beacon_host_dir: {{home_dir}}/beacon
+beacon_container_dir: /data
+beacon_memory: 3000m
+
+# TODO: not fully functional yet
+bootnodes_host_path: "{{beacon_host_dir}}/bootnodes.txt"
+bootnodes_container_path: "{{beacon_container_dir}}/bootnodes.txt"

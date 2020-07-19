@@ -1,0 +1,47 @@
+- name: Make beacon host dir
+  file:
+    path: "{{beacon_host_dir}}"
+    state: directory
+- name: Bootnodes file
+  copy:
+    content: "{{ bootnodes_data }}"
+    dest: "{{ bootnodes_host_path }}"
+  when: bootnodes_data is defined
+- name: Genesis state file
+  copy:
+    src: "{{genesis_file}}"
+    dest: "{{beacon_host_dir}}/custom_genesis.ssz"
+  when: genesis_file is defined
+# Some beacon node types, like Nimbus, look for validators by default,
+# even though we want to run a different validator client.
+# To avoid the risk of running the same validators in both BN and VC, point the BN to empty dummy directories.
+- name: BN keys alternative
+  file:
+    dest: "{{beacon_host_dir}}/no_bn_keys"
+    state: directory
+- name: BN secrets alternative
+  file:
+    dest: "{{beacon_host_dir}}/no_bn_secrets"
+    state: directory
+- name: Validators config placeholder
+  copy:
+    content: ""
+    force: false
+    dest: "{{validator_host_dir}}/{{validators_config_file}}"
+  when: validators_config_file is defined
+- name: Start Eth2 beacon node container
+  docker_container:
+    name: "{{ beacon_container_name }}"
+    state: started
+    image: "{{ beacon_image_name }}"
+    pull: true
+    restart_policy: unless-stopped
+    network_mode: host
+    restart: "{{ beacon_require_restart | default(false) }}"
+    volumes:
+      - "{{beacon_host_dir}}:{{beacon_container_dir}}"
+    memory: "{{beacon_memory}}"
+    command: "{{ beacon_start_args }}"
+    env: "{{ beacon_env | default({}) }}"
+
+# TODO: configure client health check

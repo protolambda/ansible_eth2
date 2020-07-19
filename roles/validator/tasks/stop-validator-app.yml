@@ -1,0 +1,4 @@
+- name: Stop Eth2 validator client container
+  docker_container:
+    name: "{{ validator_container_name }}"
+    state: stopped

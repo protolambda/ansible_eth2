@@ -1,0 +1,20 @@
+- name: Make validator host dir
+  file:
+    path: "{{validator_host_dir}}"
+    state: directory
+- name: Start Eth2 validator client container
+  docker_container:
+    name: "{{ validator_container_name }}"
+    state: started
+    image: "{{ validator_image_name }}"
+    pull: true
+    restart_policy: unless-stopped
+    network_mode: host
+    restart: "{{ validator_require_restart | default(false) }}"
+    volumes:
+      - "{{validator_host_dir}}:{{validator_container_dir}}"
+    memory: "{{validator_memory}}"
+    command: "{{ validator_start_args }}"
+    env: "{{ validator_env | default({}) }}"
+
+# TODO: configure client health check

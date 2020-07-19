@@ -1,0 +1,4 @@
+- name: Stop Eth2stats container
+  docker_container:
+    name: eth2stats-client
+    state: stopped

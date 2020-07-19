@@ -1,0 +1,30 @@
+### requried
+# this can be a company/brand or product namespace under which all content lives
+namespace: eth2
+# the designation of this specific collection
+name: Eth2
+# semantic versioning compliant version designation
+version: 0.0.1
+# a list of the collection's content authors: 'Full Name <email> (http://site) @nicks:irc/im/site#channel'
+authors: 'protolambda proto@ethereum.org (https://github.com/protolambda/)'
+
+### optional but strongly advised
+# short summary of the collection
+description: Collection of Eth2 clients, utilities, testnet data and more
+# a valid SPDX license identifier https://spdx.org/licenses/
+license: MIT
+# list of keywords you want to associate the collection with for indexing/search systems
+tags: ethereum eth2
+# list of dependencies, other collections this collection requires to be installed for it to be usable
+dependencies:
+# TODO: list role dependencies?
+
+### urls
+# url of originating SCM repository
+repository: https://github.com/protolambda/ansible_eth2.git
+# url to online docs
+documentation: https://github.com/protolambda/ansible_eth2.git
+# homepage of the collection/project
+homepage: https://github.com/protolambda/ansible_eth2.git
+# issue tracker url
+issues: https://github.com/protolambda/ansible_eth2/issues

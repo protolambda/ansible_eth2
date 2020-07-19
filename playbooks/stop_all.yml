@@ -1,0 +1,19 @@
+---
+- name: Stop nodes
+  hosts:
+    - beacon_node
+  roles:
+    - machine
+    - validator
+    - beacon
+    - eth2stats
+  gather_facts: false
+  tasks:
+    - name: Stop validator client
+      include_tasks: roles/validator/tasks/stop-validator.yml
+      when: validator_enabled
+    - name: Stop beacon node
+      include_tasks: roles/beacon/tasks/stop-beacon.yml
+    - name: Stop eth2stats
+      include_tasks: roles/eth2stats/tasks/stop-eth2stats.yml
+      when: eth2stats_enabled

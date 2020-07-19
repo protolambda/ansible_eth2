@@ -1,0 +1,12 @@
+---
+- name: Show host vars
+  hosts: all
+  roles:
+    - common
+    - metrics
+  become: false
+  gather_facts: true
+  tasks:
+    - name: "Ansible | List all known variables and facts"
+      debug:
+        var: hostvars[inventory_hostname]

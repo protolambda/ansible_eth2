@@ -6,13 +6,21 @@ local_data_dir: "./wallets/{{eth2_network_name}}"
 assignments_file: "{{local_data_dir}}/validator_assignments.json"
 remote_out_data_dir: "{{local_data_dir}}/remote_{{validator_host|replace('.','_')}}"
 remote_out_data_archive: "{{remote_out_data_dir}}.tar.gz"
-assign_validators_source_max: "{{lookup('env', 'SOURCE_WALLET_MIN')}}"
-assign_validators_source_min: "{{lookup('env', 'SOURCE_WALLET_MAX')}}"
+
+
+validators_source_max: "{{lookup('env', 'SOURCE_WALLET_MIN')}}"
+validators_source_min: "{{lookup('env', 'SOURCE_WALLET_MAX')}}"
+
+eth2_fork_version: "0x00000123"
+deposit_amount_gwei: "32000000000"
 
 # Warning: this is testnet-quality, not so secure!
-assign_validators_source_mnemonic: "{{lookup('env', 'SOURCE_WALLET_MNEMONIC')}}"
+validators_source_mnemonic: "{{lookup('env', 'SOURCE_WALLET_VALIDATORS_MNEMONIC')}}"
+withdrawals_source_mnemonic: "{{lookup('env', 'SOURCE_WALLET_WITHDRAWALS_MNEMONIC')}}"
 
 assign_validators_wallet_name: "{{lookup('env', 'SOURCE_WALLET_NAME')}}"
+
+deposit_datas_path: "/tmp/deposit_datas.txt"
 
 # Change me to run a separate VC or not
 has_validator_client: true

@@ -55,9 +55,9 @@
     --config-base-path="{{ beacon_container_dir | default('/data') }}"
     --key-man-loc="{{validator_container_dir}}/wallets"
     --out-loc="{{remote_out_data_dir}}"
-    --source-max="{{assign_validators_source_max}}"
-    --source-min="{{assign_validators_source_min}}"
-    --source-mnemonic="{{assign_validators_source_mnemonic}}"
+    --source-max="{{validators_source_max}}"
+    --source-min="{{validators_source_min}}"
+    --source-mnemonic="{{validators_source_mnemonic}}"
     --wallet-name="{{assign_validators_wallet_name}}"
 - name: Create remote out selected directory
   file:

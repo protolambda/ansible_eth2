@@ -1,0 +1,9 @@
+- name: Build deposits
+  shell: >
+    eth2-val-tools deposit-data
+    --source-min="{{validators_source_min}}"
+    --source-max="{{validators_source_max}}"
+    --amount="{{ deposit_amount_gwei }}"
+    --fork-version="{{ eth2_fork_version }}"
+    --withdrawals-mnemonic="{{ withdrawals_source_mnemonic }}"
+    --validators-mnemonic="{{ validators_source_mnemonic }}" > {{deposit_datas_path}}

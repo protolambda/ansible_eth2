@@ -1,0 +1,5 @@
+- name: Setup swap
+  vars:
+    swap_file_size_mb: "{{machine_swap_mb}}"
+  include_role:
+    name: geerlingguy.swap

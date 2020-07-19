@@ -1,0 +1,4 @@
+- name: Restart bootnode
+  vars:
+    bootnode_require_restart: true
+  include_tasks: "start-bootnode.yml"

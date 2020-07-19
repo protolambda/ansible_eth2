@@ -1,0 +1,4 @@
+- name: Stop bootnode
+  docker_container:
+    name: "{{ bootnode_container_name }}"
+    state: stopped

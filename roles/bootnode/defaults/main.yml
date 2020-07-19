@@ -1,0 +1,18 @@
+bootnode_container_name: bootnode
+bootnode_memory: 1000m
+bootnode_image_name: gcr.io/prysmaticlabs/prysm/bootnode
+
+bootnode_port: 5000
+# TODO: change this
+bootnode_ip: 1.2.3.4
+# 32 bytes, hex encoded, no 0x.
+# E.g. "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+bootnode_p2p_priv_key: change me
+
+bootnode_start_args: >
+  --discv5-port={{bootnode_port}}
+  --external-ip={{bootnode_ip}}
+  --disable-kad
+  --private={{bootnode_p2p_priv_key}}
+
+# TODO: maybe expose metrics of bootnode?

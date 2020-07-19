@@ -1,0 +1,15 @@
+beacon_image_name: gcr.io/prysmaticlabs/prysm/beacon-chain
+beacon_start_args: >
+  --altona
+  --datadir="{{beacon_container_dir}}"
+  --p2p-host-ip={{public_ip_address}}
+  --p2p-max-peers=100
+  --p2p-udp-port=9000 --p2p-tcp-port=9000
+  --monitoring-host=0.0.0.0 --monitoring-port=8080
+  --rpc-host=0.0.0.0 --rpc-port=4001
+  --grpc-gateway-host=0.0.0.0
+  --grpc-gateway-port=4000
+  --verbosity=debug
+  --enable-debug-rpc-endpoints
+  --min-sync-peers 1
+  --bootstrap-node="enr:-KG4QLkU_qJgdh-DhT5HtONGvuqwbbW99piCe27Bpk8oO_hvC0qEYgOSpmVfZ-8iJgW71HO23ajEFCNOCvEaqpcIXiUDhGV0aDKQ_co5sAAAASH__________4JpZIJ2NIJpcIQDE_KiiXNlY3AyNTZrMaEDbBoq33b6SAUh96EJZWNYOqYwjm78pVviDreLfK-aeUKDdGNwgiMog3VkcIIjKA"

@@ -1,0 +1,21 @@
+beacon_image_name: protolambda/nim_beacon_node:latest
+beacon_start_args: >
+  beacon_node
+  --network=altona
+  --data-dir="{{beacon_container_dir}}"
+  --web3-url={{eth1_endpoint.ws}}
+  --bootstrap-file="{{bootnodes_container_path}}"
+  --udp-port=9000
+  --tcp-port=9000
+  --listen-address=0.0.0.0
+  --nat="extip:{{public_ip_address}}"
+  --log-level="INFO"
+  --rpc --rpc-port=4000 --rpc-address=0.0.0.0
+  --metrics --metrics-port=8080 --metrics-address=0.0.0.0
+  {% if validator_enabled and (not has_validator_client) %}
+    --validators-dir="{{validator_container_dir}}/keys"
+    --secrets-dir="{{validator_container_dir}}/secrets"
+  {% else %}
+    --validators-dir="{{beacon_container_dir}}/no_bn_keys"
+    --secrets-dir="{{beacon_container_dir}}/no_bn_secrets"
+  {% endif %}

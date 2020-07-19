@@ -1,0 +1,14 @@
+beacon_image_name: sigp/lighthouse:latest
+beacon_start_args: >
+  lighthouse
+  --debug-level=trace
+  --datadir="{{beacon_container_dir}}"
+  bn
+  --disable-enr-auto-update=true
+  --enr-address={{public_ip_address}}
+  --enr-tcp-port=9000 --enr-udp-port=9000
+  --port=9000 --discovery-port=9000
+  --max-peers=100
+  --boot-nodes="enr:-KG4QLkU_qJgdh-DhT5HtONGvuqwbbW99piCe27Bpk8oO_hvC0qEYgOSpmVfZ-8iJgW71HO23ajEFCNOCvEaqpcIXiUDhGV0aDKQ_co5sAAAASH__________4JpZIJ2NIJpcIQDE_KiiXNlY3AyNTZrMaEDbBoq33b6SAUh96EJZWNYOqYwjm78pVviDreLfK-aeUKDdGNwgiMog3VkcIIjKA"
+  --eth1 --eth1-endpoint={{eth1_endpoints.goerli_prysm.http}}
+  --http --http-address=0.0.0.0 --http-port=4000

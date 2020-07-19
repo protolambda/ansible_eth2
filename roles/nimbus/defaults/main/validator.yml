@@ -1,0 +1,10 @@
+validator_image_name: protolambda/nim_beacon_node:latest
+validator_start_args: >
+  validator_client
+  --log-level="INFO"
+  --data-dir="{{validator_container_dir}}"
+  --non-interactive=true
+  --rpc-port=4000
+  --rpc-address=127.0.0.1
+  --validators-dir="{{validator_container_dir}}/keys"
+  --secrets-dir="{{validator_container_dir}}/secrets"

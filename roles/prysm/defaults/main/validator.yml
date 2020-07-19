@@ -1,0 +1,9 @@
+validator_image_name: gcr.io/prysmaticlabs/prysm/validator
+validator_start_args: >
+  --datadir="/data"
+  --altona
+  --beacon-rpc-provider=localhost:4001
+  --graffiti="{{ validator_graffiti | default('@protolambda') }}"
+  --password=""
+  --keymanager=wallet
+  --keymanageropts={{ validator_container_dir }}/keymanager_opts.json

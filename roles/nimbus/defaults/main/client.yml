@@ -1,0 +1,6 @@
+eth2client_display_name: Nimbus
+has_validator_client: true
+
+# NOTE: if the validator is enabled, it can run in two modes:
+# has_validator_client: a separate validator client is running. The BN points to non-existent directories, to avoid
+# not has_validator_client: the BN runs the validators

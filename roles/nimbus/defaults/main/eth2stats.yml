@@ -1,0 +1,4 @@
+eth2stats_display_name: 🍍 Nimbus 🍍
+eth2stats_api_addr: http://localhost:4000
+eth2stats_metrics_url: http://localhost:8080/metrics
+eth2stats_beacon_type: nimbus

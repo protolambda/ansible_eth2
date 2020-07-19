@@ -1,0 +1,7 @@
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://172.1.1.101:{{prometheus_port}}

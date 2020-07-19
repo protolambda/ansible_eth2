@@ -1,0 +1,25 @@
+grafana_admin_pass: changemechangeme
+
+metrics_domain: example.com
+
+letsencrypt_email: "foobar@example.com"
+
+grafana_host_dir: "{{home_dir}}/grafana"
+prometheus_host_dir: "{{home_dir}}/prometheus"
+
+# Ips only bind to container interface, within bridge-mode network
+
+prometheus_ip: 0.0.0.0
+prometheus_port: 9090
+
+grafana_ip: 0.0.0.0
+grafana_port: 3000
+
+grafana_prometheus_network_name: promnet
+
+# TODO: update path and/or include git submodule
+metrics_dashboards_source: "../../../eth2-metrics/dashboards"
+
+# List of http urls to scrape metrics from
+validator_metrics_targets: []
+beacon_metrics_targets: []

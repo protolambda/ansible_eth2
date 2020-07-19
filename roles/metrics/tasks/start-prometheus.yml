@@ -1,0 +1,23 @@
+- name: Prometheus metrics service
+  docker_container:
+    name: prometheus
+    state: started
+    image: "{{ prometheus_image_name | default('prom/prometheus:latest') }}"
+    restart_policy: unless-stopped
+    network_mode: bridge
+    networks:
+      - name: "{{grafana_prometheus_network_name}}"
+        ipv4_address: "172.1.1.101"
+    restart: "{{ prometheus_require_restart | default(false) }}"
+    volumes:
+      - "{{prometheus_host_dir}}/prom:/etc/prometheus"
+      - "{{prometheus_host_dir}}/data:/data"
+    user: "1000"
+    command: >
+      --config.file="/etc/prometheus/prometheus.yml"
+      --web.listen-address={{prometheus_ip}}:{{prometheus_port}}
+      {% if prometheus_url is defined %}
+      --web.external-url={{prometheus_url}}
+      {% endif %}
+      --storage.tsdb.path="/data"
+      --storage.tsdb.retention.time=30d

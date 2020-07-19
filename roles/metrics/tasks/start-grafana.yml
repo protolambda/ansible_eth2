@@ -1,0 +1,24 @@
+- name: Grafana metrics service
+  docker_container:
+    name: grafana
+    state: started
+    image: "{{ grafana_image_name | default('grafana/grafana:latest') }}"
+    restart_policy: unless-stopped
+    ports:  # Cannot run on host network due to nginx proxy
+      - "{{grafana_port}}:{{grafana_port}}"
+    network_mode: bridge
+    networks:
+      - name: "{{grafana_prometheus_network_name}}"
+        ipv4_address: "172.1.1.100"
+    restart: "{{ grafana_require_restart | default(false) }}"
+    volumes:
+      - "{{grafana_host_dir}}/data:/var/lib/grafana"
+      - "{{grafana_host_dir}}/conf:/etc/grafana"
+    env:
+      VIRTUAL_HOST: "{{ metrics_domain }}"
+      VIRTUAL_PORT: "'{{ grafana_port }}'"
+      LETSENCRYPT_HOST: "{{ metrics_domain }}"
+      LETSENCRYPT_EMAIL: "{{ letsencrypt_email }}"
+    user: "1000"
+    command: >
+      --config=/etc/grafana/grafana.ini

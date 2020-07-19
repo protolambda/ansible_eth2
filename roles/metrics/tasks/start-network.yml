@@ -1,0 +1,7 @@
+- name: Create promnet
+  docker_network:
+    name: "{{grafana_prometheus_network_name}}"
+    ipam_config:
+      - subnet: 172.1.1.0/24
+        gateway: 172.1.1.1
+        iprange: 172.1.1.0/24

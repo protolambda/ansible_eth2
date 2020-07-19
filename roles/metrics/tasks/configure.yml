@@ -1,0 +1,53 @@
+- name: Make grafana provisioning datasources config directory
+  file:
+    path: "{{grafana_host_dir}}/conf/provisioning/datasources"
+    state: directory
+
+- name: Make grafana provisioning dashboards config directory
+  file:
+    path: "{{grafana_host_dir}}/conf/provisioning/datasources"
+    state: directory
+
+- name: Make grafana data directory
+  file:
+    path: "{{grafana_host_dir}}/data"
+    state: directory
+
+- name: Make grafana conf directory
+  file:
+    path: "{{grafana_host_dir}}/conf"
+    state: directory
+
+- name: Make prometheus prom dir
+  file:
+    path: "{{prometheus_host_dir}}/prom"
+    state: directory
+
+- name: Make prometheus data dir
+  file:
+    path: "{{prometheus_host_dir}}/data"
+    state: directory
+
+- name: Deploy prometheus.yml from template
+  template:
+    src: ../templates/prometheus.yml.j2
+    dest: "{{prometheus_host_dir}}/prom/prometheus.yml"
+    force: yes
+
+- name: Deploy prometheus provisioning config for grafana from template
+  template:
+    src: ../templates/prom_as_graf_datasource.yml.j2
+    dest: "{{grafana_host_dir}}/conf/provisioning/datasources/prometheus.yaml"
+    force: yes
+
+- name: Configure dashboard provider
+  copy:
+    src: ../files/dashboard_provider.yml
+    dest: "{{grafana_host_dir}}/conf/provisioning/dashboards/dashboard_provider.yml"
+    force: yes
+
+- name: Deploy grafana.ini from template
+  template:
+    src: ../templates/grafana.ini.j2
+    dest: "{{grafana_host_dir}}/conf/grafana.ini"
+    force: yes

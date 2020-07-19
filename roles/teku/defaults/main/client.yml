@@ -1,3 +1,5 @@
 eth2client_display_name: Teku
+eth2client_name: teku
+
 # Validator client is part of beacon node
 has_validator_client: false

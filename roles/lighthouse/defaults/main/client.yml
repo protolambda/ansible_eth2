@@ -1,2 +1,4 @@
 eth2client_display_name: Lighthouse
+eth2client_name: lighthouse
+
 has_validator_client: true

@@ -1,4 +1,6 @@
 eth2client_display_name: Nimbus
+eth2client_name: nimbus
+
 has_validator_client: true
 
 # NOTE: if the validator is enabled, it can run in two modes:

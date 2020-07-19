@@ -7,6 +7,9 @@ assignments_file: "{{local_data_dir}}/validator_assignments.json"
 remote_out_data_dir: "{{local_data_dir}}/remote_{{validator_host|replace('.','_')}}"
 remote_out_data_archive: "{{remote_out_data_dir}}.tar.gz"
 
+# Change this to lighthouse, prysm, etc.
+eth2client_name: foobar
+
 
 validators_source_max: "{{lookup('env', 'SOURCE_WALLET_MIN')}}"
 validators_source_min: "{{lookup('env', 'SOURCE_WALLET_MAX')}}"

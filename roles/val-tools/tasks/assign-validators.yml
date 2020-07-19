@@ -24,7 +24,7 @@
   when: (not has_validator_client) and ((not (result is defined)) or (not result.exists) or (result.exists and result.container.State.Running))
 
 - name: Wipe validator current keys
-  include_tasks: "../../{{client_name}}/wipe-validator-keys.yml"
+  include_tasks: "../../{{eth2client_name}}/wipe-validator-keys.yml"
 
 - name: Where assignment and wallet
   debug:
@@ -69,7 +69,7 @@
   vars:
     input_data_dir: "{{remote_out_data_dir}}"
     output_data_dir: "{{remote_out_data_dir}}/selected"
-  include_tasks: "../../{{client_name}}/pick-keys.yml"
+  include_tasks: "../../{{eth2client_name}}/pick-keys.yml"
 - name: Archive selected data before upload
   archive:
     path: "{{remote_out_data_dir}}/selected/*"

@@ -1,0 +1,4 @@
+- name: Deploy deposit contract
+  debug:
+    msg: TODO TODO TODO deposit contract deployment
+

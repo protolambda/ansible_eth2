@@ -1,0 +1,4 @@
+- name: Restart beacon client
+  vars:
+    beacon_require_restart: true
+  include_tasks: "start-beacon.yml"

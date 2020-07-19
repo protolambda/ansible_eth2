@@ -1,0 +1,4 @@
+- name: Restart validator client
+  vars:
+    validator_require_restart: true
+  include_tasks: "start-validator.yml"

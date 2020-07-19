@@ -1,0 +1,5 @@
+- name: Restart eth2stats client
+  vars:
+    eth2stats_require_restart: true
+  include_tasks: start-eth2stats.yml
+

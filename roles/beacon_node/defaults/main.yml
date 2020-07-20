@@ -6,6 +6,10 @@ beacon_memory: 3000m
 beacon_tcp_port: 9000
 beacon_udp_port: 9000
 
+beacon_rpc_port: 4000
+beacon_grpc_port: 4001
+beacon_metrics_port: 8080
+
 # Not maintained by every client yet
 lo_peer_count: 30
 hi_peer_count: 200

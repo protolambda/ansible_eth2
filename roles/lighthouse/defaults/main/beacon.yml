@@ -8,7 +8,7 @@ beacon_start_args: >
   --enr-address={{public_ip_address}}
   --enr-tcp-port={{beacon_tcp_port}} --enr-udp-port={{beacon_udp_port}}
   --port={{beacon_tcp_port}} --discovery-port={{beacon_udp_port}}
-  --max-peers=100
+  --max-peers={{hi_peer_count}]
   --boot-nodes="enr:-KG4QLkU_qJgdh-DhT5HtONGvuqwbbW99piCe27Bpk8oO_hvC0qEYgOSpmVfZ-8iJgW71HO23ajEFCNOCvEaqpcIXiUDhGV0aDKQ_co5sAAAASH__________4JpZIJ2NIJpcIQDE_KiiXNlY3AyNTZrMaEDbBoq33b6SAUh96EJZWNYOqYwjm78pVviDreLfK-aeUKDdGNwgiMog3VkcIIjKA"
   --eth1 --eth1-endpoint={{eth1_endpoints.goerli_prysm.http}}
-  --http --http-address=0.0.0.0 --http-port=4000
+  --http --http-address=0.0.0.0 --http-port={{beacon_rpc_port}}

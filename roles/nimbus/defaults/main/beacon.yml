@@ -10,8 +10,8 @@ beacon_start_args: >
   --listen-address=0.0.0.0
   --nat="extip:{{public_ip_address}}"
   --log-level="INFO"
-  --rpc --rpc-port=4000 --rpc-address=0.0.0.0
-  --metrics --metrics-port=8080 --metrics-address=0.0.0.0
+  --rpc --rpc-port={{beacon_rpc_port}} --rpc-address=0.0.0.0
+  --metrics --metrics-port={{beacon_metrics_port}} --metrics-address=0.0.0.0
   {% if validator_enabled and (not has_validator_client) %}
     --validators-dir="{{keystores_container_dir}}"
     --secrets-dir="{{secrets_container_dir}}"

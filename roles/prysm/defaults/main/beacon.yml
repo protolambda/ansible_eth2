@@ -5,10 +5,10 @@ beacon_start_args: >
   --p2p-host-ip={{public_ip_address}}
   --p2p-max-peers={{hi_peer_count}}
   --p2p-udp-port={{beacon_udp_port}} --p2p-tcp-port={{beacon_tcp_port}}
-  --monitoring-host=0.0.0.0 --monitoring-port=8080
-  --rpc-host=0.0.0.0 --rpc-port=4001
+  --monitoring-host=0.0.0.0 --monitoring-port={{beacon_metrics_port}}
+  --rpc-host=0.0.0.0 --rpc-port={{beacon_grpc_port}}
   --grpc-gateway-host=0.0.0.0
-  --grpc-gateway-port=4000
+  --grpc-gateway-port={{beacon_rpc_port}}
   --verbosity=debug
   --enable-debug-rpc-endpoints
   --min-sync-peers 1

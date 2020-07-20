@@ -12,4 +12,4 @@ validator_start_args: >
   --datadir="{{keystores_container_dir}}"
   --secrets-dir="{{secrets_container_dir}}"
   --auto-register
-  --server=http://localhost:4000/
+  --server=http://localhost:{{beacon_rpc_port}}/

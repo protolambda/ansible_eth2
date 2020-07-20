@@ -10,7 +10,7 @@ validator_start_args: >
   --log-level="INFO"
   --data-dir="{{validator_container_dir}}"
   --non-interactive=true
-  --rpc-port=4000
+  --rpc-port={{beacon_rpc_port}}
   --rpc-address=127.0.0.1
   --validators-dir="{{keystores_container_dir}}"
   --secrets-dir="{{secrets_container_dir}}"

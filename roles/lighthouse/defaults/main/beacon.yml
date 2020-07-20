@@ -3,6 +3,9 @@ beacon_start_args: >
   lighthouse
   --debug-level=trace
   --datadir="{{beacon_container_dir}}"
+  {% if testnet_type is 'custom' %}
+  --testnet-dir="{{beacon_container_dir}}/config/custom-testnet"
+  {% endif %}
   bn
   --disable-enr-auto-update=true
   --enr-address={{public_ip_address}}

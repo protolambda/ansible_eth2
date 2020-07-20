@@ -10,6 +10,10 @@ beacon_rpc_port: 4000
 beacon_grpc_port: 4001
 beacon_metrics_port: 8080
 
+# Set to 'custom' if it's a non-standard testnet\
+# (requires running extra configuration tasks)
+testnet_type: altona
+
 # Not maintained by every client yet
 lo_peer_count: 30
 hi_peer_count: 200

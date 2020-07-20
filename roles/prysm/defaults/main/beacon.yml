@@ -1,7 +1,14 @@
 beacon_image_name: gcr.io/prysmaticlabs/prysm/beacon-chain
 beacon_start_args: >
-  --altona
   --datadir="{{beacon_container_dir}}"
+  {% if testnet_type is 'custom' %}
+  --chain-config-file="{{beacon_container_dir}}/config/prysm_config.yaml"
+  --deposit-contract="{{deposit_contract_addr}}"
+  --contract-deployment-block="{{deposit_contract_deploy_block_nr}}"
+  --custom-genesis-delay="{{genesis_delay}}"
+  {% elif testnet_type is 'altona' %}
+  --altona
+  {% endif %}
   --p2p-host-ip={{public_ip_address}}
   --p2p-max-peers={{hi_peer_count}}
   --p2p-udp-port={{beacon_udp_port}} --p2p-tcp-port={{beacon_tcp_port}}

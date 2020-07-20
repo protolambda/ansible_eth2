@@ -3,6 +3,13 @@ beacon_host_dir: {{home_dir}}/beacon
 beacon_container_dir: /data
 beacon_memory: 3000m
 
+beacon_tcp_port: 9000
+beacon_udp_port: 9000
+
+# Not maintained by every client yet
+lo_peer_count: 30
+hi_peer_count: 200
+
 # TODO: not fully functional yet
 bootnodes_host_path: "{{beacon_host_dir}}/bootnodes.txt"
 bootnodes_container_path: "{{beacon_container_dir}}/bootnodes.txt"

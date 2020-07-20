@@ -8,11 +8,11 @@ beacon_start_args: >
   --network=altona
   --data-path="{{beacon_container_dir}}"
   --p2p-advertised-ip={{public_ip_address}}
-  --p2p-advertised-port=9000
-  --p2p-port=9000
+  --p2p-advertised-port={{beacon_udp_port}}
+  --p2p-port={{beacon_tcp_port}}
   --p2p-discovery-enabled=true
-  --p2p-peer-lower-bound=30
-  --p2p-peer-upper-bound=50
+  --p2p-peer-lower-bound={{lo_peer_count}}
+  --p2p-peer-upper-bound={{hi_peer_count}}
   --log-destination=CONSOLE
   --eth1-endpoint={{eth1_endpoint.http}}
   --rest-api-enabled=true --rest-api-interface=0.0.0.0 --rest-api-port=4000

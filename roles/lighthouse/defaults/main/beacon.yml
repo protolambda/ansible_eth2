@@ -6,8 +6,8 @@ beacon_start_args: >
   bn
   --disable-enr-auto-update=true
   --enr-address={{public_ip_address}}
-  --enr-tcp-port=9000 --enr-udp-port=9000
-  --port=9000 --discovery-port=9000
+  --enr-tcp-port={{beacon_tcp_port}} --enr-udp-port={{beacon_udp_port}}
+  --port={{beacon_tcp_port}} --discovery-port={{beacon_udp_port}}
   --max-peers=100
   --boot-nodes="enr:-KG4QLkU_qJgdh-DhT5HtONGvuqwbbW99piCe27Bpk8oO_hvC0qEYgOSpmVfZ-8iJgW71HO23ajEFCNOCvEaqpcIXiUDhGV0aDKQ_co5sAAAASH__________4JpZIJ2NIJpcIQDE_KiiXNlY3AyNTZrMaEDbBoq33b6SAUh96EJZWNYOqYwjm78pVviDreLfK-aeUKDdGNwgiMog3VkcIIjKA"
   --eth1 --eth1-endpoint={{eth1_endpoints.goerli_prysm.http}}

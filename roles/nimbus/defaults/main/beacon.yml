@@ -5,8 +5,8 @@ beacon_start_args: >
   --data-dir="{{beacon_container_dir}}"
   --web3-url={{eth1_endpoint.ws}}
   --bootstrap-file="{{bootnodes_container_path}}"
-  --udp-port=9000
-  --tcp-port=9000
+  --udp-port={{beacon_udp_port}}
+  --tcp-port={{beacon_tcp_port}}
   --listen-address=0.0.0.0
   --nat="extip:{{public_ip_address}}"
   --log-level="INFO"

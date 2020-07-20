@@ -1,5 +1,8 @@
 machine_swap_mb: 2048
 
+# Change this per host.
+public_ip_address: 1.2.3.4
+
 # For amazon linux: "ec2-user"
 # For Ubuntu images: "ubuntu"
 ansible_user: "ubuntu"

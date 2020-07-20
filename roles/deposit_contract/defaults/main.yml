@@ -1,0 +1,8 @@
+# Change this to "real_contract.json" if you need to burn goerli eth and do something more like the real thing.
+deposit_contract_file: "tdep_contract.json"
+
+deposit_contract_json_path: "{{role_path}}/{{deposit_contract_file}}"
+
+# WARNING: not secure, only meant for quick testnet use
+eth1_from_addr: "{{lookup('env', 'ETH1_FROM_ADDR')}}"
+eth1_from_priv: "{{lookup('env', 'ETH1_FROM_PRIV')}}"

@@ -1,4 +1,6 @@
 - name: Deploy deposit contract
-  debug:
-    msg: TODO TODO TODO deposit contract deployment
-
+  shell: >
+    ethereal contract deploy
+    --json="{{deposit_contract_json_path}}"
+    --from="{{eth1_from_addr}}"
+    --privatekey="{{eth1_from_priv}}"

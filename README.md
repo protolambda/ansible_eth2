@@ -24,7 +24,9 @@ For now, you can git-submodule this repository, and add the `roles` as source fo
 - `eth1_endpoint`: defaults for eth1 endpoint configuration
 - `eth2stats`: Deploy [eth2stats](https://eth2stats.io) container
 - `metrics`: Deploy prometheus, grafana, install dashboard and datasources, setup nginx, setup letsencrypt and vhosts.
-- `val-tools`: Build deposits, execute deposits, do validator assignments to remotes. 
+- `val_tools`: Build deposits, execute deposits, do validator assignments to remotes. 
+
+The `val_tools` and `deposit_contract` roles assume [`ethereal`](https://github.com/wealdtech/ethereal/) is installed.
 
 ## License
 

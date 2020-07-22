@@ -12,19 +12,20 @@ For now, you can git-submodule this repository, and add the `roles` as source fo
 
 - `machine`: common setup things for a new machine, installing required things for other roles
 - `ubuntu`: common ubuntu os settings (TODO: hardening)
-- `beacon_node`: Deploy a beacon node container, any client. Relies on client variables.
-- `validator`: similar to beacon-node, deploy a validator client into a container.
-- Clients: set defaults for `beacon_node` and `validator` roles, and provide client-specific tasks.
-    - `lighthouse`
-    - `nimbus`
-    - `prysm`
-    - `teku`
+- `eth2client`: 
+    - defines validator assignments
+    - defines validator
+    - defines beacon node
+    - defines [eth2stats](https://eth2stats.io) setup.
+    - Defaults can be configured by picking any of the `defaults` subdirectories:
+        - `lighthouse`
+        - `nimbus`
+        - `prysm`
+        - `teku`
 - `bootnode`: Discv5 bootnode for eth2 clients
 - `deposit_contract`: Deploy testnet deposit contract, optionally with tokens instead of eth.
-- `eth1_endpoint`: defaults for eth1 endpoint configuration
-- `eth2stats`: Deploy [eth2stats](https://eth2stats.io) container
 - `metrics`: Deploy prometheus, grafana, install dashboard and datasources, setup nginx, setup letsencrypt and vhosts.
-- `val_tools`: Build deposits, execute deposits, do validator assignments to remotes. 
+- `val_tools`: Build deposits, execute deposits. 
 
 The `val_tools` and `deposit_contract` roles assume [`ethereal`](https://github.com/wealdtech/ethereal/) is installed.
 

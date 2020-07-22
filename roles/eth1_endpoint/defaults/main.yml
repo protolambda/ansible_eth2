@@ -1,9 +1,0 @@
-eth1_endpoints:
-  goerli_prysm:
-    http: https://goerli.prylabs.net
-    ws: wss://goerli.prylabs.net/websocket
-  goerli_infura:
-    http: https://goerli.infura.io/v3/24d12acd50b34bad885b38fdc27e5688
-    ws: wss://goerli.infura.io/ws/v3/24d12acd50b34bad885b38fdc27e5688
-
-eth1_endpoint: "{{ eth1_endpoints.goerli_infura }}"

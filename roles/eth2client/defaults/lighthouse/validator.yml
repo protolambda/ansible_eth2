@@ -16,3 +16,4 @@ validator_start_args: >
   --secrets-dir="{{secrets_container_dir}}"
   --auto-register
   --server=http://localhost:{{beacon_rpc_port}}/
+

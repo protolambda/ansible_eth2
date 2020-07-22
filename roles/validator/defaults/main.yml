@@ -1,7 +1,0 @@
-validator_enabled: false
-validator_container_name: validator
-validator_host_dir: "{{beacon_host_dir}}"
-validator_container_dir: "{{beacon_container_dir}}"
-validator_memory: 500m
-
-validator_metrics_port: 8081

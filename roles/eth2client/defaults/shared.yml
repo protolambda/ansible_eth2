@@ -1,0 +1,111 @@
+# This is shared configuration between all eth2-clients
+#
+# Since ansible does not support multiple include-role.defaults directory sources,
+# it is sym-linked into each of the client defaults directories.
+#
+# Usage:
+#
+#   - name: "Run my eth2client task"
+#     import_role:
+#       name: eth2client
+#       defaults_from: 'lighthouse'  # pick your client type (hint: {{eth2client_name}})
+#       tasks_from: my-task-name     # omit the .yml
+#
+
+
+# General settings
+# -------------------------------------------
+home_dir: "/home/{{ ansible_user }}"
+
+
+# Testnet settings
+# -------------------------------------------
+
+# Set to 'custom' if it's a non-standard testnet\
+# (requires running extra configuration tasks)
+testnet_type: altona
+
+
+# P2P settings
+# -------------------------------------------
+
+# Warning: not maintained by every client yet
+lo_peer_count: 30
+hi_peer_count: 200
+
+
+# Beacon node
+# -------------------------------------------
+
+# TODO: not fully functional yet
+bootnodes_host_path: "{{beacon_host_dir}}/bootnodes.txt"
+bootnodes_container_path: "{{beacon_container_dir}}/bootnodes.txt"
+
+beacon_container_name: beacon
+beacon_host_dir: "{{home_dir}}/beacon"
+beacon_container_dir: /data
+beacon_memory: 3000m
+
+beacon_tcp_port: 9000
+beacon_udp_port: 9000
+
+beacon_rpc_port: 4000
+beacon_grpc_port: 4001
+beacon_metrics_port: 8080
+
+
+# Validator
+# -------------------------------------------
+validator_enabled: false
+validator_container_name: validator
+validator_host_dir: "{{beacon_host_dir}}"
+validator_container_dir: "{{beacon_container_dir}}"
+validator_memory: 500m
+
+validator_metrics_port: 8081
+
+eth2stats_enabled: true
+eth2stats_host_dir: "{{home_dir}}/eth2stats"
+
+
+# Eth2stats
+# -------------------------------------------
+eth2stats_container_name: eth2stats-client
+
+eth2stats_require_restart: false
+eth2stats_image_name: alethio/eth2stats-client:latest
+eth2stats_addr: grpc.altona.eth2stats.io:443
+
+
+# Eth1 settings
+# -------------------------------------------
+eth1_endpoints:
+  goerli_prysm:
+    http: https://goerli.prylabs.net
+    ws: wss://goerli.prylabs.net/websocket
+  goerli_infura:
+    http: https://goerli.infura.io/v3/24d12acd50b34bad885b38fdc27e5688
+    ws: wss://goerli.infura.io/ws/v3/24d12acd50b34bad885b38fdc27e5688
+
+eth1_endpoint: "{{ eth1_endpoints.goerli_infura }}"
+
+
+# Validator assignments
+# -------------------------------------------
+
+# Change me to something non-0 to run validators
+validator_count_per_host: 0
+
+validator_host: "host_{{inventory_hostname}}"
+local_data_dir: "./wallets/{{eth2_network_name}}"
+assignments_file: "{{local_data_dir}}/validator_assignments.json"
+remote_out_data_dir: "{{local_data_dir}}/remote_{{validator_host|replace('.','_')}}"
+remote_out_data_archive: "{{remote_out_data_dir}}.tar.gz"
+
+validators_source_max: "{{lookup('env', 'SOURCE_WALLET_MIN')}}"
+validators_source_min: "{{lookup('env', 'SOURCE_WALLET_MAX')}}"
+
+# TODO: refactor these into vault variables or something else secure. This is testnet stuff!
+validators_source_mnemonic: "{{lookup('env', 'SOURCE_WALLET_VALIDATORS_MNEMONIC')}}"
+
+assign_validators_wallet_name: "{{lookup('env', 'SOURCE_WALLET_NAME')}}"

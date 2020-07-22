@@ -24,7 +24,7 @@
   when: (not has_validator_client) and ((not (result is defined)) or (not result.exists) or (result.exists and result.container.State.Running))
 
 - name: Wipe validator current keys
-  include_tasks: "../../{{eth2client_name}}/wipe-validator-keys.yml"
+  include_tasks: "wipe-validator-keys-{{eth2client_name}}.yml"
 
 - name: Where assignment and wallet
   debug:
@@ -69,7 +69,7 @@
   vars:
     input_data_dir: "{{remote_out_data_dir}}"
     output_data_dir: "{{remote_out_data_dir}}/selected"
-  include_tasks: "../../{{eth2client_name}}/pick-keys.yml"
+  include_tasks: "pick-keys-{{eth2client_name}}.yml"
 - name: Archive selected data before upload
   archive:
     path: "{{remote_out_data_dir}}/selected/*"
@@ -83,10 +83,10 @@
     - name: Pull and restart validator client
       vars:
         validator_require_restart: true
-      include_tasks: "../../validator/tasks/start-validator.yml"
+      include_tasks: "start-validator.yml"
       when: has_validator_client
     - name: Or restart beacon node, if no separate beacon node
       vars:
         beacon_require_restart: true
-      include_tasks: "../../eth2client/tasks/start-beacon.yml"
+      include_tasks: "start-beacon.yml"
       when: not has_validator_client

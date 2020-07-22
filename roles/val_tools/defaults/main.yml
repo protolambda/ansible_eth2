@@ -1,16 +1,3 @@
-# Change me to something non-0 to run validators
-validator_count_per_host: 0
-
-validator_host: "host_{{inventory_hostname}}"
-local_data_dir: "./wallets/{{eth2_network_name}}"
-assignments_file: "{{local_data_dir}}/validator_assignments.json"
-remote_out_data_dir: "{{local_data_dir}}/remote_{{validator_host|replace('.','_')}}"
-remote_out_data_archive: "{{remote_out_data_dir}}.tar.gz"
-
-# Change this to lighthouse, prysm, etc.
-eth2client_name: foobar
-
-
 validators_source_max: "{{lookup('env', 'SOURCE_WALLET_MIN')}}"
 validators_source_min: "{{lookup('env', 'SOURCE_WALLET_MAX')}}"
 
@@ -18,10 +5,9 @@ eth2_fork_version: "0x00000123"
 deposit_amount_gwei: "32000000000"
 
 # Warning: this is testnet-quality, not so secure!
+# TODO: refactor these into vault variables or something else secure. This is testnet stuff!
 validators_source_mnemonic: "{{lookup('env', 'SOURCE_WALLET_VALIDATORS_MNEMONIC')}}"
 withdrawals_source_mnemonic: "{{lookup('env', 'SOURCE_WALLET_WITHDRAWALS_MNEMONIC')}}"
-
-assign_validators_wallet_name: "{{lookup('env', 'SOURCE_WALLET_NAME')}}"
 
 deposit_datas_path: "/tmp/deposit_datas.txt"
 

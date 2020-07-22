@@ -6,7 +6,7 @@
 # Usage:
 #
 #   - name: "Run my eth2client task"
-#     import_role:
+#     include_role:
 #       name: eth2client
 #       defaults_from: 'lighthouse'  # pick your client type (hint: {{eth2client_name}})
 #       tasks_from: my-task-name     # omit the .yml

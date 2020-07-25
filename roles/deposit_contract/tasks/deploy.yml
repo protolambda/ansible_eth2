@@ -1,6 +1,11 @@
 - name: Deploy deposit contract
   shell: >
     ethereal contract deploy
-    --json="{{deposit_contract_json_path}}"
+    --network="{{deposit_contract_network_name}}"
+    --data="{{ deposit_contract_data }}"
     --from="{{eth1_from_addr}}"
     --privatekey="{{eth1_from_priv}}"
+  register: dep_deploy_tx
+- name: Deposit contract tx
+  debug:
+    msg: "Deposit contract deploy tx: '{{dep_deploy_tx.stdout}}'"

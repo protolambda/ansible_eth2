@@ -67,16 +67,15 @@ validator_memory: 500m
 
 validator_metrics_port: 8081
 
-eth2stats_enabled: true
-eth2stats_host_dir: "{{home_dir}}/eth2stats"
-
 
 # Eth2stats
 # -------------------------------------------
+eth2stats_image_name: alethio/eth2stats-client:latest
 eth2stats_container_name: eth2stats-client
 
+eth2stats_host_dir: "{{home_dir}}/eth2stats"
+
 eth2stats_require_restart: false
-eth2stats_image_name: alethio/eth2stats-client:latest
 eth2stats_addr: grpc.altona.eth2stats.io:443
 
 

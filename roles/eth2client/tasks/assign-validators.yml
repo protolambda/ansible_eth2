@@ -65,10 +65,16 @@
   file:
     path: "{{ validator_host_dir }}/"
     state: directory
-- name: Upload new validator accounts
+- name: Upload new validator accounts to BN
+  unarchive:
+    src: "{{ remote_out_data_archive }}"
+    dest: "{{ beacon_host_dir }}/"
+  when: not has_validator_client
+- name: Upload new validator accounts to VC
   unarchive:
     src: "{{ remote_out_data_archive }}"
     dest: "{{ validator_host_dir }}/"
+  when: has_validator_client
 - block:
     - name: Pull and restart validator client
       vars:

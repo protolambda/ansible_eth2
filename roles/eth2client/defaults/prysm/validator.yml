@@ -1,9 +1,9 @@
 validator_image_name: gcr.io/prysmaticlabs/prysm/validator
 validator_start_args: >
   --datadir="/data"
-  {% if testnet_type is 'custom' %}
+  {% if testnet_type == 'custom' %}
   --chain-config-file="{{validator_container_dir}}/config/prysm_config.yaml"
-  {% elif testnet_type is 'altona' %}
+  {% elif testnet_type == 'altona' %}
   --altona
   {% endif %}
   --beacon-rpc-provider=localhost:{{beacon_grpc_port}}

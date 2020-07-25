@@ -27,8 +27,8 @@
   copy:
     content: ""
     force: false
-    dest: "{{validator_host_dir}}/{{validators_config_file}}"
-  when: validators_config_file is defined
+    dest: "{{beacon_host_dir}}/{{validators_config_file}}"
+  when: (not has_validator_client) and (validators_config_file is defined)
 - name: Start Eth2 beacon node container
   docker_container:
     name: "{{ beacon_container_name }}"

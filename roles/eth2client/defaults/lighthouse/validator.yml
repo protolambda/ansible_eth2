@@ -8,7 +8,7 @@ secrets_host_dir: "{{validator_host_dir}}/secrets"
 validator_image_name: sigp/lighthouse:latest
 validator_start_args: >
   lighthouse
-  {% if testnet_type is 'custom' %}
+  {% if testnet_type == 'custom' %}
   --testnet-dir="{{validator_container_dir}}/config/custom-testnet"
   {% endif %}
   validator

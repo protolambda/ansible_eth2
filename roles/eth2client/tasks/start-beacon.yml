@@ -29,6 +29,9 @@
     force: false
     dest: "{{beacon_host_dir}}/{{validators_config_file}}"
   when: (not has_validator_client) and (validators_config_file is defined)
+- name: deploy custom testnet data if necessary
+  include_tasks: "custom-testnet-beacon-{{eth2client_name}}.yml"
+  when: testnet_type == 'custom'
 - name: Start Eth2 beacon node container
   docker_container:
     name: "{{ beacon_container_name }}"

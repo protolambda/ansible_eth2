@@ -1,3 +1,6 @@
+- name: deposit range
+  debug:
+    msg: "creating deposit datas for account {{validators_source_min}} to {{validators_source_max}}"
 - name: Build deposits
   shell: >
     eth2-val-tools deposit-data
@@ -10,7 +13,7 @@
   register: deposit_datas_out
 - name: deposit_datas fact
   set_fact:
-    deposit_datas: "{{deposit_datas_out.stdout.splitlines()}}"
+    deposit_datas: "{{deposit_datas_out.stdout.splitlines()|list|flatten(1)}}"
 - name: list deposit datas
   debug:
     var: deposit_datas

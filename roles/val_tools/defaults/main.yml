@@ -1,5 +1,5 @@
-validators_source_max: "{{lookup('env', 'SOURCE_WALLET_MIN')}}"
-validators_source_min: "{{lookup('env', 'SOURCE_WALLET_MAX')}}"
+validators_source_min: "{{lookup('env', 'SOURCE_WALLET_MIN')}}"
+validators_source_max: "{{lookup('env', 'SOURCE_WALLET_MAX')}}"
 
 eth2_fork_version: "0x00000123"
 deposit_amount_gwei: "32000000000"
@@ -23,6 +23,8 @@ deposit_contract_address: TODO change me
 eth1_network_name: goerli
 # Ethereal amount notation
 deposit_actual_value: "32Ether"
+
+deposit_pause_seconds: 0.3
 
 # WARNING: not secure, only meant for quick testnet use
 eth1_from_addr: "{{lookup('env', 'ETH1_FROM_ADDR')}}"

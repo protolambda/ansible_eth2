@@ -1,8 +1,6 @@
-- name: Set up bionic
-  include_tasks: roles/ubuntu/tasks/bionic.yml
 - name: Set up swap
-  include_tasks: roles/machine/tasks/swap.yml
+  include_tasks: "{{role_path}}/tasks/swap.yml"
 - name: Add keys to ssh/authorized_keys
-  include_tasks: roles/machine/tasks/authorized-keys.yml
+  include_tasks: "{{role_path}}/tasks/authorized-keys.yml"
 - name: Install docker
-  include_tasks: roles/machine/tasks/docker.yml
+  include_tasks: "{{role_path}}/tasks/docker.yml"

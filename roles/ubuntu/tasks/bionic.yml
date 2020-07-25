@@ -1,9 +1,12 @@
-# Necessary for Docker install to find dependencies in ubuntu 18
-- name: Add universe repository for bionic
-  apt_repository:
-    repo: deb http://archive.ubuntu.com/ubuntu bionic universe
-    state: present
-  when: ansible_distribution_release == 'bionic'
-- name: Run "apt-get update" to ensure available packages are up to date
-  apt:
-    update_cache: yes
+- name: Ubuntu bionic repo and update
+  become: true
+  block:
+    # Necessary for Docker install to find dependencies in ubuntu 18
+    - name: Add universe repository for bionic
+      apt_repository:
+        repo: deb http://archive.ubuntu.com/ubuntu bionic universe
+        state: present
+      when: ansible_distribution_release == 'bionic'
+    - name: Run "apt-get update" to ensure available packages are up to date
+      apt:
+        update_cache: yes

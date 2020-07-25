@@ -1,9 +1,12 @@
-- name: Docker
-  include_role:
-    name: geerlingguy.docker
-- name: Docker Python wrapper
-  apt:
-    name: python-docker
-    state: present
-- name: Add ansible user to docker group
-  shell: 'usermod -aG docker {{ ansible_user }}'
+- name: Docker with dependencies and user role
+  become: true
+  block:
+    - name: Docker
+      include_role:
+        name: geerlingguy.docker
+    - name: Docker Python wrapper
+      apt:
+        name: python-docker
+        state: present
+    - name: Add ansible user to docker group
+      shell: 'usermod -aG docker {{ ansible_user }}'

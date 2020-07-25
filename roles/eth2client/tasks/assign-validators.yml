@@ -86,3 +86,4 @@
         beacon_require_restart: true
       include_tasks: "start-beacon.yml"
       when: not has_validator_client
+  when: restart_validator_afterwards | default(false)

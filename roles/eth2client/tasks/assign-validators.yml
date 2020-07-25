@@ -1,27 +1,14 @@
 - name: Stop Eth2 validator client container
-  shell: "docker stop --time=10 {{validator_container_name}} || true"
+  shell: "docker stop --time=10 {{validator_container_name}}"
   when: has_validator_client
-# TODO: this silently stops the play when the container does not exist somehow
-- name: Check if validator client is stopped
-  docker_container_info:
-    name: "{{validator_container_name}}"
-  register: result
-  when: has_validator_client
-- name: End if validator is not stopped
-  meta: end_play
-  when: has_validator_client and ((not (result is defined)) or (not result.exists) or (result.exists and result.container.State.Running))
+  register: stop_result
+  failed_when: "(stop_result.rc >= 1) and not ('No such container' in stop_result.stderr)"
 
 - name: Stop Eth2 beacon node if no separate validator client
-  shell: "docker stop --time=10 {{beacon_container_name}} || true"
+  shell: "docker stop --time=10 {{beacon_container_name}}"
   when: not has_validator_client
-- name: Check if validating beacon node is stopped
-  docker_container_info:
-    name: "{{beacon_container_name}}"
-  register: result
-  when: not has_validator_client
-- name: End if validating beacon node is not stopped
-  meta: end_play
-  when: (not has_validator_client) and ((not (result is defined)) or (not result.exists) or (result.exists and result.container.State.Running))
+  register: stop_result
+  failed_when: "(stop_result.rc >= 1) and not ('No such container' in stop_result.stderr)"
 
 - name: Wipe validator current keys
   include_tasks: "wipe-validator-keys-{{eth2client_name}}.yml"
@@ -65,7 +52,6 @@
     state: directory
   delegate_to: localhost
 - name: Select files for client
-  delegate_to: localhost
   vars:
     input_data_dir: "{{remote_out_data_dir}}"
     output_data_dir: "{{remote_out_data_dir}}/selected"
@@ -75,6 +61,10 @@
     path: "{{remote_out_data_dir}}/selected/*"
     dest: "{{remote_out_data_archive}}"
   delegate_to: localhost
+- name: Prepare dest directory
+  file:
+    path: "{{ validator_host_dir }}/"
+    state: directory
 - name: Upload new validator accounts
   unarchive:
     src: "{{ remote_out_data_archive }}"

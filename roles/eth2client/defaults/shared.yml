@@ -25,6 +25,9 @@ home_dir: "/home/{{ ansible_user }}"
 # (requires running extra configuration tasks)
 testnet_type: altona
 
+# Used to identify the network locally
+eth2_network_name: altona
+
 
 # P2P settings
 # -------------------------------------------
@@ -102,8 +105,8 @@ assignments_file: "{{local_data_dir}}/validator_assignments.json"
 remote_out_data_dir: "{{local_data_dir}}/remote_{{validator_host|replace('.','_')}}"
 remote_out_data_archive: "{{remote_out_data_dir}}.tar.gz"
 
-validators_source_max: "{{lookup('env', 'SOURCE_WALLET_MIN')}}"
-validators_source_min: "{{lookup('env', 'SOURCE_WALLET_MAX')}}"
+validators_source_min: "{{lookup('env', 'SOURCE_WALLET_MIN')}}"
+validators_source_max: "{{lookup('env', 'SOURCE_WALLET_MAX')}}"
 
 # TODO: refactor these into vault variables or something else secure. This is testnet stuff!
 validators_source_mnemonic: "{{lookup('env', 'SOURCE_WALLET_VALIDATORS_MNEMONIC')}}"

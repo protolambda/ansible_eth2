@@ -67,6 +67,7 @@ validator_memory: 500m
 
 validator_metrics_port: 8081
 
+validator_graffiti: "@protolambda"
 
 # Eth2stats
 # -------------------------------------------

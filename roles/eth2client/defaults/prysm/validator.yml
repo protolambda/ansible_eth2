@@ -7,7 +7,7 @@ validator_start_args: >
   --altona
   {% endif %}
   --beacon-rpc-provider=localhost:{{beacon_grpc_port}}
-  --graffiti="{{ validator_graffiti | default('@protolambda') }}"
+  --graffiti="{{ validator_graffiti }}"
   --monitoring-host=0.0.0.0 --monitoring-port={{validator_metrics_port}}
   --password=""
   --keymanager=wallet

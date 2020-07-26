@@ -5,7 +5,12 @@ validators_config_file: "validators_config.yml"
 # Debug logging spams a ton of http data every eth2stats call (every second).
 beacon_start_args: >
   --logging=INFO
+  {% if testnet_type == 'custom' %}
+  --network="{{beacon_container_dir}}/config/teku_config.yaml"
+  --eth1-deposit-contract-address="{{deposit_contract_address}}"
+  {% elif testnet_type == 'altona' %}
   --network=altona
+  {% endif %}
   --data-path="{{beacon_container_dir}}"
   --p2p-advertised-ip={{public_ip_address}}
   --p2p-advertised-port={{beacon_udp_port}}
@@ -21,7 +26,7 @@ beacon_start_args: >
   --rest-api-host-allowlist="*"
   --p2p-discovery-bootnodes="enr:-LK4QLkbbq7xuRa_EnWd_kc0TkQk0pd0B0cZYR5LvBsncFQBDyPbGdy8d24TzRVeK7ZWwM5_2EcSJK223f8TYUOQYfwBh2F0dG5ldHOIAAAAAAAAAACEZXRoMpD9yjmwAAABIf__________gmlkgnY0gmlwhAPsjtOJc2VjcDI1NmsxoQJNw_aZgWXl2SstD--WAjooGudjWLjEbbCIddJuEPxzWYN0Y3CCIyiDdWRwgiMo,enr:-LK4QHy-glnxN1WTk5f6d7-xXwy_UKJLs5k7p_S4KRY9I925KTzW_kQLjfFriIpH0de7kygBwrSl726ukq9_OG_sgKMCh2F0dG5ldHOIUjEAIQEAFMiEZXRoMpD9yjmwAAABIf__________gmlkgnY0gmlwhBLmhrCJc2VjcDI1NmsxoQNlU7gT0HUvpLA41n-P5GrCgjwMwtG02YsRRO0lAmpmBYN0Y3CCIyiDdWRwgiMo,enr:-LK4QDz0n0vpyOpuStB8e22h9ayHVcvmN7o0trC7eC0DnZV9GYGzK5uKv7WlzpMQM2nDTG43DWvF_DZYwJOZCbF4iCQBh2F0dG5ldHOI__________-EZXRoMpD9yjmwAAABIf__________gmlkgnY0gmlwhBKN136Jc2VjcDI1NmsxoQP5gcOUcaruHuMuTv8ht7ZEawp3iih7CmeLqcoY1hxOnoN0Y3CCIyiDdWRwgiMo"
   {% if validator_enabled %}
-  --validators-graffiti="{{ validator_graffiti | default('@protolambda') }}"
+  --validators-graffiti="{{ validator_graffiti }}"
   --config-file="{{beacon_container_dir}}/{{validators_config_file}}"
   {% endif %}
 

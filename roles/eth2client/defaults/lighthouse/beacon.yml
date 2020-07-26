@@ -7,6 +7,7 @@ beacon_start_args: >
   --testnet-dir="{{beacon_container_dir}}/config/custom-testnet"
   {% endif %}
   bn
+  --graffiti="{{validator_graffiti}}"
   --disable-enr-auto-update=true
   --enr-address={{public_ip_address}}
   --enr-tcp-port={{beacon_tcp_port}} --enr-udp-port={{beacon_udp_port}}

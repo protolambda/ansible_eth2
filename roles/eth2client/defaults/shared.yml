@@ -40,10 +40,6 @@ hi_peer_count: 200
 # Beacon node
 # -------------------------------------------
 
-# TODO: not fully functional yet
-bootnodes_host_path: "{{beacon_host_dir}}/bootnodes.txt"
-bootnodes_container_path: "{{beacon_container_dir}}/bootnodes.txt"
-
 beacon_container_name: beacon
 beacon_host_dir: "{{home_dir}}/beacon"
 beacon_container_dir: /data
@@ -56,6 +52,13 @@ beacon_rpc_port: 4000
 beacon_grpc_port: 4001
 beacon_metrics_port: 8080
 
+beacon_log_level: debug
+
+# Beacon Network
+# -------------------------------------------
+
+# List of ENR strings
+bootnode_enrs: []
 
 # Validator
 # -------------------------------------------

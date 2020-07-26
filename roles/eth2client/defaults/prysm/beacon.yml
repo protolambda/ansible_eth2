@@ -16,7 +16,11 @@ beacon_start_args: >
   --rpc-host=0.0.0.0 --rpc-port={{beacon_grpc_port}}
   --grpc-gateway-host=0.0.0.0
   --grpc-gateway-port={{beacon_rpc_port}}
-  --verbosity=debug
+  --verbosity="{{ beacon_log_level | lower }}"
   --enable-debug-rpc-endpoints
   --min-sync-peers 1
-  --bootstrap-node="enr:-KG4QLkU_qJgdh-DhT5HtONGvuqwbbW99piCe27Bpk8oO_hvC0qEYgOSpmVfZ-8iJgW71HO23ajEFCNOCvEaqpcIXiUDhGV0aDKQ_co5sAAAASH__________4JpZIJ2NIJpcIQDE_KiiXNlY3AyNTZrMaEDbBoq33b6SAUh96EJZWNYOqYwjm78pVviDreLfK-aeUKDdGNwgiMog3VkcIIjKA"
+  {% if bootnode_enrs is defined %}
+  {% for bootnode_enr in bootnode_enrs %}
+  --bootstrap-node="{{ bootnode_enr }}"
+  {% endfor %}
+  {% endif %}

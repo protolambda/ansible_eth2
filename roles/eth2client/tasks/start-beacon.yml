@@ -2,11 +2,6 @@
   file:
     path: "{{beacon_host_dir}}"
     state: directory
-- name: Bootnodes file
-  copy:
-    content: "{{ bootnodes_data }}"
-    dest: "{{ bootnodes_host_path }}"
-  when: bootnodes_data is defined
 - name: Genesis state file
   copy:
     src: "{{genesis_file}}"

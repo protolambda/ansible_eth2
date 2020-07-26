@@ -4,12 +4,14 @@ beacon_start_args: >
   --network=altona
   --data-dir="{{beacon_container_dir}}"
   --web3-url={{eth1_endpoint.ws}}
-  --bootstrap-file="{{bootnodes_container_path}}"
+  {% if (bootnode_enrs is defined) and bootnode_enrs %}
+  --bootstrap-node="{{ bootnode_enrs | join(',') }}"
+  {% endif %}
   --udp-port={{beacon_udp_port}}
   --tcp-port={{beacon_tcp_port}}
   --listen-address=0.0.0.0
   --nat="extip:{{public_ip_address}}"
-  --log-level="INFO"
+  --log-level="{{ beacon_log_level | upper }}"
   --rpc --rpc-port={{beacon_rpc_port}} --rpc-address=0.0.0.0
   --metrics --metrics-port={{beacon_metrics_port}} --metrics-address=0.0.0.0
   {% if validator_enabled and (not has_validator_client) %}

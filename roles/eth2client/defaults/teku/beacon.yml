@@ -8,6 +8,7 @@ beacon_start_args: >
   {% if testnet_type == 'custom' %}
   --network="{{beacon_container_dir}}/config/teku_config.yaml"
   --eth1-deposit-contract-address="{{deposit_contract_address}}"
+  --p2p-snappy-enabled=true
   {% elif testnet_type == 'altona' %}
   --network=altona
   {% endif %}

@@ -1,6 +1,6 @@
 bootnode_container_name: bootnode
 bootnode_memory: 1000m
-bootnode_image_name: gcr.io/prysmaticlabs/prysm/bootnode
+bootnode_image_name: protolambda/eth2-bootnode:latest
 
 bootnode_port: 5000
 # TODO: change this
@@ -9,10 +9,18 @@ bootnode_ip: 1.2.3.4
 # E.g. "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
 bootnode_p2p_priv_key: change me
 
-bootnode_start_args: >
-  --discv5-port={{bootnode_port}}
-  --external-ip={{bootnode_ip}}
-  --disable-kad
-  --private={{bootnode_p2p_priv_key}}
+bootnode_fork_version: "0x00000000"
 
-# TODO: maybe expose metrics of bootnode?
+bootnode_start_args: >
+  {% if (other_bootnodes is defined) and other_bootnodes %}
+  --bootnodes="{{ other_bootnodes | join(',') }}"
+  {% endif %}
+  --color=false
+  --enr-ip="{{bootnode_ip}}"
+  --enr-udp="{{bootnode_port}}"
+  --fork-version="{{bootnode_fork_version}}"
+  --level=debug
+  --listen-ip=0.0.0.0
+  --listen-udp="{{bootnode_port}}"
+  --node-db="/data/localnode.db"
+  --priv="{{bootnode_p2p_priv_key}}"

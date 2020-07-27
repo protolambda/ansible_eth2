@@ -3,17 +3,14 @@
   hosts:
     - beacon_node
   roles:
-    - machine
-    - validator
-    - beacon
-    - eth2stats
+    - eth2client
   gather_facts: true
   tasks:
     - name: Setup beacon node
-      include_tasks: roles/eth2client/tasks/start-beacon-app.yml
+      include_tasks: roles/eth2client/tasks/start-beacon.yml
     - name: Setup validator client
-      include_tasks: roles/eth2client/tasks/start-validator-app.yml
+      include_tasks: roles/eth2client/tasks/start-validator.yml
       when: validator_enabled
     - name: Setup eth2stats
-      include_tasks: roles/eth2stats/tasks/start-eth2stats.yml
+      include_tasks: roles/eth2client/tasks/start-eth2stats.yml
       when: eth2stats_enabled

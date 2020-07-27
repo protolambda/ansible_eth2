@@ -1,0 +1,8 @@
+- name: Start bootnodes
+  hosts: bootnode
+  gather_facts: false
+  tasks:
+    - name: Start bootnode container
+      include_role:
+        name: bootnode
+        tasks_from: start-bootnode

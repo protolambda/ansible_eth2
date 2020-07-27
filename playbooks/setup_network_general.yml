@@ -1,0 +1,15 @@
+- name: Setup general
+  hosts:
+    - eth2client
+    - bootnode
+    - metrics
+  gather_facts: true  # Needed to check if 'ansible_distribution_release' is 'bionic'
+  tasks:
+    - name: "Do ubuntu bionic repo setup"
+      include_role:
+        name: ubuntu
+        tasks_from: bionic
+    - name: "Do general machine setup"
+      include_role:
+        name: machine
+        tasks_from: setup

@@ -1,0 +1,8 @@
+- name: Start metrics
+  hosts: metrics
+  gather_facts: false
+  tasks:
+    - name: Run full metrics setup
+      include_role:
+        name: metrics
+        tasks_from: setup

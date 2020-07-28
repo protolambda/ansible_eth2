@@ -1,0 +1,3 @@
+[submodule "roles/metrics/files/eth2-metrics"]
+	path = roles/metrics/files/eth2-metrics
+	url = https://github.com/protolambda/eth2-metrics

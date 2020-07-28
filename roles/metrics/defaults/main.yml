@@ -18,7 +18,7 @@ grafana_port: 3000
 grafana_prometheus_network_name: promnet
 
 # TODO: update path and/or include git submodule
-metrics_dashboards_source: "../../../eth2-metrics/dashboards"
+metrics_dashboards_source: "{{role_path}}/files/eth2-metrics"
 
 # List of http urls to scrape metrics from
 validator_metrics_targets: []

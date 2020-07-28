@@ -8,6 +8,11 @@
     path: "{{grafana_host_dir}}/conf/provisioning/datasources"
     state: directory
 
+- name: Make dashboards directory
+  file:
+    path: "{{grafana_host_dir}}/conf/provisioning/dashboards"
+    state: directory
+
 - name: Make grafana data directory
   file:
     path: "{{grafana_host_dir}}/data"

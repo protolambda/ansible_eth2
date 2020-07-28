@@ -1,9 +1,9 @@
 - name: Create beacon custom testnet dir
   file:
-    path: "{{beacon_host_dir}}/config/custom-testnet"
+    path: "{{beacon_host_dir}}/custom_testnet_config"
     state: directory
 
 - name: Configure beacon node custom testnet
   copy:
     src: "{{custom_testnet_lighthouse_dir}}"
-    dest: "{{beacon_host_dir}}/config/custom-testnet"
+    dest: "{{beacon_host_dir}}/custom_testnet_config"

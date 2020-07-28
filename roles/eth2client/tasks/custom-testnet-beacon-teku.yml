@@ -5,5 +5,5 @@
 
 - name: Configure beacon node custom testnet
   copy:
-    src: "{{custom_testnet_prysm_config}}"
-    dest: "{{beacon_host_dir}}/custom_testnet_config/prysm_config.yaml"
+    src: "{{custom_testnet_teku_config}}"
+    dest: "{{beacon_host_dir}}/custom_testnet_config/teku_config.yaml"

@@ -4,7 +4,7 @@ beacon_start_args: >
   --debug-level="{{ beacon_log_level | lower }}"
   --datadir="{{beacon_container_dir}}"
   {% if testnet_type == 'custom' %}
-  --testnet-dir="{{beacon_container_dir}}/config/custom-testnet"
+  --testnet-dir="{{beacon_container_dir}}/custom_testnet_config"
   {% endif %}
   bn
   --graffiti="{{validator_graffiti}}"

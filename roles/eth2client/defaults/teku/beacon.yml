@@ -6,7 +6,7 @@ validators_config_file: "validators_config.yml"
 beacon_start_args: >
   --logging="{{ beacon_log_level | upper }}"
   {% if testnet_type == 'custom' %}
-  --network="{{beacon_container_dir}}/config/teku_config.yaml"
+  --network="{{beacon_container_dir}}/custom_testnet_config/teku_config.yaml"
   --eth1-deposit-contract-address="{{deposit_contract_address}}"
   --p2p-snappy-enabled=true
   {% elif testnet_type == 'altona' %}

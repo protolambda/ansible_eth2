@@ -1,5 +1,5 @@
 - name: Copy client versions config
-  file:   # put yaml data into config file to mount into container.
+  copy:   # put yaml data into config file to mount into container.
     content: "{{ eth2stats_client_versions_conf | to_nice_yaml }}"
     dest: "eth2stats-client-versions.yml"
 - name: Start Eth2stats server

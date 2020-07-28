@@ -23,10 +23,11 @@ eth2stats_client_versions_conf:
       version: v0.0.4
 
 eth2stats_server_start_args: >
+  run
   --grpc.port=8080
   --http.dev-cors=true
   --http.dev-cors-host="*"
   --http.port=5000
-  --network.genesis-time={{eth2stats_server_genesis_time}}
-  --network.name={{eth2stats_server_network_name}}
+  --network.genesis-time="{{eth2stats_server_genesis_time}}"
+  --network.name="{{eth2stats_server_network_name}}"
   --version-file="/client-versions.yml"

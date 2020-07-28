@@ -47,7 +47,7 @@
 
 - name: Configure dashboard provider
   copy:
-    src: ../files/dashboard_provider.yml
+    src: ../files/eth2-metrics/dashboard_provider.yml
     dest: "{{grafana_host_dir}}/conf/provisioning/dashboards/dashboard_provider.yml"
     force: yes
 

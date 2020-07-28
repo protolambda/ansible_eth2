@@ -4,6 +4,8 @@
   include_tasks: update-dashboards.yml
 - name: Start nginx reverse proxy and vhost companion
   include_tasks: start-nginx-proxy.yml
+- name: Start prometheus-grafana network
+  include_tasks: start-network.yml
 - name: Start prometheus
   include_tasks: start-prometheus.yml
   vars:

@@ -1,0 +1,4 @@
+- name: Stop eth2stats_server
+  docker_container:
+    name: "{{ eth2stats_server_container_name }}"
+    state: stopped

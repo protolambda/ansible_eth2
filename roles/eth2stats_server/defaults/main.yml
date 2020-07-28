@@ -1,0 +1,32 @@
+eth2stats_server_container_name: eth2stats_server
+eth2stats_server_memory: 2000m
+eth2stats_server_image_name: protolambda/eth2stats_server:latest
+
+eth2stats_server_grpc_port: 8080
+
+# Change these
+eth2stats_server_domain: testnet.example.com
+
+# For letsencrypt you'll need to point a DNS A record of the domain to the machine,
+#  and then start runing the nginx proxy and companion container. It will auto-renew certificates as necessary.
+letsencrypt_email: "foobar@example.com"
+
+# RFC3339 format
+eth2stats_server_genesis_time: 2020-07-28T02:04:14Z
+
+# Only for informational purposes (logs)
+eth2stats_server_network_name: testnet
+
+eth2stats_client_versions_conf:
+  client-versions:
+    - namespace: eth2stats-client
+      version: v0.0.4
+
+eth2stats_server_start_args: >
+  --grpc.port=8080
+  --http.dev-cors=true
+  --http.dev-cors-host="*"
+  --http.port=5000
+  --network.genesis-time={{eth2stats_server_genesis_time}}
+  --network.name={{eth2stats_server_network_name}}
+  --version-file="/client-versions.yml"

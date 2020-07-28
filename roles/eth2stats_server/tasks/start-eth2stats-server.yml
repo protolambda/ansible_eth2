@@ -1,0 +1,25 @@
+- name: Copy client versions config
+  file:   # put yaml data into config file to mount into container.
+    content: "{{ eth2stats_client_versions_conf | to_nice_yaml }}"
+    dest: "eth2stats-client-versions.yml"
+- name: Start Eth2stats server
+  docker_container:
+    name: "{{ eth2stats_server_container_name }}"
+    state: started
+    image: "{{ eth2stats_server_image_name }}"
+    pull: true
+    restart_policy: unless-stopped
+    network_mode: bridge  # for nginx rev proxy
+    published_ports:
+      - "{{eth2stats_server_api_port}}"  # just the container port, for the nginx setup to handle within bridge network
+      - "0.0.0.0:{{eth2stats_server_grpc_port}}:8080"  # Bind to host ip on GRPC port (binding to container port 8080)
+    env:
+      VIRTUAL_HOST: "{{ eth2stats_server_domain }}"
+      VIRTUAL_PORT: "'{{ eth2stats_server_api_port }}'"
+      LETSENCRYPT_HOST: "{{ eth2stats_server_domain }}"
+      LETSENCRYPT_EMAIL: "{{ letsencrypt_email }}"
+    restart: "{{ eth2stats_server_require_restart | default(false) }}"
+    memory: "{{eth2stats_server_memory}}"
+    command: "{{ eth2stats_server_start_args }}"
+    volumes:
+      - "eth2stats-client-versions.yml:/client-versions.yml"  # mount config file directly

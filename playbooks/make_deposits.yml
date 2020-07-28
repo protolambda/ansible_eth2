@@ -1,0 +1,13 @@
+---
+- name: Deposit validator set
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Make deposits
+      include_role:
+        name: val_tools
+        tasks_from: build_deposits
+    - name: Execute deposits
+      include_role:
+        name: val_tools
+        tasks_from: exec_deposits

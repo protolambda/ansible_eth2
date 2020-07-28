@@ -1,0 +1,9 @@
+---
+- name: Prepare testnet
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Deploy deposit contract
+      include_role:
+        name: deposit_contract
+        tasks_from: deploy

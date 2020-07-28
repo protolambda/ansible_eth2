@@ -2,9 +2,10 @@ bootnode_container_name: bootnode
 bootnode_memory: 1000m
 bootnode_image_name: protolambda/eth2-bootnode:latest
 
-bootnode_port: 5000
-# TODO: change this
-bootnode_ip: 1.2.3.4
+bootnode_port: 9000
+
+bootnode_ip: "{{public_ip_address}}"
+
 # 32 bytes, hex encoded, no 0x.
 # E.g. "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
 bootnode_p2p_priv_key: change me

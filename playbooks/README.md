@@ -14,7 +14,7 @@ ansible-playbook -i my_inventory setup_network_metrics.yml
 # Optionally, to run an eth2stats server to connect beacon nodes, start one:
 ansible-playbook -i my_inventory setup_network_eth2stats.yml
 
-# Set up bootnodes (Alternativly configure nodes to use existing bootnodes)
+# Set up bootnodes (Alternatively configure nodes to use existing bootnodes)
 # Note: configure a p2p private key for each bootnode
 ansible-playbook -i my_inventory setup_network_bootnodes.yml
 

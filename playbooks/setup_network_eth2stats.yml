@@ -1,0 +1,12 @@
+- name: Start eth2stats server
+  hosts: eth2stats_server
+  gather_facts: false
+  tasks:
+    - name: Start nginx proxy container
+      include_role:
+        name: eth2stats_server
+        tasks_from: start-nginx-proxy
+    - name: Start eth2stats server container
+      include_role:
+        name: eth2stats_server
+        tasks_from: start-eth2stats-server

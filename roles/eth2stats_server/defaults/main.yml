@@ -5,7 +5,7 @@ eth2stats_server_image_name: protolambda/eth2stats_server:latest
 eth2stats_server_grpc_port: 8080
 
 # Change these
-eth2stats_server_domain: testnet.example.com
+eth2stats_server_domain: api.testnet.example.com
 
 # For letsencrypt you'll need to point a DNS A record of the domain to the machine,
 #  and then start runing the nginx proxy and companion container. It will auto-renew certificates as necessary.

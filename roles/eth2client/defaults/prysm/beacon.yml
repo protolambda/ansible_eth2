@@ -3,7 +3,7 @@ beacon_start_args: >
   --datadir="{{beacon_container_dir}}"
   {% if testnet_type == 'custom' %}
   --chain-config-file="{{beacon_container_dir}}/config/prysm_config.yaml"
-  --deposit-contract="{{deposit_contract_addr}}"
+  --deposit-contract="{{deposit_contract_address}}"
   --contract-deployment-block="{{deposit_contract_deploy_block_nr}}"
   --custom-genesis-delay="{{genesis_delay}}"
   {% elif testnet_type == 'altona' %}

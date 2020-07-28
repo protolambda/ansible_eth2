@@ -3,6 +3,7 @@
     - eth2client
     - bootnode
     - metrics
+    - eth2stats_server
   gather_facts: true  # Needed to check if 'ansible_distribution_release' is 'bionic'
   tasks:
     - name: "Do ubuntu bionic repo setup"

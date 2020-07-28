@@ -1,5 +1,5 @@
 eth2stats_server_container_name: eth2stats_server
-eth2stats_server_memory: 2000m
+eth2stats_server_memory: 1600m
 eth2stats_server_image_name: protolambda/eth2stats_server:latest
 
 eth2stats_server_grpc_port: 8080

@@ -29,7 +29,7 @@
   delegate_to: localhost
 - name: Ensure local data dir exists
   file:
-    path: "{{local_data_dir}}"
+    path: "{{validator_local_data_dir}}"
     state: directory
   delegate_to: localhost
 - name: Assign validator keys
@@ -69,21 +69,21 @@
   unarchive:
     src: "{{ remote_out_data_archive }}"
     dest: "{{ beacon_host_dir }}/"
-  when: not has_validator_client
+  when: (not has_validator_client) and (validator_count_per_host > 0)
 - name: Upload new validator accounts to VC
   unarchive:
     src: "{{ remote_out_data_archive }}"
     dest: "{{ validator_host_dir }}/"
-  when: has_validator_client
+  when: has_validator_client and (validator_count_per_host > 0)
 - block:
     - name: Pull and restart validator client
       vars:
         validator_require_restart: true
       include_tasks: "start-validator.yml"
-      when: has_validator_client
+      when: has_validator_client and (validator_count_per_host > 0)
     - name: Or restart beacon node, if no separate beacon node
       vars:
         beacon_require_restart: true
       include_tasks: "start-beacon.yml"
-      when: not has_validator_client
+      when: (not has_validator_client) and (validator_count_per_host > 0)
   when: restart_validator_afterwards | default(false)

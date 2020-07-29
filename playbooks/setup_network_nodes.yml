@@ -10,6 +10,7 @@
         name: eth2client
         defaults_from: '{{eth2client_name}}'
         tasks_from: assign-validators
+      when: validator_enabled
 
 - name: Start beacon nodes (and optional in-beacon validators)
   hosts: beacon_node
@@ -30,7 +31,7 @@
         name: eth2client
         defaults_from: '{{eth2client_name}}'
         tasks_from: start-validator
-      when: has_validator_client
+      when: validator_enabled
 
 - name: Start eth2stats
   hosts: beacon_node

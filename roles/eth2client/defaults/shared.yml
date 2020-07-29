@@ -103,9 +103,9 @@ eth1_endpoint: "{{ eth1_endpoints.goerli_infura }}"
 validator_count_per_host: 0
 
 validator_host: "host_{{inventory_hostname}}"
-local_data_dir: "./wallets/{{eth2_network_name}}"
-assignments_file: "{{local_data_dir}}/validator_assignments.json"
-remote_out_data_dir: "{{local_data_dir}}/remote_{{validator_host|replace('.','_')}}"
+validator_local_data_dir: "{{inventory_dir}}/../validator_hub/{{eth2_network_name}}"
+assignments_file: "{{validator_local_data_dir}}/validator_assignments.json"
+remote_out_data_dir: "{{validator_local_data_dir}}/remote_{{validator_host|replace('.','_')}}"
 remote_out_data_archive: "{{remote_out_data_dir}}.tar.gz"
 
 validators_source_min: "{{lookup('env', 'SOURCE_WALLET_MIN')}}"

@@ -12,7 +12,7 @@ beacon_start_args: >
   --enr-address={{public_ip_address}}
   --enr-tcp-port={{beacon_tcp_port}} --enr-udp-port={{beacon_udp_port}}
   --port={{beacon_tcp_port}} --discovery-port={{beacon_udp_port}}
-  --max-peers={{hi_peer_count}}
+  --target-peers={{hi_peer_count}}
   {% if (bootnode_enrs is defined) and bootnode_enrs %}
   --boot-nodes="{{ bootnode_enrs | join(',') }}"
   {% endif %}

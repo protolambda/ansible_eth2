@@ -5,5 +5,5 @@
 
 - name: Configure beacon node custom testnet
   copy:
-    src: "{{custom_testnet_lighthouse_dir}}"
+    src: "{{custom_testnet_lighthouse_dir}}/"
     dest: "{{beacon_host_dir}}/custom_testnet_config"

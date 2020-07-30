@@ -8,8 +8,10 @@
     - name: Deploy validator keys
       include_role:
         name: eth2client
-        defaults_from: '{{eth2client_name}}'
+        defaults_from: '{{item}}'
         tasks_from: assign-validators
+      loop:
+        - '{{ eth2client_name }}'  # needs to be dynamic
       when: validator_enabled
 
 - name: Start beacon nodes (and optional in-beacon validators)
@@ -19,8 +21,10 @@
     - name: Start beacon containers
       include_role:
         name: eth2client
-        defaults_from: '{{eth2client_name}}'
+        defaults_from: '{{item}}'
         tasks_from: start-beacon
+      loop:
+        - '{{ eth2client_name }}'  # needs to be dynamic
 
 - name: Start validator clients
   hosts: beacon_node
@@ -29,8 +33,10 @@
     - name: Start validator containers
       include_role:
         name: eth2client
-        defaults_from: '{{eth2client_name}}'
+        defaults_from: '{{item}}'
         tasks_from: start-validator
+      loop:
+        - '{{ eth2client_name }}'  # needs to be dynamic
       when: validator_enabled
 
 - name: Start eth2stats
@@ -40,6 +46,8 @@
     - name: Start eth2stats containers
       include_role:
         name: eth2client
-        defaults_from: '{{eth2client_name}}'
+        defaults_from: '{{item}}'
         tasks_from: start-eth2stats
+      loop:
+        - '{{ eth2client_name }}'  # needs to be dynamic
       when: eth2stats_enabled

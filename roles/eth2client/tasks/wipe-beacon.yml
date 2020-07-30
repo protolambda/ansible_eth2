@@ -1,6 +1,7 @@
 - name: Stop beacon node
   include_tasks: "stop-beacon.yml"
 - name: Remove beacon data
+  become: true
   file:
     path: "{{beacon_host_dir}}"
     state: absent

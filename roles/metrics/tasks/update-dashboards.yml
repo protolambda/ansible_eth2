@@ -1,3 +1,7 @@
+- name: Remove old dashboards
+  file:
+    path: "{{grafana_host_dir}}/data/dashboards"
+    state: absent
 - name: Copy eth2-metrics dashboards to provisioned dashboards
   copy:
     src: "{{metrics_dashboards_source}}"

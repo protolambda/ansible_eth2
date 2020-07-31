@@ -44,7 +44,6 @@ hi_peer_count: 200
 beacon_container_name: beacon
 beacon_host_dir: "{{home_dir}}/beacon"
 beacon_container_dir: /data
-beacon_memory: 3000m
 
 beacon_tcp_port: 9000
 beacon_udp_port: 9000
@@ -67,7 +66,6 @@ validator_enabled: false
 validator_container_name: validator
 validator_host_dir: "{{home_dir}}/validator"
 validator_container_dir: /data
-validator_memory: 500m
 
 validator_metrics_port: 8081
 

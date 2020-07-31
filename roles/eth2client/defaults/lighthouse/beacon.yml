@@ -1,4 +1,8 @@
 beacon_image_name: sigp/lighthouse:latest
+
+beacon_memory: 3200M
+beacon_kernel_memory: 3300M
+
 beacon_start_args: >
   lighthouse
   --debug-level="{{ beacon_log_level | lower }}"

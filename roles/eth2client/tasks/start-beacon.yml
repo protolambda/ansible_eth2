@@ -34,6 +34,8 @@
     image: "{{ beacon_image_name }}"
     pull: true
     restart_policy: unless-stopped
+    memory_swappiness: 0
+    kernel_memory: "{{beacon_kernel_memory}}"
     network_mode: host
     restart: "{{ beacon_require_restart | default(false) }}"
     volumes:

@@ -2,6 +2,14 @@ beacon_image_name: pegasyseng/teku:develop
 
 validators_config_file: "validators_config.yml"
 
+beacon_env:
+  JAVA_OPTS: "-Xmx3500m"
+
+beacon_memory: 3600M
+beacon_kernel_memory: 3700M
+
+validator_memory: No validator container yet
+
 # Debug logging spams a ton of http data every eth2stats call (every second).
 beacon_start_args: >
   --logging="{{ beacon_log_level | upper }}"
@@ -32,9 +40,6 @@ beacon_start_args: >
   --validators-graffiti="{{ validator_graffiti }}"
   --config-file="{{beacon_container_dir}}/{{validators_config_file}}"
   {% endif %}
-
-beacon_env:
-  JAVA_OPTS: "-Xmx2800m"
 
 keystores_container_dir: "{{beacon_container_dir}}/keys"
 secrets_container_dir: "{{beacon_container_dir}}/secrets"

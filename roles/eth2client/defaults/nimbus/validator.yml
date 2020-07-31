@@ -4,6 +4,8 @@ secrets_container_dir: "{{validator_container_dir}}/secrets"
 keystores_host_dir: "{{validator_host_dir}}/keys"
 secrets_host_dir: "{{validator_host_dir}}/secrets"
 
+validator_memory: 400m
+
 validator_image_name: protolambda/nim_beacon_node:latest
 validator_start_args: >
   validator_client

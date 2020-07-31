@@ -1,3 +1,6 @@
+beacon_memory: 3200M
+beacon_kernel_memory: 3300M
+
 beacon_image_name: gcr.io/prysmaticlabs/prysm/beacon-chain
 beacon_start_args: >
   --datadir="{{beacon_container_dir}}"

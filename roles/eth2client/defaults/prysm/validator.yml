@@ -1,3 +1,5 @@
+validator_memory: 400m
+
 validator_image_name: gcr.io/prysmaticlabs/prysm/validator
 validator_start_args: >
   --datadir="/data"

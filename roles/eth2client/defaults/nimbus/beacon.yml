@@ -1,4 +1,8 @@
 beacon_image_name: protolambda/nim_beacon_node:latest
+
+beacon_memory: 3200M
+beacon_kernel_memory: 3300M
+
 beacon_start_args: >
   beacon_node
   --network=altona

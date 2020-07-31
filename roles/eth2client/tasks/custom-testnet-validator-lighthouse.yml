@@ -1,9 +1,9 @@
 - name: Create validator testnet dir
   file:
-    path: "{{validator_host_dir}}/config/custom-testnet"
+    path: "{{validator_host_dir}}/custom_testnet_config"
     state: directory
 
 - name: Configure validator node custom testnet
   copy:
-    src: "{{custom_testnet_dir}}"
-    dest: "{{validator_host_dir}}/config/custom-testnet"
+    src: "{{custom_testnet_lighthouse_dir}}/"
+    dest: "{{validator_host_dir}}/custom_testnet_config"

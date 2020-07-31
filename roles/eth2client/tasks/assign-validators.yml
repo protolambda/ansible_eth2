@@ -61,10 +61,16 @@
     path: "{{remote_out_data_dir}}/selected/*"
     dest: "{{remote_out_data_archive}}"
   delegate_to: localhost
-- name: Prepare dest directory
+- name: Prepare dest directory in BN
+  file:
+    path: "{{ beacon_host_dir }}/"
+    state: directory
+  when: (not has_validator_client) and (validator_count_per_host > 0)
+- name: Prepare dest directory in VC
   file:
     path: "{{ validator_host_dir }}/"
     state: directory
+  when: has_validator_client and (validator_count_per_host > 0)
 - name: Upload new validator accounts to BN
   unarchive:
     src: "{{ remote_out_data_archive }}"

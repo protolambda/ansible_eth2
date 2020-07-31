@@ -12,5 +12,8 @@ validator_start_args: >
   --graffiti="{{ validator_graffiti }}"
   --monitoring-host=0.0.0.0 --monitoring-port={{validator_metrics_port}}
   --password=""
+  --disable-accounts-v2=true
   --keymanager=wallet
   --keymanageropts={{ validator_container_dir }}/keymanager_opts.json
+
+# TODO: migrate to new keys structure

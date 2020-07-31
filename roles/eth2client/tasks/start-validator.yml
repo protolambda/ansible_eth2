@@ -1,4 +1,5 @@
 - name: Validator start
+  block:
     - name: Make validator host dir
       file:
         path: "{{validator_host_dir}}"

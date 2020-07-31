@@ -2,15 +2,28 @@
 - name: Start beacon node, validator, eth2stats
   hosts:
     - beacon_node
-  roles:
-    - eth2client
   gather_facts: true
   tasks:
-    - name: Setup beacon node
-      include_tasks: roles/eth2client/tasks/start-beacon.yml
-    - name: Setup validator client
-      include_tasks: roles/eth2client/tasks/start-validator.yml
+    - name: Start validator client
+      include_role:
+        name: eth2client
+        defaults_from: '{{item}}'
+        tasks_from: start-validator
+      loop:
+        - '{{ eth2client_name }}'  # needs to be dynamic
       when: validator_enabled
-    - name: Setup eth2stats
-      include_tasks: roles/eth2client/tasks/start-eth2stats.yml
+    - name: Start beacon node
+      include_role:
+        name: eth2client
+        defaults_from: '{{item}}'
+        tasks_from: start-beacon
+      loop:
+        - '{{ eth2client_name }}'  # needs to be dynamic
+    - name: Start eth2stats
+      include_role:
+        name: eth2client
+        defaults_from: '{{item}}'
+        tasks_from: start-eth2stats
       when: eth2stats_enabled
+      loop:
+        - '{{ eth2client_name }}'  # needs to be dynamic

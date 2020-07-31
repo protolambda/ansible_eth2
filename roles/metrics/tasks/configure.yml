@@ -34,8 +34,8 @@
     state: directory
 
 - name: Deploy prometheus.yml from template
-  template:
-    src: ../templates/prometheus.yml.j2
+  copy:
+    content: "{{prometheus_settings | to_nice_yaml }}"
     dest: "{{prometheus_host_dir}}/prom/prometheus.yml"
     force: yes
 

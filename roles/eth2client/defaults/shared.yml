@@ -18,6 +18,11 @@
 # -------------------------------------------
 home_dir: "/home/{{ ansible_user }}"
 
+common_log_options:
+  max-file: 10
+  max-size: 30m
+  mode: non-blocking
+  max-buffer-size: 4m
 
 # Testnet settings
 # -------------------------------------------

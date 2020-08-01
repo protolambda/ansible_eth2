@@ -6,6 +6,7 @@
     restart_policy: unless-stopped
     network_mode: host
     restart: "{{ eth2stats_require_restart | default(false) }}"
+    log_options: "{{ common_log_options }}"
     volumes:
       - "{{eth2stats_host_dir}}:/data"
     command: >

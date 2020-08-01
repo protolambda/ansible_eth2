@@ -38,6 +38,7 @@
     kernel_memory: "{{beacon_kernel_memory}}"
     network_mode: host
     restart: "{{ beacon_require_restart | default(false) }}"
+    log_options: "{{ common_log_options }}"
     volumes:
       - "{{beacon_host_dir}}:{{beacon_container_dir}}"
     memory: "{{beacon_memory}}"

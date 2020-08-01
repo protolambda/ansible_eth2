@@ -16,6 +16,7 @@
         restart_policy: unless-stopped
         network_mode: host
         restart: "{{ validator_require_restart | default(false) }}"
+        log_options: "{{ common_log_options }}"
         volumes:
           - "{{validator_host_dir}}:{{validator_container_dir}}"
         memory: "{{validator_memory}}"

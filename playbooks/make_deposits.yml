@@ -7,10 +7,10 @@
       include_role:
         name: val_tools
         tasks_from: build_deposits
-    - name: Debug deposits
-      debug:
-        msg: "{{deposit_datas}}"
-#    - name: Execute deposits
-#      include_role:
-#        name: val_tools
-#        tasks_from: exec_deposits
+#    - name: Debug deposits
+#      debug:
+#        msg: "{{deposit_datas}}"
+    - name: Execute deposits
+      include_role:
+        name: val_tools
+        tasks_from: exec_deposits

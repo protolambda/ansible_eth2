@@ -1,4 +1,4 @@
 - name: Stop Eth2stats container
-  docker_container:
-    name: "{{eth2stats_container_name}}"
-    state: stopped
+  shell: "docker stop --time=10 {{eth2stats_container_name}}"
+  register: stop_result
+  failed_when: "(stop_result.rc >= 1) and not ('No such container' in stop_result.stderr)"

@@ -1,0 +1,11 @@
+- name: Install metrics components
+  hosts:
+    - metrics
+  gather_facts: no
+  roles:
+    - metrics
+  tasks:
+    - name: Update dashboards
+      include_role:
+        name: metrics
+        tasks_from: update-dashboards

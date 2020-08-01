@@ -1,47 +1,49 @@
-- name: Assign validators
-  # each validator client is running on a machine with a beacon node, change this later.
-  hosts: beacon_node
-  gather_facts: false
-  vars:
-    restart_validator_afterwards: false  # Do not start validators yet
-  tasks:
-    - name: Deploy validator keys
-      include_role:
-        name: eth2client
-        defaults_from: '{{item}}'
-        tasks_from: assign-validators
-      loop:
-        - '{{ eth2client_name }}'  # needs to be dynamic
-      when: validator_enabled
-
-- name: Start beacon nodes (and optional in-beacon validators)
-  hosts: beacon_node
-  gather_facts: false
-  tasks:
-    - name: Start beacon containers
-      include_role:
-        name: eth2client
-        defaults_from: '{{item}}'
-        tasks_from: start-beacon
-      loop:
-        - '{{ eth2client_name }}'  # needs to be dynamic
-
-- name: Start validator clients
-  hosts: beacon_node
-  gather_facts: false
-  tasks:
-    - name: Start validator containers
-      include_role:
-        name: eth2client
-        defaults_from: '{{item}}'
-        tasks_from: start-validator
-      loop:
-        - '{{ eth2client_name }}'  # needs to be dynamic
-      when: validator_enabled
+#- name: Assign validators
+#  # each validator client is running on a machine with a beacon node, change this later.
+#  hosts: beacon_node
+#  gather_facts: false
+#  vars:
+#    restart_validator_afterwards: false  # Do not start validators yet
+#  tasks:
+#    - name: Deploy validator keys
+#      include_role:
+#        name: eth2client
+#        defaults_from: '{{item}}'
+#        tasks_from: assign-validators
+#      loop:
+#        - '{{ eth2client_name }}'  # needs to be dynamic
+#      when: validator_enabled
+#
+#- name: Start beacon nodes (and optional in-beacon validators)
+#  hosts: beacon_node
+#  gather_facts: false
+#  tasks:
+#    - name: Start beacon containers
+#      include_role:
+#        name: eth2client
+#        defaults_from: '{{item}}'
+#        tasks_from: start-beacon
+#      loop:
+#        - '{{ eth2client_name }}'  # needs to be dynamic
+#
+#- name: Start validator clients
+#  hosts: beacon_node
+#  gather_facts: false
+#  tasks:
+#    - name: Start validator containers
+#      include_role:
+#        name: eth2client
+#        defaults_from: '{{item}}'
+#        tasks_from: start-validator
+#      loop:
+#        - '{{ eth2client_name }}'  # needs to be dynamic
+#      when: validator_enabled
 
 - name: Start eth2stats
   hosts: beacon_node
   gather_facts: false
+  vars:
+    eth2stats_require_restart: true
   tasks:
     - name: Start eth2stats containers
       include_role:

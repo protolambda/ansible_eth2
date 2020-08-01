@@ -4,6 +4,7 @@ validators_config_file: "validators_config.yml"
 
 beacon_env:
   JAVA_OPTS: "-Xmx3500m"
+  LOG4J_CONFIGURATION_FILE: "{{beacon_container_dir}}/log_config.xml"
 
 beacon_memory: 3600M
 beacon_kernel_memory: 3700M
@@ -12,7 +13,6 @@ validator_memory: No validator container yet
 
 # Debug logging spams a ton of http data every eth2stats call (every second).
 beacon_start_args: >
-  --logging="{{ beacon_log_level | upper }}"
   {% if testnet_type == 'custom' %}
   --network="{{beacon_container_dir}}/custom_testnet_config/teku_config.yaml"
   --eth1-deposit-contract-address="{{deposit_contract_address}}"
@@ -27,7 +27,8 @@ beacon_start_args: >
   --p2p-discovery-enabled=true
   --p2p-peer-lower-bound={{lo_peer_count}}
   --p2p-peer-upper-bound={{hi_peer_count}}
-  --log-destination=CONSOLE
+  --log-destination=DEFAULT_BOTH
+  --log-file="{{beacon_container_dir}}/log_outputs"
   --eth1-endpoint={{eth1_endpoint.http}}
   --rest-api-enabled=true --rest-api-interface=0.0.0.0 --rest-api-port={{beacon_rpc_port}}
   --metrics-enabled --metrics-interface=0.0.0.0 --metrics-port={{beacon_metrics_port}}

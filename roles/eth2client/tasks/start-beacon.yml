@@ -18,6 +18,12 @@
   file:
     dest: "{{beacon_host_dir}}/no_bn_secrets"
     state: directory
+- name: Teku logging config
+  template:
+    src: ../templates/teku_log_config.xml.j2
+    dest: "{{beacon_host_dir}}/log_config.xml"
+    force: yes
+  when: eth2client_name == "teku"
 - name: Validators config placeholder
   copy:
     content: ""

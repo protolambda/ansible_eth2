@@ -2,6 +2,9 @@ eth2stats_server_container_name: eth2stats_server
 eth2stats_server_memory: 1600m
 eth2stats_server_image_name: protolambda/eth2stats_server:latest
 
+eth2stats_host_path: "{{home_dir}}/eth2stats_server"
+eth2stats_container_path: "/data"
+
 eth2stats_server_grpc_port: 8080
 
 # Change these
@@ -19,15 +22,16 @@ eth2stats_server_network_name: testnet
 
 eth2stats_client_versions_conf:
   client-versions:
-    - namespace: eth2stats-client
-      version: v0.0.4
+  - namespace: eth2stats-client
+    version: v0.0.4
 
 eth2stats_server_start_args: >
   run
+  --grpc.ip=0.0.0.0
   --grpc.port=8080
   --http.dev-cors=true
   --http.dev-cors-host="*"
   --http.port=5000
   --network.genesis-time="{{eth2stats_server_genesis_time}}"
   --network.name="{{eth2stats_server_network_name}}"
-  --version-file="/client-versions.yml"
+  --version-file="{{eth2stats_container_path}}/client-versions.yml"

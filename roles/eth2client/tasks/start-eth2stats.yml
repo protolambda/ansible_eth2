@@ -13,7 +13,7 @@
       run
       --eth2stats.node-name="{{ eth2stats_display_name }}"
       --data.folder="/data"
-      --eth2stats.addr="{{ eth2stats_addr }}" --eth2stats.tls=true
+      --eth2stats.addr="{{ eth2stats_addr }}" --eth2stats.tls="{{eth2stats_grpc_tls_enabled}}"
       --beacon.type="{{ eth2stats_beacon_type }}"
       --beacon.addr="{{ eth2stats_api_addr }}"
       {% if eth2stats_metrics_url is defined %}

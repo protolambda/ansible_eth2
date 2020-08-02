@@ -1,0 +1,26 @@
+keystores_container_dir: "{{validator_container_dir}}/keystores"
+secrets_container_dir: "{{validator_container_dir}}/secrets"
+validators_db_container_dir: "{{validator_container_dir}}/validators"
+
+keystores_host_dir: "{{validator_host_dir}}/keystores"
+secrets_host_dir: "{{validator_host_dir}}/secrets"
+validators_db_host_dir: "{{validator_host_dir}}/validators"
+
+validator_memory: 400m
+
+validator_image_name: chainsafe/lodestar:latest
+validator_start_args: >
+  validator run
+  {% if testnet_type == 'custom' %}
+  --config="{{validator_container_dir}}/custom_testnet_config/lodestar_config.yml"
+  {% elif testnet_type == 'medalla' %}
+  --testnet=medalla
+  {% elif testnet_type == 'altona' %}
+  --testnet=altona
+  {% endif %}
+  --rootDir="{{validator_container_dir}}"
+  --keystoresDir="{{keystores_container_dir}}"
+  --secretsDir="{{secrets_container_dir}}"
+  --validatorsDbDir="{{validators_db_container_dir}}"
+  --graffiti="{{validator_graffiti}}"
+  --server=http://localhost:{{beacon_rpc_port}}/

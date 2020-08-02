@@ -1,0 +1,4 @@
+eth2client_display_name: Lodestar
+eth2client_name: lodestar
+
+has_validator_client: true

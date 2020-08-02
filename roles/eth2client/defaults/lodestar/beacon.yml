@@ -1,0 +1,37 @@
+beacon_image_name: chainsafe/lodestar:latest
+
+beacon_memory: 3200M
+beacon_kernel_memory: 3300M
+
+beacon_start_args: >
+  beacon run
+  {% if testnet_type == 'custom' %}
+  --config="{{beacon_container_dir}}/custom_testnet_config/lodestar_config.yml"
+  {% elif testnet_type == 'medalla' %}
+  --testnet=medalla
+  {% elif testnet_type == 'altona' %}
+  --testnet=altona
+  {% endif %}
+  --rootDir="{{beacon_container_dir}}"
+  --api.namespaces=beacon,validator,node
+  --api.enabled=true
+  --api.host=0.0.0.0
+  --api.port={{beacon_rpc_port}}
+  --eth1.enabled=true
+  --eth1.provider.url="{{eth1_endpoint.http}}"
+  --eth1.depositContract.deployedAt={{deposit_contract_deploy_block_nr}}
+  --metrics.enabled=true
+  --metrics.serverPort={{beacon_metrics_port}}
+  --logger.chain.level="{{ beacon_log_level | lower }}"
+  --logger.eth1.level="{{ beacon_log_level | lower }}"
+  --logger.network.level="{{ beacon_log_level | lower }}"
+  --logger.sync.level="{{ beacon_log_level | lower }}"
+  --network.discv5.enabled=true
+  --network.discv5.bindaddr="/ip4/0.0.0.0/udp/{{beacon_udp_port}}"
+  {% if bootnode_enrs is defined %}
+  {% for bootnode_enr in bootnode_enrs %}
+  --network.discv5.bootEnrs="{{ bootnode_enr }}"
+  {% endfor %}
+  {% endif %}
+  --network.maxPeers={{hi_peer_count}}
+  --network.multiaddrs="/ip4/0.0.0.0/tcp/{{beacon_tcp_port}}"

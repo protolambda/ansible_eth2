@@ -1,9 +1,4 @@
-beacon_image_name: >
-  {% if eth2_network_name == 'attacknet_beta' %}
-  protolambda/nimbus:attacknet
-  {% else %}
-  protolambda/nimbus:latest
-  {% endif %}
+beacon_image_name: protolambda/nimbus:latest
 
 beacon_memory: 3200M
 beacon_kernel_memory: 3300M

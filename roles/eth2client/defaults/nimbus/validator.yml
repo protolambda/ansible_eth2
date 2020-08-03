@@ -6,12 +6,7 @@ secrets_host_dir: "{{validator_host_dir}}/secrets"
 
 validator_memory: 400m
 
-validator_image_name: >
-  {% if eth2_network_name == 'attacknet_beta' %}
-  protolambda/nimbus:attacknet
-  {% else %}
-  protolambda/nimbus:latest
-  {% endif %}
+validator_image_name: protolambda/nimbus:latest
 
 validator_start_args: >
   validator_client

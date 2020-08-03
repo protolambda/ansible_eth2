@@ -10,11 +10,9 @@ beacon_start_args: >
   {% if testnet_type == 'custom' %}
   --testnet-dir="{{beacon_container_dir}}/custom_testnet_config"
   {% elif testnet_type == 'altona' %}
-  --altona
-  {% elif testnet_type == 'onyx' %}
-  --onyx
+  --testnet=altona
   {% elif testnet_type == 'medalla' %}
-  --medalla
+  --testnet=medalla
   {% endif %}
   bn
   --graffiti="{{validator_graffiti}}"

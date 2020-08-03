@@ -10,6 +10,10 @@ beacon_start_args: >
   --contract-deployment-block="{{deposit_contract_deploy_block_nr}}"
   {% elif testnet_type == 'altona' %}
   --altona
+  {% elif testnet_type == 'onyx' %}
+  --onyx
+  {% elif testnet_type == 'medalla' %}
+  --medalla
   {% endif %}
   --http-web3provider="{{eth1_endpoint.http}}"
   --p2p-host-ip={{public_ip_address}}

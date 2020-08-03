@@ -19,6 +19,8 @@ beacon_start_args: >
   --p2p-snappy-enabled=true
   {% elif testnet_type == 'altona' %}
   --network=altona
+  {% elif testnet_type == 'medalla' %}
+  --network=medalla
   {% endif %}
   --data-path="{{beacon_container_dir}}"
   --p2p-advertised-ip={{public_ip_address}}

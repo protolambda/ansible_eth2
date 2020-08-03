@@ -11,6 +11,10 @@ validator_start_args: >
   lighthouse
   {% if testnet_type == 'custom' %}
   --testnet-dir="{{validator_container_dir}}/custom_testnet_config"
+  {% elif testnet_type == 'altona' %}
+  --testnet=altona
+  {% elif testnet_type == 'medalla' %}
+  --testnet=medalla
   {% endif %}
   validator
   --datadir="{{keystores_container_dir}}"

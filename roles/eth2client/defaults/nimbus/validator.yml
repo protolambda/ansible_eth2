@@ -6,7 +6,17 @@ secrets_host_dir: "{{validator_host_dir}}/secrets"
 
 validator_memory: 400m
 
-validator_image_name: protolambda/nim_beacon_node:latest
+validator_image_name: >
+  {% if testnet_type == 'custom' %}
+  {% if eth2_network_name == 'attacknet_beta' %}
+  protolambda/nimbus:attacknet
+  {% endif %}
+  {% elif testnet_type == 'altona' %}
+  protolambda/nimbus:altona
+  {% elif testnet_type == 'medalla' %}
+  protolambda/nimbus:medalla
+  {% endif %}
+
 validator_start_args: >
   validator_client
   --log-level="INFO"

@@ -7,6 +7,10 @@ validator_start_args: >
   --chain-config-file="{{validator_container_dir}}/custom_testnet_config/prysm_config.yaml"
   {% elif testnet_type == 'altona' %}
   --altona
+  {% elif testnet_type == 'onyx' %}
+  --onyx
+  {% elif testnet_type == 'medalla' %}
+  --medalla
   {% endif %}
   --beacon-rpc-provider=localhost:{{beacon_grpc_port}}
   --graffiti="{{ validator_graffiti }}"

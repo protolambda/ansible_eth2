@@ -9,6 +9,12 @@ beacon_start_args: >
   --datadir="{{beacon_container_dir}}"
   {% if testnet_type == 'custom' %}
   --testnet-dir="{{beacon_container_dir}}/custom_testnet_config"
+  {% elif testnet_type == 'altona' %}
+  --altona
+  {% elif testnet_type == 'onyx' %}
+  --onyx
+  {% elif testnet_type == 'medalla' %}
+  --medalla
   {% endif %}
   bn
   --graffiti="{{validator_graffiti}}"
@@ -20,5 +26,5 @@ beacon_start_args: >
   {% if (bootnode_enrs is defined) and bootnode_enrs %}
   --boot-nodes="{{ bootnode_enrs | join(',') }}"
   {% endif %}
-  --eth1 --eth1-endpoint={{eth1_endpoints.goerli_prysm.http}}
+  --eth1 --eth1-endpoint="{{eth1_endpoint.http}}"
   --http --http-address=0.0.0.0 --http-port={{beacon_rpc_port}}

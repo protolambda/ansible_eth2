@@ -6,12 +6,18 @@
 
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-25.25t | %-5level | %-30.30c{1} | %msg%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-20.20t | %-5level | %logger{36} | %-20.20c{1} | %msg%n"/>
         </Console>
     </Appenders>
     <Loggers>
         <!-- disables the "Quartz enterprise job scheduler" timing-event spam when using debug level or lower -->
         <Logger name="org.quartz" level="INFO"/>
+        <!-- disable dv5 auth-header spam -->
+        <Logger name="org.ethereum.beacon.discovery" level="INFO"/>
+        <!-- disable metrics / api HTTP usage spam -->
+        <Logger name="io.netty.util" level="INFO"/>
+        <Logger name="org.eclipse.jetty" level="INFO"/>
+        <Logger name="io.libp2p.security.noise" level="INFO"/>
         <Root level="${sys:root.log.level}">
             <AppenderRef ref="Console" />
         </Root>

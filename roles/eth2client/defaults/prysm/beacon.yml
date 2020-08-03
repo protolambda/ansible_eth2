@@ -11,6 +11,7 @@ beacon_start_args: >
   {% elif testnet_type == 'altona' %}
   --altona
   {% endif %}
+  --http-web3provider="{{eth1_endpoint.http}}"
   --p2p-host-ip={{public_ip_address}}
   --p2p-max-peers={{hi_peer_count}}
   --p2p-udp-port={{beacon_udp_port}} --p2p-tcp-port={{beacon_tcp_port}}

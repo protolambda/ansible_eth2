@@ -8,15 +8,17 @@ validator_memory: 400m
 
 validator_image_name: protolambda/nimbus:latest
 
+# No network option available currently?
+#  {% if testnet_type == 'custom' %}
+#  --network={{eth2_network_name}}
+#  {% elif testnet_type == 'medalla' %}
+#  --network=medalla
+#  {% elif testnet_type == 'altona' %}
+#  --network=altona
+#  {% endif %}
+
 validator_start_args: >
   validator_client
-  {% if testnet_type == 'custom' %}
-  --network={{eth2_network_name}}
-  {% elif testnet_type == 'medalla' %}
-  --network=medalla
-  {% elif testnet_type == 'altona' %}
-  --network=altona
-  {% endif %}
   --log-level="INFO"
   --data-dir="{{validator_container_dir}}"
   --non-interactive=true

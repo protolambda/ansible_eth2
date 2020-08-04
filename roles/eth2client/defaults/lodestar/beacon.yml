@@ -4,7 +4,7 @@ beacon_memory: 3200M
 beacon_kernel_memory: 3300M
 
 beacon_start_args: >
-  beacon run
+  beacon
   {% if testnet_type == 'custom' %}
   --config="{{beacon_container_dir}}/custom_testnet_config/lodestar_config.yml"
   {% elif testnet_type == 'medalla' %}

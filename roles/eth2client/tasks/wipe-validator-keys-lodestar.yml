@@ -1,0 +1,12 @@
+- name: Lodestar wipe validators
+  file:  # TODO: do we even want to delete this? Maybe all clients should implement this pattern?
+    path: "{{validators_db_host_dir}}"
+    state: absent
+- name: Lodestar wipe keystores
+  file:
+    path: "{{keystores_host_dir}}"
+    state: absent
+- name: Lodestar wipe secrets
+  file:
+    path: "{{secrets_host_dir}}"
+    state: absent

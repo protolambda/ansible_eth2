@@ -1,7 +1,9 @@
-- name: Lodestar wipe validators
-  file:  # TODO: do we even want to delete this? Maybe all clients should implement this pattern?
-    path: "{{validators_db_host_dir}}"
-    state: absent
+# Not removed, it stores slashings info, and can be kept safely. If moving validators to other machines, other anti-slashing measures have to be taken.
+#- name: Lodestar wipe validators
+#  become: true
+#  file:  # TODO: do we even want to delete this? Maybe all clients should implement this pattern?
+#    path: "{{validators_db_host_dir}}"
+#    state: absent
 - name: Lodestar wipe keystores
   file:
     path: "{{keystores_host_dir}}"

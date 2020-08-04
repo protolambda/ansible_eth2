@@ -1,5 +1,5 @@
 eth2stats_display_name: 🍍 Lodestar 🍍
-eth2stats_api_addr: http://localhost:4000
-eth2stats_metrics_url: http://localhost:4000/metrics
+eth2stats_api_addr: "http://localhost:{{beacon_rpc_port}}"
+eth2stats_metrics_url: "http://localhost:{{beacon_metrics_port}}/metrics"
 # Lodestar uses the v1 standardized Eth2 API for eth2stats.
 eth2stats_beacon_type: v1

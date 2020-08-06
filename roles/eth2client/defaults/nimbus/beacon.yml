@@ -6,7 +6,7 @@ beacon_kernel_memory: 3300M
 beacon_start_args: >
   beacon_node
   {% if testnet_type == 'custom' %}
-  --network={{eth2_network_name}}
+  --network="{{beacon_container_dir}}/custom_testnet_config/nimbus_config.json"
   {% elif testnet_type == 'medalla' %}
   --network=medalla
   {% elif testnet_type == 'altona' %}

@@ -22,6 +22,7 @@
         network_mode: host
         restart: "{{ validator_require_restart | default(false) }}"
         log_options: "{{ common_log_options }}"
+        log_driver: "{{ common_log_driver }}"
         volumes:
           - "{{validator_host_dir}}:{{validator_container_dir}}"
         memory: "{{validator_memory}}"

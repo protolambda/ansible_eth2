@@ -45,6 +45,7 @@
     network_mode: host
     restart: "{{ beacon_require_restart | default(false) }}"
     log_options: "{{ common_log_options }}"
+    log_driver: "{{ common_log_driver }}"
     volumes:
       - "{{beacon_host_dir}}:{{beacon_container_dir}}"
     memory: "{{beacon_memory}}"

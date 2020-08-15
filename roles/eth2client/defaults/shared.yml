@@ -24,6 +24,8 @@ common_log_options:
   mode: non-blocking
   max-buffer-size: 4m
 
+common_log_driver: json-file
+
 # Testnet settings
 # -------------------------------------------
 

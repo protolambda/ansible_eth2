@@ -22,6 +22,7 @@ beacon_start_args: >
   {% elif testnet_type == 'medalla' %}
   --network=medalla
   {% endif %}
+  --data-storage-mode=PRUNE
   --data-path="{{beacon_container_dir}}"
   --p2p-advertised-ip={{public_ip_address}}
   --p2p-advertised-port={{beacon_udp_port}}

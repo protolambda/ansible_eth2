@@ -1,0 +1,9 @@
+- name: Clean up diskspace
+  hosts: beacon_node
+  gather_facts: false
+  tasks:
+    - name: delete logs
+      become: true
+      shell: find /var/lib/docker/containers/ -type f -name "*.log" -delete
+    - name: docker prunes
+      shell: docker system prune -a -f

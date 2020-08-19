@@ -1,5 +1,5 @@
-beacon_memory: 3200M
-beacon_kernel_memory: 3300M
+beacon_memory: 3700M
+beacon_kernel_memory: 3700M
 
 beacon_image_name: gcr.io/prysmaticlabs/prysm/beacon-chain:latest
 beacon_start_args: >

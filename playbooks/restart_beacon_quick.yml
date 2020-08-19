@@ -1,0 +1,7 @@
+- name: Restart beacon quick
+  hosts: beacon_node
+  gather_facts: false
+  tasks:
+    - name: Restart beacon node
+      shell: docker restart beacon
+

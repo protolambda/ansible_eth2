@@ -17,6 +17,9 @@ beacon_kernel_memory: 3800M
 
 validator_memory: No validator container yet
 
+sync_rate_limit_per_minute: 500
+request_limit_per_minute: 100
+
 # Debug logging spams a ton of http data every eth2stats call (every second).
 beacon_start_args: >
   {% if testnet_type == 'custom' %}
@@ -34,6 +37,8 @@ beacon_start_args: >
   --p2p-advertised-port={{beacon_udp_port}}
   --p2p-port={{beacon_tcp_port}}
   --p2p-discovery-enabled=true
+  --Xpeer-rate-limit={{sync_rate_limit_per_minute}}
+  --Xpeer-request-limit={{request_limit_per_minute}}
   --p2p-peer-lower-bound={{lo_peer_count}}
   --p2p-peer-upper-bound={{hi_peer_count}}
   --log-destination=DEFAULT_BOTH

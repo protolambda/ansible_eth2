@@ -3,6 +3,8 @@ beacon_image_name: sigp/lighthouse:latest
 beacon_memory: 3200M
 beacon_kernel_memory: 3300M
 
+max_skip_slots: 700
+
 beacon_start_args: >
   lighthouse
   --debug-level="{{ beacon_log_level | lower }}"
@@ -24,6 +26,6 @@ beacon_start_args: >
   {% if (bootnode_enrs is defined) and bootnode_enrs %}
   --boot-nodes="{{ bootnode_enrs | join(',') }}"
   {% endif %}
-  --max-skip-slots=700
+  --max-skip-slots={{max_skip_slots}}
   --eth1 --eth1-endpoint="{{eth1_endpoint.http}}"
   --http --http-address=0.0.0.0 --http-port={{beacon_rpc_port}}

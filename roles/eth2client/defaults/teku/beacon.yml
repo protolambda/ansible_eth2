@@ -6,14 +6,14 @@ validators_config_file: "validators_config.yml"
 # And the container OS + java stack need some size too.
 # At the same time, docker uses KB, MB, GB.
 beacon_env:
-  JAVA_OPTS: "-Xmx3450m -Xms3450m"  # fully commit available memory at start to heap
+  JAVA_OPTS: "-Xmx3200m -Xms3200m"  # fully commit available memory at start to heap
   LOG4J_CONFIGURATION_FILE: "{{beacon_container_dir}}/log_config.xml"
 
-# 3450 MiB = 3617587200 bytes committed to java (excl stack)
-# 3700 MB  = 3700000000 bytes soft limit
-# 3800 MB  = 3800000000 bytes hard limit
-beacon_memory: 3700M
-beacon_kernel_memory: 3800M
+# 3200 MiB = 3355,443 MB committed to java (excl stack)
+# 3400 MB soft limit
+# 3500 MB hard limit
+beacon_memory: 3400M
+beacon_kernel_memory: 3500M
 
 validator_memory: No validator container yet
 

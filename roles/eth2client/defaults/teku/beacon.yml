@@ -10,13 +10,13 @@ validators_config_file: "validators_config.yml"
 # OS uses some, and off-heap (network buffers and rocksdb things) take memory too.
 # It needs a big margin of memory to docker memory limit.
 beacon_env:
-  JAVA_OPTS: "-Xmx2400m -Xms2400m"  # fully commit available memory at start to heap
+  JAVA_OPTS: "-Xmx2000m -Xms2000m"  # fully commit available memory at start to heap
   LOG4J_CONFIGURATION_FILE: "{{beacon_container_dir}}/log_config.xml"
 
-# 2400 MiB = 2516 MB committed to java (excl stack)
+# 2000 MiB = 2097 MB committed to java (excl stack)
 # Be conservative with limits here, other things (even within the same process) need memory too
-beacon_memory: 3500M
-beacon_kernel_memory: 3600M
+beacon_memory: 3450M
+beacon_kernel_memory: 3550M
 
 validator_memory: No validator container yet
 

@@ -23,12 +23,14 @@ validator_memory: No validator container yet
 sync_rate_limit_per_minute: 500
 request_limit_per_minute: 100
 
+# If the keystores should stay locked on a crash.
+validator_keystore_locking: true
+
 # Debug logging spams a ton of http data every eth2stats call (every second).
 beacon_start_args: >
   {% if testnet_type == 'custom' %}
   --network="{{beacon_container_dir}}/custom_testnet_config/teku_config.yaml"
   --eth1-deposit-contract-address="{{deposit_contract_address}}"
-  --p2p-snappy-enabled=true
   {% elif testnet_type == 'altona' %}
   --network=altona
   {% elif testnet_type == 'medalla' %}
@@ -49,6 +51,7 @@ beacon_start_args: >
   --eth1-endpoint={{eth1_endpoint.http}}
   --rest-api-enabled=true --rest-api-interface=0.0.0.0 --rest-api-port={{beacon_rpc_port}}
   --metrics-enabled --metrics-interface=0.0.0.0 --metrics-port={{beacon_metrics_port}}
+  --validators-keystore-locking-enabled={{validator_keystore_locking}}
   --metrics-host-allowlist="*"
   --rest-api-host-allowlist="*"
   {% if (bootnode_enrs is defined) and bootnode_enrs %}

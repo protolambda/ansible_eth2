@@ -1,0 +1,8 @@
+- name: Stop beacon node and free lockfiles
+  hosts: eth2client_teku
+  gather_facts: false
+  tasks:
+    - name: Stop beacon node
+      shell: docker stop beacon
+    - name: unlock keystores
+      shell: find . -name "voting-keystore.json.lock" -type f -delete

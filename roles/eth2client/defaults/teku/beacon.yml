@@ -35,6 +35,8 @@ beacon_start_args: >
   --network=altona
   {% elif testnet_type == 'medalla' %}
   --network=medalla
+  {% elif testnet_type == 'zinken' %}
+  --network=zinken
   {% endif %}
   --data-storage-mode=PRUNE
   --data-path="{{beacon_container_dir}}"

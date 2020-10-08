@@ -11,6 +11,8 @@ validator_start_args: >
   --onyx
   {% elif testnet_type == 'medalla' %}
   --medalla
+  {% elif testnet_type == 'zinken' %}
+  --zinken
   {% endif %}
   --beacon-rpc-provider=localhost:{{beacon_grpc_port}}
   --graffiti="{{ validator_graffiti }}"

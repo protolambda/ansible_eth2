@@ -15,6 +15,8 @@ beacon_start_args: >
   --testnet=altona
   {% elif testnet_type == 'medalla' %}
   --testnet=medalla
+  {% elif testnet_type == 'zinken' %}
+  --testnet=zinken
   {% endif %}
   bn
   --graffiti="{{validator_graffiti}}"

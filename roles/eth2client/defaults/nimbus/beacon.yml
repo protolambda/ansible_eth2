@@ -11,6 +11,8 @@ beacon_start_args: >
   --network=medalla
   {% elif testnet_type == 'altona' %}
   --network=altona
+  {% elif testnet_type == 'zinken' %}
+  --network=zinken
   {% endif %}
   --data-dir="{{beacon_container_dir}}"
   --web3-url={{eth1_endpoint.ws}}

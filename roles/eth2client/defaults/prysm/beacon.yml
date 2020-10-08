@@ -14,6 +14,8 @@ beacon_start_args: >
   --onyx
   {% elif testnet_type == 'medalla' %}
   --medalla
+  {% elif testnet_type == 'zinken' %}
+  --zinken
   {% endif %}
   --http-web3provider="{{eth1_endpoint.http}}"
   --p2p-host-ip={{public_ip_address}}

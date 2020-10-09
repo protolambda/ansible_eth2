@@ -1,5 +1,4 @@
 eth2stats_display_name: 🍍 Lighthouse 🍍
 eth2stats_api_addr: "http://localhost:{{beacon_rpc_port}}"
-# Lighthouse runs metrics on RPC same server as API, thus RPC port
-eth2stats_metrics_url: "http://localhost:{{beacon_rpc_port}}/metrics"
-eth2stats_beacon_type: lighthouse
+eth2stats_metrics_url: "http://localhost:{{beacon_metrics_port}}/metrics"
+eth2stats_beacon_type: v1

@@ -31,3 +31,4 @@ beacon_start_args: >
   --max-skip-slots={{max_skip_slots}}
   --eth1 --eth1-endpoint="{{eth1_endpoint.http}}"
   --http --http-address=0.0.0.0 --http-port={{beacon_rpc_port}}
+  --metrics --metrics-address=0.0.0.0 --metrics-port={{beacon_metrics_port}}

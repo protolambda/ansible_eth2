@@ -18,9 +18,9 @@ validator_start_args: >
   {% elif testnet_type == 'zinken' %}
   --testnet=zinken
   {% endif %}
-  validator
-  --datadir="{{keystores_container_dir}}"
+  vc
+  --validators-dir="{{keystores_container_dir}}"
   --secrets-dir="{{secrets_container_dir}}"
-  --auto-register
+  --init-slashing-protection
   --server=http://localhost:{{beacon_rpc_port}}/
 

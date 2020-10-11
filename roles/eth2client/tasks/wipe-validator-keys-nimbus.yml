@@ -2,7 +2,9 @@
   file:
     path: "{{keystores_host_dir}}"
     state: absent
+  become: true
 - name: Nimbus wipe secrets
   file:
     path: "{{secrets_host_dir}}"
     state: absent
+  become: true

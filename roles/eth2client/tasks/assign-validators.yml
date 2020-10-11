@@ -70,16 +70,21 @@
   file:
     path: "{{ validator_host_dir }}/"
     state: directory
+    mode: '0750'
   when: has_validator_client and (validator_count_per_host > 0)
 - name: Upload new validator accounts to BN
   unarchive:
     src: "{{ remote_out_data_archive }}"
     dest: "{{ beacon_host_dir }}/"
+    mode: "0600"
+  become: true
   when: (not has_validator_client) and (validator_count_per_host > 0)
 - name: Upload new validator accounts to VC
   unarchive:
     src: "{{ remote_out_data_archive }}"
     dest: "{{ validator_host_dir }}/"
+    mode: "0600"
+  become: true
   when: has_validator_client and (validator_count_per_host > 0)
 - block:
     - name: Pull and restart validator client

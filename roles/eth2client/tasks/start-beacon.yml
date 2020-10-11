@@ -15,10 +15,12 @@
   file:
     dest: "{{beacon_host_dir}}/no_bn_keys"
     state: directory
+  ignore_errors: yes
 - name: BN secrets alternative
   file:
     dest: "{{beacon_host_dir}}/no_bn_secrets"
     state: directory
+  ignore_errors: yes
 - name: Teku logging config
   template:
     src: ../templates/teku_log_config.xml.j2

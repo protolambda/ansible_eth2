@@ -9,8 +9,6 @@ deposit_amount_gwei: "32000000000"
 validators_source_mnemonic: "{{lookup('env', 'SOURCE_WALLET_VALIDATORS_MNEMONIC')}}"
 withdrawals_source_mnemonic: "{{lookup('env', 'SOURCE_WALLET_WITHDRAWALS_MNEMONIC')}}"
 
-deposit_datas_path: "/tmp/deposit_datas.txt"
-
 # Change me to run a separate VC or not
 has_validator_client: true
 

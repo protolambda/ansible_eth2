@@ -7,6 +7,7 @@
   shell: >
     ethereal beacon deposit
     --allow-unknown-contract="{{force_deposit}}"
+    --connection="{{eth1_endpoint.http}}"
     --address="{{deposit_contract_address}}"
     --network="{{eth1_network_name}}"
     --data='{{item}}'

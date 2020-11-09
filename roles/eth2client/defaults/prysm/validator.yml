@@ -13,6 +13,8 @@ validator_start_args: >
   --medalla
   {% elif testnet_type == 'zinken' %}
   --zinken
+  {% elif testnet_type == 'toledo' %}
+  --toledo
   {% endif %}
   --beacon-rpc-provider=localhost:{{beacon_grpc_port}}
   --graffiti="{{ validator_graffiti }}"

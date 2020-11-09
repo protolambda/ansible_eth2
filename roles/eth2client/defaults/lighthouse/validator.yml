@@ -17,6 +17,8 @@ validator_start_args: >
   --testnet=medalla
   {% elif testnet_type == 'zinken' %}
   --testnet=zinken
+  {% elif testnet_type == 'toledo' %}
+  --testnet=toledo
   {% endif %}
   vc
   --validators-dir="{{keystores_container_dir}}"

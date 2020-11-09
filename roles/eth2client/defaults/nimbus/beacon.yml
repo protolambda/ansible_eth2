@@ -14,7 +14,7 @@ beacon_start_args: >
   {% elif testnet_type == 'zinken' %}
   --network=zinken
   {% elif testnet_type == 'toledo' %}
-  --network="/data/toledo_preset.json"
+  --network=toledo
   {% endif %}
   --data-dir="{{beacon_container_dir}}"
   --web3-url={{eth1_endpoint.ws}}

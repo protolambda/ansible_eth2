@@ -8,8 +8,3 @@
     path: "{{ secrets_host_dir }}"
     state: absent
   become: true
-- name: Teku wipe validator config
-  file:
-    path: "{{ validator_config_host_path }}"
-    state: absent
-  become: true

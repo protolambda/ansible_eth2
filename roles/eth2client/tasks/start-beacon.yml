@@ -27,12 +27,6 @@
     dest: "{{beacon_host_dir}}/log_config.xml"
     force: yes
   when: eth2client_name == "teku"
-- name: Validators config placeholder
-  copy:
-    content: ""
-    force: false
-    dest: "{{beacon_host_dir}}/{{validators_config_file}}"
-  when: (not has_validator_client) and (validators_config_file is defined)
 - name: deploy custom testnet data if necessary
   include_tasks: "custom-testnet-beacon-{{eth2client_name}}.yml"
   when: testnet_type == 'custom'
@@ -55,5 +49,6 @@
     memory_swap: "{{beacon_memory}}"
     command: "{{ beacon_start_args }}"
     env: "{{ beacon_env | default({}) }}"
+    user: "1000:1000"  # same as host ansible user, for teku to work
 
 # TODO: configure client health check

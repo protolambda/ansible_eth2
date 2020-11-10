@@ -1,7 +1,5 @@
 beacon_image_name: pegasyseng/teku:develop
 
-validators_config_file: "validators_config.yml"
-
 # Warning: java likes to use KiB, MiB, GiB and shortens it ambiguously.
 # And the container OS + java stack need some size too.
 # At the same time, docker uses KB, MB, GB.
@@ -71,5 +69,3 @@ secrets_container_dir: "{{beacon_container_dir}}/secrets"
 
 keystores_host_dir: "{{beacon_host_dir}}/keys"
 secrets_host_dir: "{{beacon_host_dir}}/secrets"
-
-validator_config_host_path: "{{ beacon_host_dir }}/{{validators_config_file}}"

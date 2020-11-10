@@ -10,12 +10,9 @@
   register: stop_result
   failed_when: "(stop_result.rc >= 1) and not ('No such container' in stop_result.stderr)"
 
-- name: Wipe validator current keys
-  include_tasks: "wipe-validator-keys-{{eth2client_name}}.yml"
-
-- name: Where assignment and wallet
+- name: Where wallet
   debug:
-    msg: "assignments in '{{ assignments_file }}', remote output data in '{{remote_out_data_dir}}'"
+    msg: "remote output data in '{{remote_out_data_dir}}'"
   delegate_to: localhost
 - name: Remove old local output data
   file:
@@ -32,20 +29,16 @@
     path: "{{validator_local_data_dir}}"
     state: directory
   delegate_to: localhost
-- name: Assign validator keys
+- name: Prepare validator keys
   delegate_to: localhost
   shell: >
-    eth2-val-tools assign
-    --assignments="{{assignments_file}}"
-    --count={{validator_count_per_host}}
-    --hostname="{{validator_host}}"
-    --config-base-path="{{ beacon_container_dir | default('/data') }}"
+    eth2-val-tools keystores
     --key-man-loc="{{validator_container_dir}}/wallets"
     --out-loc="{{remote_out_data_dir}}"
     --source-max="{{validators_source_max}}"
     --source-min="{{validators_source_min}}"
     --source-mnemonic="{{validators_source_mnemonic}}"
-    --wallet-name="{{assign_validators_wallet_name}}"
+
 - name: Create remote out selected directory
   file:
     path: "{{ remote_out_data_dir }}/selected"
@@ -65,36 +58,40 @@
   file:
     path: "{{ beacon_host_dir }}/"
     state: directory
-  when: (not has_validator_client) and (validator_count_per_host > 0)
+  when: (not has_validator_client) and (validators_source_min < validators_source_max)
 - name: Prepare dest directory in VC
   file:
     path: "{{ validator_host_dir }}/"
     state: directory
     mode: '0750'
-  when: has_validator_client and (validator_count_per_host > 0)
+  when: has_validator_client and (validators_source_min < validators_source_max)
 - name: Upload new validator accounts to BN
   unarchive:
     src: "{{ remote_out_data_archive }}"
     dest: "{{ beacon_host_dir }}/"
-    mode: "0600"
+    mode: "0700"  # execute bit, to iterate directory
+    owner: "1000"
+    group: "1000"
   become: true
-  when: (not has_validator_client) and (validator_count_per_host > 0)
+  when: (not has_validator_client) and (validators_source_min < validators_source_max)
 - name: Upload new validator accounts to VC
   unarchive:
     src: "{{ remote_out_data_archive }}"
     dest: "{{ validator_host_dir }}/"
-    mode: "0600"
+    mode: "0700"  # execute bit, to iterate directory
+    owner: "1000"
+    group: "1000"
   become: true
-  when: has_validator_client and (validator_count_per_host > 0)
+  when: has_validator_client and (validators_source_min < validators_source_max)
 - block:
     - name: Pull and restart validator client
       vars:
         validator_require_restart: true
       include_tasks: "start-validator.yml"
-      when: has_validator_client and (validator_count_per_host > 0)
+      when: has_validator_client and (validators_source_min < validators_source_max)
     - name: Or restart beacon node, if no separate beacon node
       vars:
         beacon_require_restart: true
       include_tasks: "start-beacon.yml"
-      when: (not has_validator_client) and (validator_count_per_host > 0)
+      when: (not has_validator_client) and (validators_source_min < validators_source_max)
   when: restart_validator_afterwards | default(false)

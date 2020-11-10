@@ -1,0 +1,11 @@
+---
+- name: update auth
+  hosts: all
+  become: false
+#  gather_facts: true
+  gather_facts: false
+  tasks:
+    - name: Add gh keys
+      include_role:
+        name: machine
+        tasks_from: authorized-keys

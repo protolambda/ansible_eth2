@@ -63,7 +63,7 @@ beacon_start_args: >
   {% endif %}
   {% if validator_enabled %}
   --validators-graffiti="{{ validator_graffiti }}"
-  --config-file="{{beacon_container_dir}}/{{validators_config_file}}"
+  --validator-keys="{{keystores_container_dir}}:{{secrets_container_dir}}"
   {% endif %}
 
 keystores_container_dir: "{{beacon_container_dir}}/keys"

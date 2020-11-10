@@ -1,6 +1,5 @@
 - name: Teku data files
   delegate_to: localhost
   shell: |
-    mv {{ input_data_dir }}/teku_validators_config.yaml {{ output_data_dir }}/{{validators_config_file}}
     mv {{ input_data_dir }}/keys {{ output_data_dir }}/keys
     mv {{ input_data_dir }}/secrets {{ output_data_dir }}/secrets

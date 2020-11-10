@@ -36,3 +36,5 @@ beacon_start_args: >
   --bootstrap-node="{{ bootnode_enr }}"
   {% endfor %}
   {% endif %}
+
+beacon_user_id: ""

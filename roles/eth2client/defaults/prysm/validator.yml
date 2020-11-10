@@ -20,8 +20,8 @@ validator_start_args: >
   --beacon-rpc-provider=localhost:{{beacon_grpc_port}}
   --graffiti="{{ validator_graffiti }}"
   --monitoring-host=0.0.0.0 --monitoring-port={{validator_metrics_port}}
-  --disable-accounts-v2=true
-  --keymanager=wallet
-  --keymanageropts={{ validator_container_dir }}/keymanager_opts.json
+  --wallet-dir={{ validator_container_dir }}/wallet
+  --wallet-password-file="{{ validator_container_dir }}/wallet_pass.txt"
 
-# TODO: migrate to new keys structure
+
+beacon_keystores_file_mode: "0700"

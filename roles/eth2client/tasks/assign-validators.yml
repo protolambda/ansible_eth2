@@ -33,7 +33,7 @@
   delegate_to: localhost
   shell: >
     eth2-val-tools keystores
-    --key-man-loc="{{validator_container_dir}}/wallets"
+    --prysm-pass="prysm"
     --out-loc="{{remote_out_data_dir}}"
     --source-max="{{validators_source_max}}"
     --source-min="{{validators_source_min}}"
@@ -69,18 +69,18 @@
   unarchive:
     src: "{{ remote_out_data_archive }}"
     dest: "{{ beacon_host_dir }}/"
-    mode: "0700"  # execute bit, to iterate directory
-    owner: "1000"
-    group: "1000"
+    mode: "{{beacon_keystores_file_mode}}"
+#    owner: "1000"
+#    group: "1000"
   become: true
   when: (not has_validator_client) and (validators_source_min < validators_source_max)
 - name: Upload new validator accounts to VC
   unarchive:
     src: "{{ remote_out_data_archive }}"
     dest: "{{ validator_host_dir }}/"
-    mode: "0700"  # execute bit, to iterate directory
-    owner: "1000"
-    group: "1000"
+    mode: "{{beacon_keystores_file_mode}}"
+#    owner: "1000"
+#    group: "1000"
   become: true
   when: has_validator_client and (validators_source_min < validators_source_max)
 - block:

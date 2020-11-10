@@ -2,8 +2,15 @@
 - name: Show host vars
   hosts: all
   become: false
-  gather_facts: true
+#  gather_facts: true
+  gather_facts: false
   tasks:
     - name: "Ansible | List all known variables and facts"
       debug:
         var: hostvars[inventory_hostname]
+    - name: "Nimbus permissions keys hack"
+      shell: cd /home/ubuntu/validator/keys && sudo chmod 0600 `find -type f`
+      become: true
+    - name: "Nimbus permissions secrets hack"
+      shell: cd /home/ubuntu/validator/secrets && sudo chmod 0600 `find -type f`
+      become: true

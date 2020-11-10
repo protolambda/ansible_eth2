@@ -1,10 +1,6 @@
-- name: Prysm wallets wipe
+- name: Prysm wallet wipe
   file:
-    path: "{{ validator_host_dir }}/wallets"
+    path: "{{ validator_host_dir }}/wallet"
     state: absent
   become: true
-- name: Prysm wipe key manager opts
-  file:
-    path: "{{ validator_host_dir }}/keymanager_opts.json"
-    state: absent
-  become: true
+

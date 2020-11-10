@@ -49,6 +49,6 @@
     memory_swap: "{{beacon_memory}}"
     command: "{{ beacon_start_args }}"
     env: "{{ beacon_env | default({}) }}"
-    user: "1000:1000"  # same as host ansible user, for teku to work
+    user: "{{ beacon_user_id }}"  # todo same as host ansible user, for teku to work
 
 # TODO: configure client health check

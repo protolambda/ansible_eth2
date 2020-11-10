@@ -26,3 +26,5 @@ validator_start_args: >
   --init-slashing-protection
   --server=http://localhost:{{beacon_rpc_port}}/
 
+
+beacon_keystores_file_mode: "0700"

@@ -36,3 +36,5 @@ beacon_start_args: >
     --validators-dir="{{beacon_container_dir}}/no_bn_keys"
     --secrets-dir="{{beacon_container_dir}}/no_bn_secrets"
   {% endif %}
+
+beacon_user_id: ""

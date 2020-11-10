@@ -27,3 +27,5 @@ validator_start_args: >
   --rpc-address=127.0.0.1
   --validators-dir="{{keystores_container_dir}}"
   --secrets-dir="{{secrets_container_dir}}"
+
+beacon_keystores_file_mode: "0600"  # strictly no execution bit

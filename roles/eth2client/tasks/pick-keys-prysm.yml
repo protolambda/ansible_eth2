@@ -1,5 +1,7 @@
 - name: Prysm data files
   delegate_to: localhost
   shell: |
-    mv {{ input_data_dir }}/prysm/wallets {{ output_data_dir }}/wallets
-    mv {{ input_data_dir }}/prysm/keymanager_opts.json {{ output_data_dir }}/keymanager_opts.json
+    mkdir -p {{ output_data_dir }}/wallet/direct/accounts
+    echo -n "prysm" > {{ output_data_dir }}/wallet_pass.txt
+    mv {{ input_data_dir }}/prysm/all-accounts.keystore.json {{ output_data_dir }}/wallet/direct/accounts/all-accounts.keystore.json
+    mv {{ input_data_dir }}/prysm/keymanageropts.json {{ output_data_dir }}/wallet/direct/keymanageropts.json

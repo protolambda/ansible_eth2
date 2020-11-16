@@ -1,4 +1,4 @@
-- name: Ubuntu bionic repo and update
+- name: Ubuntu universe repo and update
   become: true
   block:
     - name: Debug distribution

@@ -10,7 +10,7 @@
       include_role:
         name: ubuntu
         tasks_from: universe
-    - name: "Do general machine setup"
+    - name: "Do docker extras setup, assume docker is installed"
       include_role:
         name: machine
-        tasks_from: setup
+        tasks_from: docker

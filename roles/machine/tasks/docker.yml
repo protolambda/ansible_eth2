@@ -6,7 +6,7 @@
         name: geerlingguy.docker
     - name: Docker Python wrapper
       apt:
-        name: python-docker
+        name: python3-docker
         state: present
     - name: Add ansible user to docker group
       shell: 'usermod -aG docker {{ ansible_user }}'

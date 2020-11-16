@@ -37,6 +37,8 @@ beacon_start_args: >
   --network=zinken
   {% elif testnet_type == 'toledo' %}
   --network=toledo
+  {% elif testnet_type == 'pyrmont' %}
+  --network=pyrmont
   {% endif %}
   --data-storage-mode=PRUNE
   --data-path="{{beacon_container_dir}}"

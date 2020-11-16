@@ -19,6 +19,8 @@ beacon_start_args: >
   --zinken
   {% elif testnet_type == 'toledo' %}
   --toledo
+  {% elif testnet_type == 'pyrmont' %}
+  --pyrmont
   {% endif %}
   --pprof
   --blst

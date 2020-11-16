@@ -16,6 +16,8 @@ validator_start_args: >
   --zinken
   {% elif testnet_type == 'toledo' %}
   --toledo
+  {% elif testnet_type == 'pyrmont' %}
+  --pyrmont
   {% endif %}
   --beacon-rpc-provider=localhost:{{beacon_grpc_port}}
   --graffiti="{{ validator_graffiti }}"

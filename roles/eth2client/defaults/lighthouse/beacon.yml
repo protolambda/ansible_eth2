@@ -19,6 +19,8 @@ beacon_start_args: >
   --testnet=zinken
   {% elif testnet_type == 'toledo' %}
   --testnet=toledo
+  {% elif testnet_type == 'pyrmont' %}
+  --testnet=pyrmont
   {% endif %}
   bn
   --graffiti="{{validator_graffiti}}"

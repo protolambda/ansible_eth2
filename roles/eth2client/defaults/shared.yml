@@ -104,9 +104,6 @@ eth1_endpoint: "{{ eth1_endpoints.goerli_prysm }}"
 # Validator assignments
 # -------------------------------------------
 
-# Change me to something non-0 to run validators
-validator_count_per_host: 0
-
 validator_host: "host_{{inventory_hostname}}"
 validator_local_data_dir: "{{inventory_dir}}/../validator_hub/{{eth2_network_name}}"
 

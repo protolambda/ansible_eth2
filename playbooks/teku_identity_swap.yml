@@ -1,0 +1,11 @@
+- name: Stop beacon node and change Teku p2p identity
+  hosts: eth2client_teku
+  gather_facts: false
+  tasks:
+    - name: Stop beacon node
+      shell: docker stop beacon
+    - name: unlock keystores
+      become: true
+      shell: rm -rf beacon/beacon/kvstore
+    - name: Start beacon node
+      shell: docker start beacon

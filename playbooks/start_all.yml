@@ -3,6 +3,7 @@
   hosts:
     - beacon_node
   gather_facts: true
+  serial: 20
   tasks:
     - name: Start validator client
       include_role:

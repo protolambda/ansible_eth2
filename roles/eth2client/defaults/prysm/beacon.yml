@@ -23,7 +23,6 @@ beacon_start_args: >
   --pyrmont
   {% endif %}
   --pprof
-  --blst
   --http-web3provider="{{eth1_endpoint.http}}"
   --p2p-host-ip={{public_ip_address}}
   --p2p-max-peers={{hi_peer_count}}

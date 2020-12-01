@@ -10,17 +10,19 @@ validator_image_name: sigp/lighthouse:latest
 validator_start_args: >
   lighthouse
   {% if testnet_type == 'custom' %}
-  --testnet-dir="{{validator_container_dir}}/custom_testnet_config"
+  --network-dir="{{validator_container_dir}}/custom_testnet_config"
   {% elif testnet_type == 'altona' %}
-  --testnet=altona
+  --network=altona
   {% elif testnet_type == 'medalla' %}
-  --testnet=medalla
+  --network=medalla
   {% elif testnet_type == 'zinken' %}
-  --testnet=zinken
+  --network=zinken
   {% elif testnet_type == 'toledo' %}
-  --testnet=toledo
+  --network=toledo
   {% elif testnet_type == 'pyrmont' %}
-  --testnet=pyrmont
+  --network=pyrmont
+  {% elif testnet_type == 'mainnet' %}
+  --network=mainnet
   {% endif %}
   vc
   --validators-dir="{{keystores_container_dir}}"

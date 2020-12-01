@@ -18,6 +18,8 @@ validator_start_args: >
   --toledo
   {% elif testnet_type == 'pyrmont' %}
   --pyrmont
+  {% elif testnet_type == 'mainnet' %}
+  --mainnet
   {% endif %}
   --beacon-rpc-provider=localhost:{{beacon_grpc_port}}
   --graffiti="{{ validator_graffiti }}"

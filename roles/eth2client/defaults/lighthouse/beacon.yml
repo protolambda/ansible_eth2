@@ -10,17 +10,19 @@ beacon_start_args: >
   --debug-level="{{ beacon_log_level | lower }}"
   --datadir="{{beacon_container_dir}}"
   {% if testnet_type == 'custom' %}
-  --testnet-dir="{{beacon_container_dir}}/custom_testnet_config"
+  --network-dir="{{beacon_container_dir}}/custom_testnet_config"
   {% elif testnet_type == 'altona' %}
-  --testnet=altona
+  --network=altona
   {% elif testnet_type == 'medalla' %}
-  --testnet=medalla
+  --network=medalla
   {% elif testnet_type == 'zinken' %}
-  --testnet=zinken
+  --network=zinken
   {% elif testnet_type == 'toledo' %}
-  --testnet=toledo
+  --network=toledo
   {% elif testnet_type == 'pyrmont' %}
-  --testnet=pyrmont
+  --network=pyrmont
+  {% elif testnet_type == 'mainnet' %}
+  --network=mainnet
   {% endif %}
   bn
   --graffiti="{{validator_graffiti}}"
@@ -36,5 +38,6 @@ beacon_start_args: >
   --eth1 --eth1-endpoints="{{eth1_endpoint.http}}"
   --http --http-address=0.0.0.0 --http-port={{beacon_rpc_port}}
   --metrics --metrics-address=0.0.0.0 --metrics-port={{beacon_metrics_port}}
+  {{beacon_extra_opts}}
 
 beacon_user_id: ""

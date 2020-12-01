@@ -52,6 +52,8 @@ beacon_container_name: beacon
 beacon_host_dir: "{{home_dir}}/beacon"
 beacon_container_dir: /data
 
+beacon_extra_opts: ""
+
 beacon_tcp_port: 9000
 beacon_udp_port: 9000
 

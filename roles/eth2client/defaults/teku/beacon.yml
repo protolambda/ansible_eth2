@@ -39,6 +39,8 @@ beacon_start_args: >
   --network=toledo
   {% elif testnet_type == 'pyrmont' %}
   --network=pyrmont
+  {% elif testnet_type == 'mainnet' %}
+  --network=mainnet
   {% endif %}
   --data-storage-mode=PRUNE
   --data-path="{{beacon_container_dir}}"
@@ -65,6 +67,7 @@ beacon_start_args: >
   --validators-graffiti="{{ validator_graffiti }}"
   --validator-keys="{{keystores_container_dir}}:{{secrets_container_dir}}"
   {% endif %}
+  {{beacon_extra_opts}}
 
 keystores_container_dir: "{{beacon_container_dir}}/keys"
 secrets_container_dir: "{{beacon_container_dir}}/secrets"

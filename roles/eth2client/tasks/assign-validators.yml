@@ -14,45 +14,35 @@
   debug:
     msg: "remote output data in '{{remote_out_data_dir}}'"
   delegate_to: localhost
-- name: Remove old local output data
+- name: Remove old local selected data
   file:
-    path: "{{remote_out_data_dir}}"
+    path: "{{validator_local_select_host_dir}}"
     state: absent
   delegate_to: localhost
 - name: Remove old output archive
   file:
-    path: "{{remote_out_data_archive}}"
+    path: "{{validator_local_output_host_dir}}"
     state: absent
   delegate_to: localhost
-- name: Ensure local data dir exists
+- name: Ensure local output parent dir exists
   file:
-    path: "{{validator_local_data_dir}}"
+    path: "{{validator_local_output_dir}}"
     state: directory
   delegate_to: localhost
-- name: Prepare validator keys
-  delegate_to: localhost
-  shell: >
-    eth2-val-tools keystores
-    --prysm-pass="prysm"
-    --out-loc="{{remote_out_data_dir}}"
-    --source-max="{{validators_source_max}}"
-    --source-min="{{validators_source_min}}"
-    --source-mnemonic="{{validators_source_mnemonic}}"
-
 - name: Create remote out selected directory
   file:
-    path: "{{ remote_out_data_dir }}/selected"
+    path: "{{ validator_local_select_host_dir }}"
     state: directory
   delegate_to: localhost
 - name: Select files for client
   vars:
-    input_data_dir: "{{remote_out_data_dir}}"
-    output_data_dir: "{{remote_out_data_dir}}/selected"
+    input_data_dir: "{{validator_local_prep_host_dir}}"
+    output_data_dir: "{{validator_local_select_host_dir}}"
   include_tasks: "pick-keys-{{eth2client_name}}.yml"
 - name: Archive selected data before upload
   archive:
-    path: "{{remote_out_data_dir}}/selected/*"
-    dest: "{{remote_out_data_archive}}"
+    path: "{{validator_local_select_host_dir}}/*"
+    dest: "{{validator_local_output_host_archive}}"
   delegate_to: localhost
 - name: Prepare dest directory in BN
   file:
@@ -67,7 +57,7 @@
   when: has_validator_client and (validators_source_min < validators_source_max)
 - name: Upload new validator accounts to BN
   unarchive:
-    src: "{{ remote_out_data_archive }}"
+    src: "{{ validator_local_output_host_archive }}"
     dest: "{{ beacon_host_dir }}/"
     mode: "{{beacon_keystores_file_mode}}"
 #    owner: "1000"
@@ -76,22 +66,11 @@
   when: (not has_validator_client) and (validators_source_min < validators_source_max)
 - name: Upload new validator accounts to VC
   unarchive:
-    src: "{{ remote_out_data_archive }}"
+    src: "{{ validator_local_output_host_archive }}"
     dest: "{{ validator_host_dir }}/"
     mode: "{{beacon_keystores_file_mode}}"
 #    owner: "1000"
 #    group: "1000"
   become: true
   when: has_validator_client and (validators_source_min < validators_source_max)
-- block:
-    - name: Pull and restart validator client
-      vars:
-        validator_require_restart: true
-      include_tasks: "start-validator.yml"
-      when: has_validator_client and (validators_source_min < validators_source_max)
-    - name: Or restart beacon node, if no separate beacon node
-      vars:
-        beacon_require_restart: true
-      include_tasks: "start-beacon.yml"
-      when: (not has_validator_client) and (validators_source_min < validators_source_max)
-  when: restart_validator_afterwards | default(false)
+# No automatic restart! Be careful with deploying validators!

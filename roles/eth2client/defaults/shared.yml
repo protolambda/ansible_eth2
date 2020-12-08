@@ -107,10 +107,14 @@ eth1_endpoint: "{{ eth1_endpoints.goerli_prysm }}"
 # -------------------------------------------
 
 validator_host: "host_{{inventory_hostname}}"
-validator_local_data_dir: "{{inventory_dir}}/../validator_hub/{{eth2_network_name}}"
+validator_local_prep_dir: "{{inventory_dir}}/../validator_prep/"
+validator_local_select_dir: "{{inventory_dir}}/../validator_select/"
+validator_local_output_dir: "{{inventory_dir}}/../validator_output/"
 
-remote_out_data_dir: "{{validator_local_data_dir}}/remote_{{validator_host|replace('.','_')}}"
-remote_out_data_archive: "{{remote_out_data_dir}}.tar.gz"
+validator_local_prep_host_dir: "{{validator_local_prep_dir}}/host_{{eth2_node_index}}"
+
+validator_local_select_host_dir: "{{validator_local_select_dir}}/host_{{eth2_node_index}}"
+validator_local_output_host_archive: "{{validator_local_output_dir}}/host_{{eth2_node_index}}.tar.gz"
 
 validators_source_min: 0
 validators_source_max: 0

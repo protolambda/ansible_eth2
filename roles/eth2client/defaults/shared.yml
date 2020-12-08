@@ -111,15 +111,14 @@ validator_local_prep_dir: "{{inventory_dir}}/../validator_prep/"
 validator_local_select_dir: "{{inventory_dir}}/../validator_select/"
 validator_local_output_dir: "{{inventory_dir}}/../validator_output/"
 
-validator_local_prep_host_dir: "{{validator_local_prep_dir}}/host_{{eth2_node_index}}"
+validator_local_prep_host_dir: "{{validator_local_prep_dir}}host_{{eth2_node_index}}"
 
-validator_local_select_host_dir: "{{validator_local_select_dir}}/host_{{eth2_node_index}}"
-validator_local_output_host_archive: "{{validator_local_output_dir}}/host_{{eth2_node_index}}.tar.gz"
+validator_local_select_host_dir: "{{validator_local_select_dir}}host_{{eth2_node_index}}"
+validator_local_output_host_archive: "{{validator_local_output_dir}}host_{{eth2_node_index}}.tar.gz"
 
+# legacy, only remains for deposits via ansible (also replaced with scripts)
 validators_source_min: 0
 validators_source_max: 0
-
-
 # TODO: refactor these into vault variables or something else secure. This is testnet stuff!
 validators_source_mnemonic: "change me"
 

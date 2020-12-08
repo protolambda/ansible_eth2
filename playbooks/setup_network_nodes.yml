@@ -2,8 +2,6 @@
   # each validator client is running on a machine with a beacon node, change this later.
   hosts: beacon_node
   gather_facts: false
-  vars:
-    restart_validator_afterwards: false  # Do not start validators yet
   tasks:
     - name: Deploy validator keys
       include_role:

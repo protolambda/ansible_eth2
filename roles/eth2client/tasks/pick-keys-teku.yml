@@ -1,5 +1,5 @@
 - name: Teku data files
   delegate_to: localhost
   shell: |
-    mv {{ input_data_dir }}/teku-keys {{ output_data_dir }}/keys
-    mv {{ input_data_dir }}/teku-secrets {{ output_data_dir }}/secrets
+    cp -r {{ input_data_dir }}/teku-keys {{ output_data_dir }}/keys
+    cp -r {{ input_data_dir }}/teku-secrets {{ output_data_dir }}/secrets

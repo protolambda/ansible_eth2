@@ -1,8 +1,8 @@
 - name: Lodestar data files
   delegate_to: localhost
   shell: |
-    mv {{ input_data_dir }}/keys {{ output_data_dir }}/{{keystores_relative_dir}}
-    mv {{ input_data_dir }}/lodestar-secrets {{ output_data_dir }}/{{secrets_relative_dir}}
+    cp -r {{ input_data_dir }}/keys {{ output_data_dir }}/{{keystores_relative_dir}}
+    cp -r {{ input_data_dir }}/lodestar-secrets {{ output_data_dir }}/{{secrets_relative_dir}}
 
 # Lodestar is similar to Lighthouse, except it has split keystores and validator data into different dirs.
 # And the pubkey-named secret files are named without 0x prefix in the file name.

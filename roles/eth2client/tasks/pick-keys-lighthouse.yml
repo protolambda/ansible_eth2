@@ -1,5 +1,5 @@
 - name: Lighthouse data files
   delegate_to: localhost
   shell: |
-    mv {{ input_data_dir }}/keys {{ output_data_dir }}/validators
-    mv {{ input_data_dir }}/secrets {{ output_data_dir }}/secrets
+    cp -r {{ input_data_dir }}/keys {{ output_data_dir }}/validators
+    cp -r {{ input_data_dir }}/secrets {{ output_data_dir }}/secrets

@@ -10,9 +10,12 @@
   register: stop_result
   failed_when: "(stop_result.rc >= 1) and not ('No such container' in stop_result.stderr)"
 
+- name: Wipe validator current keys
+  include_tasks: "wipe-validator-keys-{{eth2client_name}}.yml"
+
 - name: Where wallet
   debug:
-    msg: "remote output data in '{{remote_out_data_dir}}'"
+    msg: "prep data in '{{validator_local_prep_host_dir}}', remote select data in '{{validator_local_select_host_dir}}', out data in '{{validator_local_output_host_archive}}'"
   delegate_to: localhost
 - name: Remove old local selected data
   file:
@@ -21,7 +24,7 @@
   delegate_to: localhost
 - name: Remove old output archive
   file:
-    path: "{{validator_local_output_host_dir}}"
+    path: "{{validator_local_output_host_archive}}"
     state: absent
   delegate_to: localhost
 - name: Ensure local output parent dir exists
@@ -48,13 +51,13 @@
   file:
     path: "{{ beacon_host_dir }}/"
     state: directory
-  when: (not has_validator_client) and (validators_source_min < validators_source_max)
+  when: not has_validator_client
 - name: Prepare dest directory in VC
   file:
     path: "{{ validator_host_dir }}/"
     state: directory
     mode: '0750'
-  when: has_validator_client and (validators_source_min < validators_source_max)
+  when: has_validator_client
 - name: Upload new validator accounts to BN
   unarchive:
     src: "{{ validator_local_output_host_archive }}"
@@ -63,7 +66,7 @@
 #    owner: "1000"
 #    group: "1000"
   become: true
-  when: (not has_validator_client) and (validators_source_min < validators_source_max)
+  when: not has_validator_client
 - name: Upload new validator accounts to VC
   unarchive:
     src: "{{ validator_local_output_host_archive }}"
@@ -72,5 +75,5 @@
 #    owner: "1000"
 #    group: "1000"
   become: true
-  when: has_validator_client and (validators_source_min < validators_source_max)
+  when: has_validator_client
 # No automatic restart! Be careful with deploying validators!

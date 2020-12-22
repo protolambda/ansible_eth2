@@ -3,6 +3,9 @@ beacon_image_name: protolambda/nimbus:latest
 beacon_memory: 3200M
 beacon_kernel_memory: 3300M
 
+# Docker manages the logs, don't duplicate them by writing them to a file.
+# The file does not get rotated/pruned, so make sure to never store the duplicate data to begin with.
+
 beacon_start_args: >
   beacon_node
   {% if testnet_type == 'custom' %}
@@ -32,6 +35,7 @@ beacon_start_args: >
   --graffiti="{{ validator_graffiti }}"
   --nat="extip:{{public_ip_address}}"
   --log-level="{{ beacon_log_level | upper }}"
+  --log-file="/dev/null"
   --rpc --rpc-port={{beacon_rpc_port}} --rpc-address=0.0.0.0
   --metrics --metrics-port={{beacon_metrics_port}} --metrics-address=0.0.0.0
   {% if validator_enabled and (not has_validator_client) %}

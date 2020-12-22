@@ -10,9 +10,13 @@ validator_image_name: protolambda/nimbus:latest
 
 # No network option, validator uses api data from BN
 
+# Docker manages the logs, don't duplicate them by writing them to a file.
+# The file does not get rotated/pruned, so make sure to never store the duplicate data to begin with.
+
 validator_start_args: >
   validator_client
   --log-level="INFO"
+  --log-file="/dev/null"
   --data-dir="{{validator_container_dir}}"
   --non-interactive=true
   --graffiti="{{ validator_graffiti }}"

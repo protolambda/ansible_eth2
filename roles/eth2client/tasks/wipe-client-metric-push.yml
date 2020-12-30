@@ -1,0 +1,10 @@
+- name: 'Ensure metric pusher is not present'
+  cron:
+    name: "metric-pusher"
+    state: absent
+
+- name: 'Remove the metric pusher file'
+  become: true
+  file:
+    path: /opt/metric-pusher.sh
+    state: absent

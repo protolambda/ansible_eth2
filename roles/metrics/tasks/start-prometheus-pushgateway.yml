@@ -1,0 +1,10 @@
+- name: Run push-gateway for instances to push metrics to
+  docker_container:
+    name: pushgateway
+    image: prom/pushgateway
+    restart_policy: unless-stopped
+    exposed_ports:
+      - 9091
+    ports:
+      - "9091:9091"
+    state: started

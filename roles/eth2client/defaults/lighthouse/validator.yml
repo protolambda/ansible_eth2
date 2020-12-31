@@ -10,7 +10,7 @@ validator_image_name: sigp/lighthouse:latest
 validator_start_args: >
   lighthouse
   {% if testnet_type == 'custom' %}
-  --network-dir="{{validator_container_dir}}/custom_testnet_config"
+  --testnet-dir="{{validator_container_dir}}/custom_testnet_config"
   {% elif testnet_type == 'altona' %}
   --network=altona
   {% elif testnet_type == 'medalla' %}
@@ -29,6 +29,7 @@ validator_start_args: >
   --secrets-dir="{{secrets_container_dir}}"
   --init-slashing-protection
   --server=http://localhost:{{beacon_rpc_port}}/
+  --http --http-port={{validator_rpc_port}}
 
 
 beacon_keystores_file_mode: "0700"

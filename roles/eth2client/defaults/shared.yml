@@ -1,3 +1,4 @@
+
 # This is shared configuration between all eth2-clients
 #
 # Since ansible does not support multiple include-role.defaults directory sources,
@@ -25,6 +26,7 @@ common_log_options:
   max-buffer-size: 4m
 
 common_log_driver: json-file
+push_metrics_enabled: true
 
 # Testnet settings
 # -------------------------------------------

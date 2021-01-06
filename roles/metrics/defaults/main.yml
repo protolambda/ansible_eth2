@@ -20,6 +20,8 @@ grafana_prometheus_network_name: promnet
 # TODO: update path and/or include git submodule
 metrics_dashboards_source: "{{role_path}}/files/eth2-metrics"
 
+pagerduty_alertmanager_api_key: 0
+
 prometheus_settings:
   global:
     scrape_interval:     15s

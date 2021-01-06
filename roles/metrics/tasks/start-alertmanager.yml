@@ -1,0 +1,23 @@
+
+- name: copy alert rules
+  copy:
+    src: files/alertmanager/alert.rules
+    dest: "{{prometheus_host_dir}}/prom/alert.rules"
+
+- name: Move the alertmanager config template
+  template:
+    src: files/alertmanager/alerts-config.yml
+    dest: "{{prometheus_host_dir}}/prom/alerts-config.yml"
+
+- name: start prometheus alert manager
+  docker_container:
+    name: alertmanager
+    state: started
+    restart: yes
+    restart_policy: always
+    volumes:
+      - "{{prometheus_host_dir}}/prom:/etc/prometheus"
+    image: prom/alertmanager
+    command: --config.file=/etc/prometheus/alerts-config.yml
+    ports:
+      - "9093:9093"

@@ -6,6 +6,8 @@
   include_tasks: start-nginx-proxy.yml
 - name: Start prometheus-grafana network
   include_tasks: start-network.yml
+- name: Start alertmanager
+  include_tasks: start-alertmanager.yml
 - name: Start prometheus
   include_tasks: start-prometheus.yml
   vars:

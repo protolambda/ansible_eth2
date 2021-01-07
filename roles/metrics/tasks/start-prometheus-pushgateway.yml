@@ -3,6 +3,10 @@
     name: pushgateway
     image: prom/pushgateway
     restart_policy: unless-stopped
+    network_mode: bridge
+    networks:
+      - name: "{{grafana_prometheus_network_name}}"
+        ipv4_address: "172.1.1.102"
     exposed_ports:
       - 9091
     ports:

@@ -19,5 +19,9 @@
       - "{{prometheus_host_dir}}/prom:/etc/prometheus"
     image: prom/alertmanager
     command: --config.file=/etc/prometheus/alerts-config.yml
+    network_mode: bridge
+    networks:
+      - name: "{{grafana_prometheus_network_name}}"
+        ipv4_address: "172.1.1.103"
     ports:
       - "9093:9093"

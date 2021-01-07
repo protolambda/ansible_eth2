@@ -14,6 +14,6 @@ function pull_to_push {
   sleep 12
 }
 
-for (( j = 0; j < 5; j++ )); do
+for (( j = 0; j < 4; j++ )); do
 	pull_to_push
 done

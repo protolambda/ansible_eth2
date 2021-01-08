@@ -4,7 +4,7 @@ Description=Node Exporter
 [Service]
 User=node_exporter
 EnvironmentFile=/etc/default/node_exporter
-ExecStart=/usr/local/bin/node_exporter $OPTIONS
+ExecStart=/usr/local/bin/node_exporter --collector.textfile.directory /var/lib/node_exporter/textfile_collector --collector.filesystem.ignored-mount-points=^/(sys|proc|run)($|/)
 
 [Install]
 WantedBy=multi-user.target

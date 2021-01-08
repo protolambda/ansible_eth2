@@ -7,7 +7,7 @@ groups:
   rules:
   - alert: PrometheusTargetMissing
     expr: up == 0
-    for: 1m
+    for: 2m
     labels:
       severity: critical
     annotations:
@@ -28,18 +28,37 @@ groups:
       severity: warning
     annotations:
       summary: Host unusual network throughput out (instance {{ $labels.instance }})
-- name: Memory
+- name: RAM
   rules:
-  - alert: HostOutOfMemory
+  - alert: HostOutOfRAM
     expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 10
-    for: 2m
+    for: 5m
     labels:
       severity: warning
     annotations:
-      summary: Host out of memory (instance {{ $labels.instance }})
+      summary: Host out of RAM (instance {{ $labels.instance }})
+- name: Disk
+  rules:
+  # Please add ignored mountpoints in node_exporter parameters like
+  # "--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|run)($|/)".
+  # Same rule using "node_filesystem_free_bytes" will fire when disk fills for non-root users.
+  - alert: HostOutOfDiskSpace
+    expr: (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 10 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: Host almost out (<10% free) of disk space (instance {{ $labels.instance }})
+  - alert: HostOutOfDiskSpace
+    expr: (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 5 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: Host almost out (<5% free) of disk space (instance {{ $labels.instance }})
   - alert: HostDiskWillFillIn24Hours
     expr: (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 10 and ON (instance, device, mountpoint) predict_linear(node_filesystem_avail_bytes{fstype!~"tmpfs"}[1h], 24 * 3600) < 0 and ON (instance, device, mountpoint) node_filesystem_readonly == 0
-    for: 2m
+    for: 5m
     labels:
       severity: warning
     annotations:

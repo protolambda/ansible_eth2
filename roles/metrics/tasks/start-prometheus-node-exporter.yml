@@ -38,15 +38,15 @@
     owner: node_exporter
     group: node_exporter
 
-- name: Copy the node exporter config
-  copy:
-    src: files/prometheus-node-exporter/sysconfig.node_exporter
-    dest: /etc/default/node_exporter
-
 - name: Copy the systemD unit file
   copy:
     src: files/prometheus-node-exporter/node_exporter.service
     dest: /etc/systemd/system/node_exporter.service
+
+- name: Stop node_exporter service
+  systemd:
+    state: stopped
+    name: node_exporter
 
 - name: Reload systemD
   systemd:

@@ -1,8 +1,36 @@
+- name: Make tmp rules directory
+  file:
+    path: "/tmp/alerting-rules"
+    state: directory
+
+- name: Remove existing alerting file
+  file:
+    path: "{{prometheus_host_dir}}/prom/alert.rules"
+    state: absent
 
 - name: copy alert rules
   copy:
     src: files/alertmanager/alert.rules
+    dest: /tmp/alerting-rules/base-rules.rules
+    force: yes
+
+- name: copy custom alert rules
+  when: custom_alerting
+  copy:
+    content: "{{custom_alert_rules | to_nice_yaml }}"
+#    dest: "{{prometheus_host_dir}}/prom/eth2-alerts.yml"
+    dest: /tmp/alerting-rules/custom-rules.rules
+    force: yes
+
+- name: Assemble the rule fragments into one rules file
+  ansible.builtin.assemble:
+    src: /tmp/alerting-rules
     dest: "{{prometheus_host_dir}}/prom/alert.rules"
+
+- name: Remove tmp dir
+  file:
+    path: /tmp/alerting-rules
+    state: absent
 
 - name: Move the alertmanager config template
   template:

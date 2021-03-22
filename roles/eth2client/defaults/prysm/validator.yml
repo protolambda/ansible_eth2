@@ -20,6 +20,8 @@ validator_start_args: >
   --pyrmont
   {% elif testnet_type == 'mainnet' %}
   --mainnet
+  {% elif testnet_type == 'prater' %}
+  --prater
   {% endif %}
   --beacon-rpc-provider=localhost:{{beacon_grpc_port}}
   --graffiti="{{ validator_graffiti }}"

@@ -22,6 +22,8 @@ beacon_start_args: >
   --network=pyrmont
   {% elif testnet_type == 'mainnet' %}
   --network=mainnet
+  {% elif testnet_type == 'prater' %}
+  --network=prater
   {% endif %}
   --max-peers="{{hi_peer_count}}"
   --data-dir="{{beacon_container_dir}}"

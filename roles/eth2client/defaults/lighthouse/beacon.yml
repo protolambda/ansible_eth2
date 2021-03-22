@@ -10,7 +10,7 @@ beacon_start_args: >
   --debug-level="{{ beacon_log_level | lower }}"
   --datadir="{{beacon_container_dir}}"
   {% if testnet_type == 'custom' %}
-  --network-dir="{{beacon_container_dir}}/custom_testnet_config"
+  --testnet-dir="{{beacon_container_dir}}/custom_testnet_config"
   {% elif testnet_type == 'altona' %}
   --network=altona
   {% elif testnet_type == 'medalla' %}

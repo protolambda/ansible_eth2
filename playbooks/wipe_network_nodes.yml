@@ -22,3 +22,17 @@
         tasks_from: wipe-eth2stats
       when: eth2stats_enabled
       loop: ['{{ eth2client_name }}']
+    - name: Wipe metrics push cronjob
+      include_role:
+        name: eth2client
+        tasks_from: wipe-client-metric-push
+
+- name: Stop node collector for local metric collection
+  hosts: beacon_node
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Stop node exporter
+      include_role:
+        name: metrics
+        tasks_from: stop-prometheus-node-exporter.yml

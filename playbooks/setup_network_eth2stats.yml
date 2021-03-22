@@ -10,3 +10,7 @@
       include_role:
         name: eth2stats_server
         tasks_from: start-eth2stats-server
+    - name: Start prometheus pushgateway
+      include_role:
+        name: metrics
+        tasks_from: start-prometheus-pushgateway

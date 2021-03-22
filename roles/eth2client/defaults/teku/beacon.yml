@@ -75,5 +75,5 @@ secrets_container_dir: "{{beacon_container_dir}}/secrets"
 keystores_host_dir: "{{beacon_host_dir}}/keys"
 secrets_host_dir: "{{beacon_host_dir}}/secrets"
 
-beacon_keystores_file_mode: "0700"  # execute bit, to iterate directory
+beacon_keystores_file_mode: "0704"  # execute bit, to iterate directory
 beacon_user_id: "1000:1000"

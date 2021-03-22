@@ -49,3 +49,27 @@
       loop:
         - '{{ eth2client_name }}'  # needs to be dynamic
       when: eth2stats_enabled
+
+- name: Setup node collector for local metric collection
+  hosts: beacon_node
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Start node exporter
+      include_role:
+        name: external_roles/cloudalchemy.node-exporter
+        tasks_from: main.yml
+      when: push_metrics_enabled
+
+- name: Start metrics push cronjob
+  hosts: beacon_node
+  gather_facts: false
+  tasks:
+    - name: Start metrics cronjob
+      include_role:
+        name: eth2client
+        defaults_from: '{{item}}'
+        tasks_from: start-client-metric-push
+      loop:
+        - '{{ eth2client_name }}'  # needs to be dynamic
+      when: push_metrics_enabled

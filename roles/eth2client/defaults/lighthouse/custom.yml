@@ -1,1 +1,1 @@
-custom_testnet_lighthouse_dir: config/custom_lighthouse
+custom_testnet_lighthouse_dir: "{{inventory_dir}}/../testnet_config/lighthouse"

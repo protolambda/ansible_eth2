@@ -1,6 +1,6 @@
 function pull_to_push {
 
-  curl localhost:{{beacon_metrics_port}}/metrics | curl --data-binary @- http://{{pushgateway_ip}}/metrics/job/pushgateway/scrape_location/beacon/network/{{eth2_network_name}}/instance/$(hostname)/client/{{eth2client_name}}
+  curl localhost:{{beacon_metrics_port}}/metrics | curl --data-binary @- http://{{pushgateway_ip}}/metrics/job/pushgateway/scrape_location/beacon/network/{{eth2_network_name}}/instance/$(hostname)/client_name/{{eth2client_name}}
 
   curl localhost:9100/metrics | curl --data-binary @- http://{{pushgateway_ip}}/metrics/job/pushgateway/scrape_location/node_exporter/network/{{eth2_network_name}}/instance/$(hostname)/client/{{eth2client_name}}
 

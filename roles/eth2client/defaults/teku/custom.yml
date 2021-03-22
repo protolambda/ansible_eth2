@@ -1,1 +1,1 @@
-custom_testnet_teku_config: config/custom_teku.yml
+custom_testnet_teku_config: "{{inventory_dir}}/../testnet_config/teku_config.yaml"

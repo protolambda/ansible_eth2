@@ -16,3 +16,7 @@
   include_tasks: start-grafana.yml
   vars:
     grafana_require_restart: true
+- name: Start prometheus pushgateway
+  include_role:
+    name: metrics
+    tasks_from: start-prometheus-pushgateway

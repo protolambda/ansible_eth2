@@ -24,10 +24,13 @@ beacon_start_args: >
   {% elif testnet_type == 'mainnet' %}
   --mainnet
   {% elif testnet_type == 'prater' %}
-  --prater
+  --prater --genesis-state={{beacon_container_dir}}/custom_genesis.ssz
   {% endif %}
   --pprof
   --http-web3provider="{{eth1_endpoint.http}}"
+  {% if failover_eth1_rpc is defined %}
+  --fallback-web3provider={{failover_eth1_rpc}}
+  {% endif %}
   --p2p-host-ip={{public_ip_address}}
   --p2p-max-peers={{hi_peer_count}}
   --p2p-udp-port={{beacon_udp_port}} --p2p-tcp-port={{beacon_tcp_port}}

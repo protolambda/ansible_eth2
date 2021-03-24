@@ -10,4 +10,4 @@
     name: "metric-pusher"
     minute: "*"
     job: "/opt/metric-pusher.sh"
-    user: "devops"
+    user: "{{ ansible_user }}"

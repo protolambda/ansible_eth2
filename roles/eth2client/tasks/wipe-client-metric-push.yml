@@ -2,6 +2,7 @@
   cron:
     name: "metric-pusher"
     state: absent
+    user: "{{ ansible_user }}"
 
 - name: 'Remove the metric pusher file'
   become: true

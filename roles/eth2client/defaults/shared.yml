@@ -1,4 +1,3 @@
-
 # This is shared configuration between all eth2-clients
 #
 # Since ansible does not support multiple include-role.defaults directory sources,
@@ -18,6 +17,7 @@
 # General settings
 # -------------------------------------------
 home_dir: "/home/{{ ansible_user }}"
+push_metrics_enabled: true
 
 common_log_options:
   max-file: "10"
@@ -26,7 +26,6 @@ common_log_options:
   max-buffer-size: 4m
 
 common_log_driver: json-file
-push_metrics_enabled: true
 
 # Testnet settings
 # -------------------------------------------
@@ -60,6 +59,8 @@ beacon_tcp_port: 9000
 beacon_udp_port: 9000
 
 beacon_rpc_port: 4000
+validator_rpc_port: 4002
+
 beacon_grpc_port: 4001
 beacon_metrics_port: 8080
 

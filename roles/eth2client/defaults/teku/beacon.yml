@@ -41,6 +41,8 @@ beacon_start_args: >
   --network=pyrmont
   {% elif testnet_type == 'mainnet' %}
   --network=mainnet
+  {% elif testnet_type == 'prater' %}
+  --network=prater
   {% endif %}
   --data-storage-mode=PRUNE
   --data-path="{{beacon_container_dir}}"

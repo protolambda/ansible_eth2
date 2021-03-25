@@ -1,1 +1,1 @@
-custom_testnet_prysm_config: config/custom_prysm.yml
+custom_testnet_prysm_config: "{{inventory_dir}}/../testnet_config/prysm_config.yaml"

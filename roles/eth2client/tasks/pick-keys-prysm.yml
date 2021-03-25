@@ -2,6 +2,6 @@
   delegate_to: localhost
   shell: |
     mkdir -p {{ output_data_dir }}/wallet/direct/accounts
-    echo -n "prysm" > {{ output_data_dir }}/wallet_pass.txt
+    echo "prysm" > {{ output_data_dir }}/wallet_pass.txt
     cp {{ input_data_dir }}/prysm/all-accounts.keystore.json {{ output_data_dir }}/wallet/direct/accounts/all-accounts.keystore.json
     cp {{ input_data_dir }}/prysm/keymanageropts.json {{ output_data_dir }}/wallet/direct/keymanageropts.json

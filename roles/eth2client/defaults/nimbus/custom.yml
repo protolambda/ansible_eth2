@@ -1,1 +1,1 @@
-custom_testnet_nimbus_config: config/custom_nimbus.yml
+custom_testnet_nimbus_config: "{{inventory_dir}}/../testnet_config/nimbus_config.json"

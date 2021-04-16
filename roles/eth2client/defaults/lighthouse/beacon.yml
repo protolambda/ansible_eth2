@@ -28,7 +28,7 @@ beacon_start_args: >
   {% endif %}
   bn
   --graffiti="{{validator_graffiti}}"
-  --disable-enr-auto-update=true
+  --disable-enr-auto-update
   --enr-address={{public_ip_address}}
   --enr-tcp-port={{beacon_tcp_port}} --enr-udp-port={{beacon_udp_port}}
   --port={{beacon_tcp_port}} --discovery-port={{beacon_udp_port}}

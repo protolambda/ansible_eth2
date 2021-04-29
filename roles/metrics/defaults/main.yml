@@ -22,6 +22,8 @@ metrics_dashboards_source: "{{role_path}}/files/eth2-metrics"
 
 pagerduty_alertmanager_api_key: 0
 
+setup_cadvisor: false
+
 prometheus_settings:
   global:
     scrape_interval:     15s

@@ -1,0 +1,20 @@
+- name: cadvisor metrics exporter service
+  docker_container:
+    name: cadvisor
+    state: started
+    image: "{{ cadvisor_image_name | default('gcr.io/cadvisor/cadvisor:latest') }}"
+    restart_policy: unless-stopped
+    network_mode: bridge
+    networks:
+      - name: "{{grafana_prometheus_network_name}}"
+        ipv4_address: "172.1.1.111"
+    restart: "{{ cadvisor_require_restart | default(false) }}"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"

@@ -18,3 +18,9 @@
       - "8080"
     ports:
       - "8080:8080"
+    command: >
+      --housekeeping_interval=10s
+      --docker_only=true
+
+# the housekeeping interval reduces the CPU useage of cadvisor
+# Docker only true also reduces the scope of cadvisor and reduces CPU usage

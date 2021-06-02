@@ -20,3 +20,8 @@
   include_role:
     name: metrics
     tasks_from: start-prometheus-pushgateway
+- name: Start cadvisor
+  include_tasks: start-cadvisor.yml
+  vars:
+    cadvisor_require_restart: true
+  when: setup_cadvisor

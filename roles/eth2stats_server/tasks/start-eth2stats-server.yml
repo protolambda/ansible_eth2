@@ -13,7 +13,7 @@
     image: "{{ eth2stats_server_image_name }}"
     pull: true
     restart_policy: unless-stopped
-    network_mode: bridge  # for nginx rev proxy
+    network_mode: bridge  # for non nginx version
     published_ports:
       - "5000:5000"  # just the container port exposed within the host, for the nginx setup
       - "0.0.0.0:{{eth2stats_server_grpc_port}}:8080"  # Bind to host ip on GRPC port (binding to container port 8080)

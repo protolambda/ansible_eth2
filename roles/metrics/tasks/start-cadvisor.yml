@@ -5,6 +5,7 @@
     image: "{{ cadvisor_image_name | default('gcr.io/cadvisor/cadvisor:latest') }}"
     restart_policy: unless-stopped
     network_mode: bridge
+    privileged: true
     networks:
       - name: "{{grafana_prometheus_network_name}}"
         ipv4_address: "172.1.1.111"
@@ -14,13 +15,17 @@
       - /var/run:/var/run:rw
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/kmsg:/dev/kmsg
     expose:
       - "8080"
     ports:
       - "8080:8080"
     command: >
-      --housekeeping_interval=10s
+      --housekeeping_interval=60s
+      --docker_only
+      --max_housekeeping_interval=65s
+      --global_housekeeping_interval=60s
       --docker_only=true
-
+      --disable_metrics=percpu,process,sched,diskIO
 # the housekeeping interval reduces the CPU useage of cadvisor
 # Docker only true also reduces the scope of cadvisor and reduces CPU usage

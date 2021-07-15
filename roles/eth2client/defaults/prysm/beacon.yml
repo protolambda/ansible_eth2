@@ -5,12 +5,13 @@ beacon_image_name: gcr.io/prysmaticlabs/prysm/beacon-chain:latest
 beacon_start_args: >
   --accept-terms-of-use=true
   --datadir="{{beacon_container_dir}}"
+  {% if genesis_file is defined %}
+  --genesis-state={{beacon_container_dir}}/custom_genesis.ssz
+  {% endif %}
   {% if testnet_type == 'custom' %}
   --chain-config-file="{{beacon_container_dir}}/custom_testnet_config/prysm_config.yaml"
   --deposit-contract="{{deposit_contract_address}}"
   --contract-deployment-block="{{deposit_contract_deploy_block_nr}}"
-  {% if genesis_file is defined %}
-  --genesis-state={{beacon_container_dir}}/custom_genesis.ssz
   {% elif testnet_type == 'altona' %}
   --altona
   {% elif testnet_type == 'onyx' %}

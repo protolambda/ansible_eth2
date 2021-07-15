@@ -5,15 +5,14 @@ beacon_kernel_memory: 3300M
 
 max_skip_slots: 700
 
+# add the following back post altona
+#  {% if testnet_type == 'custom' %}
+#                  --testnet-dir="{{beacon_container_dir}}/custom_testnet_config"
 beacon_start_args: >
   lighthouse
   --debug-level="{{ beacon_log_level | lower }}"
   --datadir="{{beacon_container_dir}}"
-  {% if testnet_type == 'custom' %}
-  --testnet-dir="{{beacon_container_dir}}/custom_testnet_config"
-  {% elif testnet_type == 'altona' %}
-  --network=altona
-  {% elif testnet_type == 'medalla' %}
+  {% if testnet_type == 'medalla' %}
   --network=medalla
   {% elif testnet_type == 'zinken' %}
   --network=zinken
@@ -25,6 +24,12 @@ beacon_start_args: >
   --network=mainnet
   {% elif testnet_type == 'prater' %}
   --network=prater
+  {% elif eth2_network_name == 'altairDevnet0' %}
+  --network=altair-devnet-0
+  {% elif eth2_network_name == 'altairDevnet1' %}
+  --network=altair-devnet-1
+  {% elif testnet_type == 'custom' %}
+  --testnet-dir="{{beacon_container_dir}}/custom_testnet_config"
   {% endif %}
   bn
   --graffiti="{{validator_graffiti}}"

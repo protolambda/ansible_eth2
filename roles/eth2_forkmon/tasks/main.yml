@@ -1,0 +1,28 @@
+---
+# tasks file for eth2-fork-mon
+
+- name: make sure forkmon dir exists
+  file:
+    path: "{{ forkmon_dir }}"
+    state: directory
+
+- name: Copy forkmon configuration in place.
+  template:
+    src: forkmon-config.yaml.j2
+    dest: "{{ forkmon_dir }}/forkmon-config.yaml"
+    mode: 0644
+    force: yes
+
+- name: Setup eth2 forkmon
+  docker_container:
+    name: "eth2_forkmon"
+    state: started
+    image: "{{ eth2_forkmon_image | default('ralexstokes/eth2-fork-mon:latest') }}"
+    restart_policy: unless-stopped
+    network_mode: bridge
+    privileged: true
+    restart: "{{ forkmon_require_restart | default(true) }}"
+    volumes:
+      - "{{ forkmon_dir }}/forkmon-config.yaml:/config.yaml"
+    ports:
+      - "{{ forkmon_http_listen_port }}:8080"

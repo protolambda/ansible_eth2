@@ -26,11 +26,12 @@ validator_keystore_locking: true
 
 # Debug logging spams a ton of http data every eth2stats call (every second).
 beacon_start_args: >
+  {% if genesis_file is defined %}
+  --initial-state="{{beacon_container_dir}}/custom_genesis.ssz"
+  {% endif %}
   {% if testnet_type == 'custom' %}
   --network="{{beacon_container_dir}}/custom_testnet_config/teku_config.yaml"
   --eth1-deposit-contract-address="{{deposit_contract_address}}"
-  {% if genesis_file is defined %}
-  --initial-state="{{beacon_container_dir}}/custom_genesis.ssz"
   {% elif testnet_type == 'altona' %}
   --network=altona
   {% elif testnet_type == 'medalla' %}

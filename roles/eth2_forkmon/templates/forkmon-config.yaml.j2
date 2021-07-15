@@ -1,0 +1,9 @@
+endpoints:
+{{ forkmon_endpoints | to_yaml }}
+
+http_timeout_milliseconds: 0
+eth2:
+ network: {{ network_name }}
+ seconds_per_slot: {{ seconds_per_slot }}
+ genesis_time: {{ genesis_time }}
+ slots_per_epoch: {{ slots_per_epoch }}

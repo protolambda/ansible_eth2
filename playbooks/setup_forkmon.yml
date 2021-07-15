@@ -1,0 +1,8 @@
+- name: Start forkmon
+  hosts: eth2_forkmon
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Run forkmon setup
+      include_role:
+        name: eth2_forkmon

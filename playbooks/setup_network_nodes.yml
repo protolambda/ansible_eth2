@@ -52,7 +52,7 @@
 
 - name: Setup node collector for local metric collection
   hosts: beacon_node
-  gather_facts: false
+  gather_facts: true
   become: true
   tasks:
     - name: Start node exporter

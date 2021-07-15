@@ -4,6 +4,10 @@ function pull_to_push {
 
   curl localhost:{{beacon_metrics_port}}/metrics | sed '/^[^#]/s/process_virtual_memory_bytes /_ /' | sed '/^[^#]/s/process_max_fds /_c /' | sed '/^[^#]/s/process_open_fds /_b /' | sed '/^[^#]/s/process_cpu_seconds_total /_d /' |sed '/^[^#]/s/process_start_time_seconds /_e /' | sed '/^[^#]/s/process_resident_memory_bytes /_f /' | curl --data-binary @- http://{{pushgateway_ip}}/metrics/job/pushgateway/scrape_location/beacon/network/{{eth2_network_name}}/instance/$(hostname)/client_name/{{eth2client_name}}
 
+  {%- elif eth2client_name == "lighthouse" %}
+
+  curl localhost:{{beacon_metrics_port}}/metrics | sed '/^[^#]/s/process_cpu_seconds_total /_ /' | curl --data-binary @- http://{{pushgateway_ip}}/metrics/job/pushgateway/scrape_location/beacon/network/{{eth2_network_name}}/instance/$(hostname)/client_name/{{eth2client_name}}
+
   {% else %}
 
   curl localhost:{{beacon_metrics_port}}/metrics | curl --data-binary @- http://{{pushgateway_ip}}/metrics/job/pushgateway/scrape_location/beacon/network/{{eth2_network_name}}/instance/$(hostname)/client_name/{{eth2client_name}}
@@ -22,9 +26,9 @@ function pull_to_push {
   curl localhost:{{validator_metrics_port}}/metrics | curl --data-binary @- http://{{pushgateway_ip}}/metrics/job/pushgateway/scrape_location/validator/network/{{eth2_network_name}}/instance/$(hostname)/client/{{eth2client_name}}
   {% endif %}
 
-  sleep 12
+  sleep 20
 }
 
-for (( j = 0; j < 4; j++ )); do
+for (( j = 0; j < 2; j++ )); do
 	pull_to_push
 done

@@ -3,7 +3,7 @@
   hosts: localhost
   gather_facts: false
   tasks:
-    - name: Make deposits
+    - name: Build deposits
       include_role:
         name: val_tools
         tasks_from: build_deposits

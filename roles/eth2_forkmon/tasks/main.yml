@@ -15,7 +15,7 @@
 
 - name: Setup eth2 forkmon
   docker_container:
-    name: "eth2_forkmon"
+    name: "{{ forkmon_container_name | default('eth2_forkmon') }}"
     state: started
     image: "{{ eth2_forkmon_image | default('ralexstokes/eth2-fork-mon:latest') }}"
     restart_policy: unless-stopped

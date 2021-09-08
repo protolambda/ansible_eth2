@@ -20,8 +20,7 @@ validator_start_args: >
   --data-dir="{{validator_container_dir}}"
   --non-interactive=true
   --graffiti="{{ validator_graffiti }}"
-  --rpc-port={{beacon_rpc_port}}
-  --rpc-address=127.0.0.1
+  --beacon-node=http://127.0.0.1:{{beacon_rpc_port}}
   --validators-dir="{{keystores_container_dir}}"
   --secrets-dir="{{secrets_container_dir}}"
 

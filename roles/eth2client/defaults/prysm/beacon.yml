@@ -44,6 +44,8 @@ beacon_start_args: >
   --verbosity="{{ beacon_log_level | lower }}"
   --enable-debug-rpc-endpoints
   --min-sync-peers 1
+  --dev
+  --p2p-denylist=private
   {% if bootnode_enrs is defined %}
   {% for bootnode_enr in bootnode_enrs %}
   --bootstrap-node="{{ bootnode_enr }}"

@@ -78,6 +78,6 @@
   when: has_validator_client
 # No automatic restart! Be careful with deploying validators!
 - name: Modify permissions to match user-group inside nimbus docker image
-  shell: chown -R 1000:1000 "{{ validator_host_dir }}/"
+  shell: chown -R devops "{{ beacon_host_dir }}"
   become: true
   when: eth2client_name == "nimbus"
